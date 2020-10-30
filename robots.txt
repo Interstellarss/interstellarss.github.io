@@ -61,4 +61,4 @@ Disallow: /
 User-agent: ZoominfoBot
 Disallow: /
 
-Sitemap: https://interstellarss.github.io.git/sitemap.xml
+Sitemap: https://interstellarss.github.io/sitemap.xml
