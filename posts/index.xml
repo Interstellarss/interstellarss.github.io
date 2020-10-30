@@ -32,5 +32,12 @@ test]]></description>
     <author>作者</author>
     <guid>https://interstellarss.github.io/posts/physical-layer/</guid>
     <description><![CDATA[<p>探索计算机网络OSI模型中的物理层的故事.</p>]]></description>
+</item><item>
+    <title>DFA与NFA的故事(一)</title>
+    <link>https://interstellarss.github.io/posts/something-about-dfa-and-nfa/</link>
+    <pubDate>Sat, 25 Apr 2020 19:20:13 &#43;0200</pubDate>
+    <author>作者</author>
+    <guid>https://interstellarss.github.io/posts/something-about-dfa-and-nfa/</guid>
+    <description><![CDATA[对于DFA和NFA形式定义的一些理解，以及正则运算封闭性和DFA与NFA等价性的证明，也就是说DFA的故事是属于NFA的，是特例和常规的故事]]></description>
 </item></channel>
 </rss>
