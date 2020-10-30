@@ -1,8 +1,8 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>computer network - 标签 - 法术分享Blog</title>
+        <title>computer network - 标签 - 法术研究分享Blog</title>
         <link>https://interstellarss.github.io/tags/computer-network/</link>
-        <description>computer network - 标签 - 法术分享Blog</description>
+        <description>computer network - 标签 - 法术研究分享Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sat, 02 May 2020 00:08:02 &#43;0200</lastBuildDate><atom:link href="https://interstellarss.github.io/tags/computer-network/" rel="self" type="application/rss+xml" /><item>
     <title>充满机遇的物理层</title>
     <link>https://interstellarss.github.io/posts/physical-layer/</link>

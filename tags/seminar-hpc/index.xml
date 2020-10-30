@@ -1,8 +1,8 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>Seminar-HPC - 标签 - 法术分享Blog</title>
+        <title>Seminar-HPC - 标签 - 法术研究分享Blog</title>
         <link>https://interstellarss.github.io/tags/seminar-hpc/</link>
-        <description>Seminar-HPC - 标签 - 法术分享Blog</description>
+        <description>Seminar-HPC - 标签 - 法术研究分享Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 03 May 2020 22:35:00 &#43;0200</lastBuildDate><atom:link href="https://interstellarss.github.io/tags/seminar-hpc/" rel="self" type="application/rss+xml" /><item>
     <title>当我们谈论 shared memory parallelism 的时候我们在谈论些什么--前导篇</title>
     <link>https://interstellarss.github.io/posts/shared-memory-parallelism_1/</link>
