@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>当我们谈论 shared memory parallelism 的时候我们在谈论些什么--提升篇 - 法术研究分享Blog</title><meta name="Description" content="first draft"><meta property="og:title" content="当我们谈论 shared memory parallelism 的时候我们在谈论些什么--提升篇" />
+<meta property="og:description" content="first draft" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://interstellarss.github.io/posts/shared-memory-parallelism_2/" />
+<meta property="og:image" content="https://interstellarss.github.io/logo.png"/>
+<meta property="article:published_time" content="2020-06-07T21:44:12+02:00" />
+<meta property="article:modified_time" content="2020-10-30T22:44:12+01:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://interstellarss.github.io/logo.png"/>
+
+<meta name="twitter:title" content="当我们谈论 shared memory parallelism 的时候我们在谈论些什么--提升篇"/>
+<meta name="twitter:description" content="first draft"/>
+<meta name="application-name" content="法术研究分享Blog">
+<meta name="apple-mobile-web-app-title" content="法术研究分享Blog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c">
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'G-LMR64333PL', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://interstellarss.github.io/posts/shared-memory-parallelism_2/" /><link rel="prev" href="https://interstellarss.github.io/posts/shared-memory-parallelism_1/" /><link rel="next" href="https://interstellarss.github.io/posts/first_post/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "当我们谈论 shared memory parallelism 的时候我们在谈论些什么--提升篇",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/interstellarss.github.io\/posts\/shared-memory-parallelism_2\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/interstellarss.github.io\/images\/Apple-Devices-Preview.png",
+                            "width":  3200 ,
+                            "height":  2048 
+                        }],"genre": "posts","keywords": "parallel computing, Seminar-HPC","wordcount":  2030 ,
+        "url": "https:\/\/interstellarss.github.io\/posts\/shared-memory-parallelism_2\/","datePublished": "2020-06-07T21:44:12+02:00","dateModified": "2020-10-30T22:44:12+01:00","publisher": {
+            "@type": "Organization",
+            "name": "Puxuan"},"author": {
+                "@type": "Person",
+                "name": "Puxuan"
+            },"description": "first draft"
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="法术研究分享Blog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>Puxuan</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="法术研究分享Blog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>Puxuan</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">当我们谈论 shared memory parallelism 的时候我们在谈论些什么--提升篇</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://interstellarss.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Puxuan</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>学习笔记</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-06-07">2020-06-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2030 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 5 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#a-brief-overview-on-shared-memory-parallelism-in-parallel-computing">A brief Overview on Shared Memory Parallelism in Parallel Computing</a>
+      <ul>
+        <li><a href="#1-why-parallel">1. Why parallel?</a></li>
+        <li><a href="#2--as-it-was-mentioned-above-when-we-write-programs-that-are-explicitly-parallel-we-will-be-focusing-on-two-major-types-of-parallel-systems-shared-memory-and-distributed-memory">2.  As it was mentioned above, when we write programs that are explicitly parallel, we will be focusing on two major types of parallel systems: shared-memory and distributed-memory.</a>
+          <ul>
+            <li><a href="#interconnection-topologies">Interconnection topologies</a></li>
+            <li><a href="#interconnection-networks">Interconnection networks</a></li>
+            <li><a href="#cache-issues">Cache Issues</a>
+              <ul>
+                <li><a href="#cache-coherency">Cache Coherency</a></li>
+                <li><a href="#false-sharing">False Sharing</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#3">3.</a></li>
+        <li><a href="#4usage-in-high-performance-computing">4.Usage in high performance computing</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>这次带来的是提升篇，其实就是seminar要交的paper的first draft，倒也算是偷懒的一种方式吧。</p>
+<h2 id="a-brief-overview-on-shared-memory-parallelism-in-parallel-computing">A brief Overview on Shared Memory Parallelism in Parallel Computing</h2>
+<h3 id="1-why-parallel">1. Why parallel?</h3>
+<p>To speed up, while we are facing the limitation of current transistors and increasing energy consumption.
+Now that we know it is necessary and lots of privilege besides you need to reconstruct your program yourself rather than automatically distributed by APIs in a serial way. So, it then leads to the following question: how do we write parallel programs? Truth be told, there are number of possible answers to this question, while most of them share the idea of partitioning the work among cores. The two commonly used approach for this: task-parallelism and data-parallelism. In task-parallelism, we partition the problems into separately tasks that will be carried out in cores. While in data-parallelism each core carries out roughly similar operations on its part of data.</p>
+<h3 id="2--as-it-was-mentioned-above-when-we-write-programs-that-are-explicitly-parallel-we-will-be-focusing-on-two-major-types-of-parallel-systems-shared-memory-and-distributed-memory">2.  As it was mentioned above, when we write programs that are explicitly parallel, we will be focusing on two major types of parallel systems: shared-memory and distributed-memory.</h3>
+<p>What is the idea of shared memory system? In a shared memory system, processors are connected via an interconnection network, so that every core can access ach memory location. And there are different hardware structures in implementing this idea. In shared-memory system all processors are either connected directly to the main memory or have their own memory blocks and are accessible to each other through special hardware build into the processors. Anyway, shared memory parallel computers may have different implementations, but generally have in common the ability for all processors to access all memory as global address space, which means multiple processors can operate independently but share the same memory resources. Furthermore, changes in a memory location operated by one processor are visible to all other processors.</p>
+<h4 id="interconnection-topologies">Interconnection topologies</h4>
+<p>Thus, the first type of system is called a uniform memory access, or UMA, system, while the second type is called a nonuniform memory access, or NUMA, system. In UMA systems the time for every core to access the memory locations is the same, while in NUMA access time from one cache to distributed data parts varies as topology place.</p>
+<p>The NUMA Systems
+In a Nonuniform Memory Access architecture, each CPU has a memory module physically next to it,</p>
+<p>Advantages:
+Global address space provides a user-friendly programming perspective to memory
+Data sharing between tasks is both fast and uniform due to the proximity of memory to CPUs</p>
+<p>Disadvantages:
+Primary disadvantage is the lack of scalability between memory and CPUs.
+Programmer responsibility for synchronization constructs that ensure “correct” access of global memory.</p>
+<h4 id="interconnection-networks">Interconnection networks</h4>
+<p>This is important in implementing hardware of shared-memory parallelism: the efficiency of data exchange between memory and processors have huge impact on final execution time.
+Shared-memory interconnects
+Here we will explain two most widely used interconnects in shared-memory systems: buses and crossbars.
+The key property for a bus is that the devices connected to it share the communication wires. Since the amount of our cores is not many, it is more flexible to use a bus. However, the expected performance decreases as the number of cores connected to the bus increases. Thus, buses are replaced by switched interconnects in a more complicated shared-memory system.
+As name suggests, switched interconnects use switches to control the data among the connected devices.
+(Figure of crossbars)
+The individual switches can be shown as one from following figure
+(Figure of crossbar status)
+Crossbar switches are too expensive for large -scale systems, but are useful in some small systems. However, we can simplify the idea, that leads us to Omega (or Delta) Interconnects, which is similar to crossbars, but with fewer paths.
+(Figure of Omega Interconnects)</p>
+<h4 id="cache-issues">Cache Issues</h4>
+<p>Before we go further on this topic, let us firstly recall the idea of caching. To solve the problem of redundant time of processors accessing data in main memory we added block of</p>
+<h5 id="cache-coherency">Cache Coherency</h5>
+<p>Explanation: To understand these issues, suppose we have a shared-memory system with two cores, each of which has its own private data cache. As long as the two cores only read share data, there is no problem. For example, suppose that x is a shared variable that has been initialized to value 3. In one cache we have the instruction that changes the value of x to 7, while in another cache at the same time also have operation concerning the value of x, which leads to the problem of 3 or 7?
+(could be a figure involving things describes above)</p>
+<p>However, this will be unpredictable situation when situations mentioned above occur regardless of whether the system using which policy among processors, because this occurs in caches with in processors. An intuitive solution to this is an update to the cached variable is “informed” to the other processors. That is that the cached value stored by the other processors is also updated.</p>
+<p>How to solve this issue?</p>
+<p>Snooping cache coherence
+The idea behind snooping comes from bus-based system: When the cores share a bus, any signal transmitted on the bus can be aware by all the cores connected to the bus. Thus, when one core updates that a copy of a variable is stored in its cache, other cores that is “snooping” the bus, they will, they will see the update from this cache and mark this variable in their own cache as invalid. However, be aware that our protocol here only informs other processors that the cache line containing the variable, suppose x, has been updated, not x has been updated.</p>
+<p>Directory-based cache coherence
+In large networks broadcasts are expensive, because for every update the cost for broadcast can be high. In NUMA system, for example, core 0 can access the variable x stored in core 1’s memory, so it will certainly be slower if cores are accessing the memory in another core. However, snooping cache coherence can slow the program down since the interconnect with a large amount of processor will be relatively slow.
+Therefore, directory-based cache coherence comes to solve this problem. In this protocol we introduce a new data structure called a directory, which stores the status of each cache line. In our example, in memory and cache we separate some space for the responsibility storing the part of the directory structure that specifies the status of the cache lines in its local memory. Thus, when a line is read into, say, core 0’s cache, the directory entry corresponding to that line would be updated indicating that core 0 has a copy of the line. When a variable is updated, the directory is consulted, and the cache controllers of the cores that have that variable’s cache line in their caches are invalidated. Clearly there will be substantial additional storage required for the directory, but when a cache variable is updated, only the cores storing that variable need to be contacted.</p>
+<p>With these protocols we may solve issue with cache coherence, but new problems also occur: false sharing.  We now know when cache issue may occur when same variables are stored within different processors, and these processors try to modify them. but there will also be a problem when processors trying to access two different variables but were stored in their caches.</p>
+<h5 id="false-sharing">False Sharing</h5>
+<p>False sharing occurs when threads on different processors modify variables that reside on the same cache line. When one core updates a variable in one cache line, and another core wants to access another variable in the same cache line, it will have to access main memory, since the unit of cache coherence is the cache line. That is, the second core only “knows” that the line it wants to access has been updated. It does not know that the variable it wants to access has not been changed.</p>
+<p>Example:
+Consider the following expression
+int x, y;
+Since x and y are declared adjacently, most compilers will assign them contiguous memory address. Thus, unless one of them is at a boundary of a memory block, when they are cached, they will be stored in the same cache line. Suppose the program writes to Z, and</p>
+<h3 id="3">3.</h3>
+<p>OpenMP is an API designed for programming shared-memory parallel programming. The MP in OpenMP stands for “multiprocessing”. Something good about OpenMP is that the programmer does not need to specify how each thread behave explicitly, which suggests that OpenMP allows the programmer to simply mark that the block of code should be executed in parallel, and the exact determination of which thread should execute them is handed to the compiler and the run-time system. In other word, OpenMP requires more compiler support rather works like a library of functions. This convenience in writing parallel program does not come at no cost: we give away the power to program virtually any possible thread behaviour in exchange.</p>
+<p>(give an example of a program in OpenMP, then introduce the basic rules of writing program with OpenMP)</p>
+<h3 id="4usage-in-high-performance-computing">4.Usage in high performance computing</h3>
+<p>Parallelism not always make the execution faster, sometimes the more parallelism we had, the slower the program ran, which means we need to reconsider the task before we choose to implement it parallelly.</p>
+<p>​     (table with run time of Dijkstra with 1000 nodes but different number of threads)
+​     (table with run time of Dijkstra with 25000 nodes but different number of threads)</p>
+<p>Possible way to improve our performance when writing parallel program with OpenMP on shared-memory systems:</p>
+<ol>
+<li>False sharing could be a problem.
+Example to this: analysis the execution of a Matrix multiplies a vector.
+$Y = A * x$</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"> <span class="cp">#pragma omp parallel for num_threads(thread_count) \
+</span><span class="cp">  default(none) private (i, j) shared(A, x, y, m, n)
+</span><span class="cp"></span>  <span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span> <span class="n">m</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+     <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
+       <span class="k">for</span><span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">){</span>
+           <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+        <span class="p">}</span>
+   <span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>We will compare the performance of the matrix 8000000 x8 or 8000000 x 8 or 8 x 8000000
+(efficiency table here)
+Although we may face much larger numbers in high performance computing<br>
+Why is multi threads worse than less threads?
+Suppose for the moment that threads 0 and 1 are assigned to one of the processors and threads 2 and 3 are assigned to the other. Also suppose that for the 8x8,000,000 problem all of y is stored in a single cache line. Then every write to some element of y will invalidate the line in the other processor’s cache. For example, each time thread 0 updates y[0] in the statement.
+$y[i] += A[i][j] * x[j];$
+if thread 2 or 3 is executing this code, it will have to reload y. Each thread will update each of its components 8,000,000 times. We see that with this assignment of threads to processors and components of y to cache lines, all the threads will have to reload y many times. This is going to happen in spite of the fact that only one thread accesses any one component of y, for example, only thread0 accesses $y[0]$.</p>
+<p>(Explain why false sharing may not be a problem here)</p>
+<p>Possible ways of avoiding false sharing in the matrix multiplication program: One possible solution is to “pad” y vector with dummy elements in order to guarantee that any update by one thread won’t influence another cache line. Another alternative way is to have its own private storage during the loop, and then update the shared storage when iterations are done.</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2020-10-30&nbsp;<a class="git-hash" href="https://github.com/Interstellarss/myblog2/commit/832fd732ebc2f5a8c5aeafade22d988f2bce4339" target="_blank" title="commit by Puxuan(leslie.qq.lol@gmail.com) 832fd732ebc2f5a8c5aeafade22d988f2bce4339: adding 2. for the parallel computing">
+                                    <i class="fas fa-hashtag fa-fw"></i>832fd73</a></span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://interstellarss.github.io/posts/shared-memory-parallelism_2/" data-title="当我们谈论 shared memory parallelism 的时候我们在谈论些什么--提升篇" data-hashtags="parallel computing,Seminar-HPC"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://interstellarss.github.io/posts/shared-memory-parallelism_2/" data-hashtag="parallel computing"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://interstellarss.github.io/posts/shared-memory-parallelism_2/" data-title="当我们谈论 shared memory parallelism 的时候我们在谈论些什么--提升篇"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://interstellarss.github.io/posts/shared-memory-parallelism_2/" data-title="当我们谈论 shared memory parallelism 的时候我们在谈论些什么--提升篇"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@2.14.0/icons/line.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://interstellarss.github.io/posts/shared-memory-parallelism_2/" data-title="当我们谈论 shared memory parallelism 的时候我们在谈论些什么--提升篇" data-ralateuid="xxxx"><i class="fab fa-weibo fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/parallel-computing/">parallel computing</a>,&nbsp;<a href="/tags/seminar-hpc/">Seminar-HPC</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/shared-memory-parallelism_1/" class="prev" rel="prev" title="当我们谈论 shared memory parallelism 的时候我们在谈论些什么--前导篇"><i class="fas fa-angle-left fa-fw"></i>当我们谈论 shared memory parallelism 的时候我们在谈论些什么--前导篇</a>
+            <a href="/posts/first_post/" class="next" rel="next" title="First_post">First_post<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.76.5">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.2.0/dist/css/lightgallery.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.37.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.8/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.2.0/dist/js/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.2.0/dist/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.0/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'G-LMR64333PL', { 'anonymize_ip': true });
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=G-LMR64333PL" async></script></body>
+</html>
