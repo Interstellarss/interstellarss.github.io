@@ -19,6 +19,13 @@ test]]></description>
     <guid>https://interstellarss.github.io/posts/shared-memory-parallelism_2/</guid>
     <description><![CDATA[这次带来的是提升篇，其实就是seminar要交的paper的first draft，倒也算是偷懒的一种方式吧。 A brief Overview on Shared Memory Parallelism in Parallel Computing 1. Why parallel? To speed up,]]></description>
 </item><item>
+    <title>功能重要单一的数据链路层</title>
+    <link>https://interstellarss.github.io/posts/data-link-layer/</link>
+    <pubDate>Tue, 12 May 2020 09:44:32 &#43;0200</pubDate>
+    <author>作者</author>
+    <guid>https://interstellarss.github.io/posts/data-link-layer/</guid>
+    <description><![CDATA[连接的特征（Verbindungscharakterisierung） 两个节点之间的连接会有如下的各种属性：传输速率（Übertragung]]></description>
+</item><item>
     <title>当我们谈论 shared memory parallelism 的时候我们在谈论些什么--前导篇</title>
     <link>https://interstellarss.github.io/posts/shared-memory-parallelism_1/</link>
     <pubDate>Sun, 03 May 2020 22:35:00 &#43;0200</pubDate>

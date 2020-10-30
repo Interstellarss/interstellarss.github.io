@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>功能重要单一的数据链路层 - 法术研究分享Blog</title><meta name="Description" content="初识高性能计算"><meta property="og:title" content="功能重要单一的数据链路层" />
+<meta property="og:description" content="初识高性能计算" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://interstellarss.github.io/posts/data-link-layer/" />
+<meta property="og:image" content="https://interstellarss.github.io/logo.png"/>
+<meta property="article:published_time" content="2020-05-12T09:44:32+02:00" />
+<meta property="article:modified_time" content="2020-05-12T09:44:32+02:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://interstellarss.github.io/logo.png"/>
+
+<meta name="twitter:title" content="功能重要单一的数据链路层"/>
+<meta name="twitter:description" content="初识高性能计算"/>
+<meta name="application-name" content="法术研究分享Blog">
+<meta name="apple-mobile-web-app-title" content="法术研究分享Blog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c">
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'G-LMR64333PL', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://interstellarss.github.io/posts/data-link-layer/" /><link rel="prev" href="https://interstellarss.github.io/posts/shared-memory-parallelism_1/" /><link rel="next" href="https://interstellarss.github.io/posts/shared-memory-parallelism_2/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "功能重要单一的数据链路层",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/interstellarss.github.io\/posts\/data-link-layer\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/interstellarss.github.io\/images\/Apple-Devices-Preview.png",
+                            "width":  3200 ,
+                            "height":  2048 
+                        }],"genre": "posts","keywords": "computer network","wordcount":  2058 ,
+        "url": "https:\/\/interstellarss.github.io\/posts\/data-link-layer\/","datePublished": "2020-05-12T09:44:32+02:00","dateModified": "2020-05-12T09:44:32+02:00","publisher": {
+            "@type": "Organization",
+            "name": "Puxuan"},"author": {
+                "@type": "Person",
+                "name": "Puxuan"
+            },"description": "初识高性能计算"
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="法术研究分享Blog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>Puxuan</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="法术研究分享Blog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>Puxuan</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">功能重要单一的数据链路层</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://interstellarss.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Puxuan</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>学习笔记</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-05-12">2020-05-12</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2058 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 5 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#连接的特征verbindungscharakterisierung">连接的特征（Verbindungscharakterisierung）</a>
+      <ul>
+        <li><a href="#点对点的信道">点对点的信道</a>
+          <ul>
+            <li><a href="#übertragungsrate">Übertragungsrate</a></li>
+            <li><a href="#ausbreitungsverzögerung">Ausbreitungsverzögerung</a></li>
+            <li><a href="#gesamtverzögerung">Gesamtverzögerung</a></li>
+            <li><a href="#bandbreitenverzögerungsprodukt">Bandbreitenverzögerungsprodukt</a></li>
+            <li><a href="#übertragungsrichtung">Übertragungsrichtung</a></li>
+          </ul>
+        </li>
+        <li><a href="#广播信道的数据链路层">广播信道的数据链路层</a>
+          <ul>
+            <li><a href="#aloha-and-sorted-aloha">ALOHA and Sorted ALOHA</a></li>
+            <li><a href="#csma-csmacd-csmaca">CSMA, CSMA/CD, CSMA/CA</a>
+              <ul>
+                <li><a href="#csmacd">CSMA/CD</a></li>
+              </ul>
+            </li>
+            <li><a href="#csmaca">CSMA/CA</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#封装成帧">封装成帧</a>
+      <ul>
+        <li><a href="#mac地址">MAC地址</a>
+          <ul>
+            <li><a href="#mac帧格式">MAC帧格式</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#差错检测">差错检测</a>
+      <ul>
+        <li><a href="#crc亢余检测">CRC亢余检测</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="连接的特征verbindungscharakterisierung">连接的特征（Verbindungscharakterisierung）</h2>
+<p>两个节点之间的连接会有如下的各种属性：传输速率（Übertragungsrate），传输延迟（Übertragungsverzögerung），传输方向（Übertragungsrichtung），以及多路访问或多路复用（Mehrfachzugriff (Multiplexing)）。</p>
+<h3 id="点对点的信道">点对点的信道</h3>
+<h4 id="übertragungsrate">Übertragungsrate</h4>
+<p>数据在信道上面被放置的时间我们称作Serialisierungszeit，记作 $t_s$,  L 为需要传输的数据大小，r 为传输速率，于是
+$$
+t_s = \frac{L}{r}
+$$
+这里的$t_s$可以认为是传输时延，传输这些数据会要用到的时间。</p>
+<h4 id="ausbreitungsverzögerung">Ausbreitungsverzögerung</h4>
+<p>顾名思义，传播延迟，与上面的不一样的是这是信号在信道中从一段到另一端会花的时间：
+$$
+t_p = \frac{d}{vc_0}
+$$
+$c_0$即为光速，v为一个常数， 与传输介质有关。</p>
+<h4 id="gesamtverzögerung">Gesamtverzögerung</h4>
+<p>$t_d 即是总的延迟为上面两项的和$。</p>
+<h4 id="bandbreitenverzögerungsprodukt">Bandbreitenverzögerungsprodukt</h4>
+<p>这个就是所谓的宽带延迟，正是因为在信道中的传播不可避免的需要时间，我们需要一定容量来存储：
+$$
+C = t_p r = \frac{d}{vc_0} r
+$$
+单位是bit。</p>
+<h4 id="übertragungsrichtung">Übertragungsrichtung</h4>
+<figure>
+    <img src="https://cdn.jsdelivr.net/gh/Interstellarss/CDN@0.1.4/images/data-link-layer/ubertragungsrichtung.jpg"
+         alt="image"/> <figcaption>
+            <p>Übertragungsrichtung</p>
+        </figcaption>
+</figure>
+
+<h3 id="广播信道的数据链路层">广播信道的数据链路层</h3>
+<p>一般来说这里我们会用到时分复用（Zeitmultiplex），即用一个信道实现不同端口之间的通信，基于分组网络（以太网，无线局域网）中的非确定性方法（并发访问）。
+至于复用我想教授的slide上面的图已经很清楚了：
+<figure>
+    <img src="https://cdn.jsdelivr.net/gh/Interstellarss/CDN@0.1.4/images/data-link-layer/Multiplexing.jpg"
+         alt="image"/> <figcaption>
+            <p>Multiplexing</p>
+        </figcaption>
+</figure>
+</p>
+<h4 id="aloha-and-sorted-aloha">ALOHA and Sorted ALOHA</h4>
+<h4 id="csma-csmacd-csmaca">CSMA, CSMA/CD, CSMA/CA</h4>
+<p>CSMA 指的其实是 Carrier Sense Multiple Access, 是对于前面sorted ALOHA的一种简单的优化，也即“listen before talk”。</p>
+<h5 id="csmacd">CSMA/CD</h5>
+<p>中文翻译也即 载波监听碰撞监听多点接入/碰撞检测，以太网即用此协议，分为载波监听和碰撞检测两部分：即“发送前先监听”，每个站在发送数据前要先检测一下总线上是否有其他站在发送数据，如果有，暂时不发送数据，等待信道空闲时再发送，总线上没有“载波”，这里只是一个习惯称呼；-碰撞检测：即“边发送边监听”，适配器边发送数据边检测信道上的信号电压，以便判断自己在发送数据时其他站是否也在发送数据。同时发送数据时，总线上的信号电压变化幅度大，超过一定门限值时，就认为总线上至少两个站同时在发送数据，表明有碰撞。这时总线上的信号失真，无法恢复。所以，每一个正在发送数据的站，一旦发现有碰撞，适配器就要立即停止发送，以免浪费网络资源，等待一段随机时间后再发送。 如果考虑上信号在链路上的传播时延，那么过程类似这样；</p>
+<figure>
+    <img src="https://cdn.jsdelivr.net/gh/Interstellarss/CDN@0.1.4/images/data-link-layer/CSMA_CD.jpg"
+         alt="image"/> <figcaption>
+            <p>CSMA/CD</p>
+        </figcaption>
+</figure>
+
+<p>每个端点在自己发送数据之后的一小短时间内，存在着遭遇碰撞的可能性，这段时间最长为两个单程最长时间，将这个时间成为“争用期”，只有通过争用期的“考验”，才能肯定这次发送不会发生碰撞。正是因为这个原因，以太网规定了数据帧的最小长度即64字节，所有小于此长度都认为是碰撞导致的丢弃帧。当我们接收到至少64字节我们就可认为这之间没有碰撞。</p>
+<p>CSMA/CD不能同时进行发送和接受，因此是Halbdulplex，也就是半双工协议，即双向交替通信。</p>
+<h4 id="csmaca">CSMA/CA</h4>
+<p>在有线连接的局域网中就不能使用CSMA/CD（无线局域网中），因为即使发送的信息足够长, 也不能总是检测到碰撞。这里的CA其实就是colision avoidance，发送包的同时不能检测到信道上有无冲突，只能尽量“避免”。例如，如果计算机A和计算机C同时给计算机B发送一个控制消息，它们将同时到达计算机B，导致冲突的发生。当这种冲突发生时，发送者可以随机等待一段时间，然后重发控制消息。因为控制消息比数据帧要短得多，所以发生第二次冲突的可能性也要比传统以太网要小很多。最终将有一个控制消息正确到达，然后计算机B发送一个响应消息。通常CSMA/CA利用ACK信号来避免冲突的发生，也就是说，只有当客户端收到网络上返回的ACK信号后才确认送出的数据已经正确到达目的。</p>
+<p>教授slide中是这样说的：</p>
+<blockquote>
+<ol>
+<li>Wenn Medium frei, übertrage mit Wahrscheinlichkeit p oder verzögere mit Wahrscheinlichkeit 1 − p um eine feste Zeit dann 1.</li>
+</ol>
+</blockquote>
+<ol start="2">
+<li>Wenn Medium belegt, warte bis frei, dann 1.</li>
+</ol>
+<h2 id="封装成帧">封装成帧</h2>
+<p>封装简单说就是事先对数据包进行拆分和打包，在所发送的数据包上附加上目标地址，本地地址，以及一些用于纠错的字节等。对数据包进行处理时通信双方所遵循和协商好的规则就是协议。</p>
+<p>网络层传输的包（packet）在数据链路层中传输的是帧就（frame，Rahmen）。数据包到达数据链路层后加上数据链路层的协议头和协议尾就构成了一个数据帧。</p>
+<h3 id="mac地址">MAC地址</h3>
+<p>是指局域网上的每一台计算机中固化在适配器的ROM中的地址（因此也叫适配器地址或适配器标识符EUI—48），由硬件厂商决定，是不会变的。只要适配器不变，它就不变。它是每一个站的“名字”或标识符。如果连接在局域网上的主机或路由器安装有多个适配器，那么这样的主机或路由器就有多个“地址”，也就是说，这种48位地址应当是某个接口的标识符。当然通过相应软件也是可以改变mac地址的。</p>
+<h4 id="mac帧格式">MAC帧格式</h4>
+<h2 id="差错检测">差错检测</h2>
+<h3 id="crc亢余检测">CRC亢余检测</h3>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2020-05-12</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://interstellarss.github.io/posts/data-link-layer/" data-title="功能重要单一的数据链路层" data-hashtags="computer network"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://interstellarss.github.io/posts/data-link-layer/" data-hashtag="computer network"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://interstellarss.github.io/posts/data-link-layer/" data-title="功能重要单一的数据链路层"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://interstellarss.github.io/posts/data-link-layer/" data-title="功能重要单一的数据链路层"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@2.14.0/icons/line.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://interstellarss.github.io/posts/data-link-layer/" data-title="功能重要单一的数据链路层" data-ralateuid="xxxx"><i class="fab fa-weibo fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/computer-network/">computer network</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/shared-memory-parallelism_1/" class="prev" rel="prev" title="当我们谈论 shared memory parallelism 的时候我们在谈论些什么--前导篇"><i class="fas fa-angle-left fa-fw"></i>当我们谈论 shared memory parallelism 的时候我们在谈论些什么--前导篇</a>
+            <a href="/posts/shared-memory-parallelism_2/" class="next" rel="next" title="当我们谈论 shared memory parallelism 的时候我们在谈论些什么--提升篇">当我们谈论 shared memory parallelism 的时候我们在谈论些什么--提升篇<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.76.5">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.2.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/copy-tex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.37.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.8/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.2.0/dist/js/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.2.0/dist/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.0/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'G-LMR64333PL', { 'anonymize_ip': true });
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=G-LMR64333PL" async></script></body>
+</html>
