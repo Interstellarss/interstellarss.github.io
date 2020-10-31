@@ -12,7 +12,8 @@
     <author>作者</author>
     <guid>https://interstellarss.github.io/posts/first_post/</guid>
     <description><![CDATA[Test
-test]]></description>
+test
+   1 2 3 4 5 6 7            ]]></description>
 </item><item>
     <title>当我们谈论 shared memory parallelism 的时候我们在谈论些什么--提升篇</title>
     <link>https://interstellarss.github.io/posts/shared-memory-parallelism_2/</link>
