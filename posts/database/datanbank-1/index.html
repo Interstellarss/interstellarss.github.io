@@ -5,8 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-        <title>初识数据库 -- 1 - 法术研究分享Blog</title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:title" content="初识数据库 -- 1" />
-<meta property="og:description" content="" />
+        <title>初识数据库 -- 1 - 法术研究分享Blog</title><meta name="Description" content="简单介绍DBMS的概念以及涵盖的主题"><meta property="og:title" content="初识数据库 -- 1" />
+<meta property="og:description" content="简单介绍DBMS的概念以及涵盖的主题" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://interstellarss.github.io/posts/database/datanbank-1/" />
 <meta property="og:image" content="https://interstellarss.github.io/logo.png"/>
@@ -16,7 +16,7 @@
 <meta name="twitter:image" content="https://interstellarss.github.io/logo.png"/>
 
 <meta name="twitter:title" content="初识数据库 -- 1"/>
-<meta name="twitter:description" content=""/>
+<meta name="twitter:description" content="简单介绍DBMS的概念以及涵盖的主题"/>
 <meta name="application-name" content="法术研究分享Blog">
 <meta name="apple-mobile-web-app-title" content="法术研究分享Blog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c">
 
@@ -47,13 +47,13 @@ if (!doNotTrack) {
                             "url": "https:\/\/interstellarss.github.io\/images\/Apple-Devices-Preview.png",
                             "width":  3200 ,
                             "height":  2048 
-                        }],"genre": "posts","keywords": "Database","wordcount":  1529 ,
+                        }],"genre": "posts","keywords": "Database","wordcount":  1542 ,
         "url": "https:\/\/interstellarss.github.io\/posts\/database\/datanbank-1\/","datePublished": "2020-11-04T19:46:16+01:00","dateModified": "2020-11-04T19:46:16+01:00","publisher": {
             "@type": "Organization",
             "name": "Puxuan"},"author": {
                 "@type": "Person",
                 "name": "Puxuan"
-            },"description": ""
+            },"description": "简单介绍DBMS的概念以及涵盖的主题"
     }
     </script></head>
     <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
@@ -124,7 +124,7 @@ if (!doNotTrack) {
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">初识数据库 -- 1</h1><h2 class="single-subtitle">Database笔记 -- 介绍篇</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://interstellarss.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Puxuan</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>学习笔记</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-11-04">2020-11-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1529 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-11-04">2020-11-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1542 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -140,8 +140,10 @@ if (!doNotTrack) {
         <li><a href="#datenabstraktion">Datenabstraktion</a>
           <ul>
             <li><a href="#datenunabhängigkeit">Datenunabhängigkeit</a></li>
+            <li><a href="#datenbankschema-und-ausprägung">Datenbankschema und Ausprägung</a></li>
           </ul>
         </li>
+        <li><a href="#queries-in-a-dbms">Queries in a DBMS</a></li>
       </ul>
     </li>
   </ul>
@@ -167,16 +169,13 @@ if (!doNotTrack) {
 <p>就像名字所描绘的那样，在Relational data Model中描述了所有的“relations”， 包括“entities”and“relationships”，其中的主要概念是：relation， 对于relation我们基本上可以想像成一系列的“Tabellen”，也即“table with rows and columns”,更深入的理解为“table”与“table”之间的关系。举例来说：对于，学生听讲座，我们有学生组成的表，Vorlesung组成的表，还有“听”的表，所以才有学生组成的表“听”讲座组成的表。同时，每一个“relation”都有一个“schema”或者说“Spalten”，来描述内部储存的数据，也即各列的意义，所表示的“attributes”。</p>
 <h3 id="datenabstraktion">Datenabstraktion</h3>
 <p>下图展示了DBMS的三个抽象层级，分别是physical Ebene, logische Ebene(对应 conceptual Schema)，以及die Schichten(对应external Schema)。</p>
-<p><figure><a class="lightgallery" href="/images/database/level_of_abstraction.png" title="/images/database/level_of_abstraction.png" data-thumbnail="/images/database/level_of_abstraction.png" data-sub-html="<h2>Level of Abstraction</h2>">
-        <img
-            class="lazyload"
-            src="/svg/loading.min.svg"
-            data-src="/images/database/level_of_abstraction.png"
-            data-srcset="/images/database/level_of_abstraction.png, /images/database/level_of_abstraction.png 1.5x, /images/database/level_of_abstraction.png 2x"
-            data-sizes="auto"
-            alt="/images/database/level_of_abstraction.png" />
-    </a><figcaption class="image-caption">Level of Abstraction</figcaption>
-    </figure> <sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p><figure>
+    <img src="/images/database/level_of_abstraction.png"
+         alt="Level of Abstraction"/> <figcaption>
+            <p>Level of Abstraction</p>
+        </figcaption>
+</figure>
+ <sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
 <ul>
 <li>
 <p>Die physische Ebene: 描述了data是如何储存的，并且定义了使用的files和indexes，换句话说总结了上一层逻辑层中的“relations”是如何存储在储存设备上的。</p>
@@ -198,6 +197,8 @@ if (!doNotTrack) {
 physical schema 变化，可能会改变引索的属性、以及索引的方式，但是上层并不清楚这些变化。</p>
 </li>
 </ul>
+<h4 id="datenbankschema-und-ausprägung">Datenbankschema und Ausprägung</h4>
+<h3 id="queries-in-a-dbms">Queries in a DBMS</h3>
 <section class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
