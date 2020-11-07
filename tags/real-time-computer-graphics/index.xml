@@ -1,0 +1,14 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>real-time computer graphics - 标签 - 法术研究分享Blog</title>
+        <link>https://interstellarss.github.io/tags/real-time-computer-graphics/</link>
+        <description>real-time computer graphics - 标签 - 法术研究分享Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 21 May 2020 11:38:08 &#43;0200</lastBuildDate><atom:link href="https://interstellarss.github.io/tags/real-time-computer-graphics/" rel="self" type="application/rss+xml" /><item>
+    <title>基于diamond-square-algorithm生成高度图的C&#43;&#43;实现</title>
+    <link>https://interstellarss.github.io/posts/computer_graphics/implementation-about-diamond-square/</link>
+    <pubDate>Thu, 21 May 2020 11:38:08 &#43;0200</pubDate>
+    <author>作者</author>
+    <guid>https://interstellarss.github.io/posts/computer_graphics/implementation-about-diamond-square/</guid>
+    <description><![CDATA[其实很多时候我们看到的这些渲染真的是很神奇的事，比如一些terrain看似是三维的，其实可以由二维产生，即为每一个像素点赋予一个高度值，这些]]></description>
+</item></channel>
+</rss>
