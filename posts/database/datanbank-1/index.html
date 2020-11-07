@@ -47,7 +47,7 @@ if (!doNotTrack) {
                             "url": "https:\/\/interstellarss.github.io\/images\/Apple-Devices-Preview.png",
                             "width":  3200 ,
                             "height":  2048 
-                        }],"genre": "posts","keywords": "Database","wordcount":  972 ,
+                        }],"genre": "posts","keywords": "Database","wordcount":  1485 ,
         "url": "https:\/\/interstellarss.github.io\/posts\/database\/datanbank-1\/","datePublished": "2020-11-04T19:46:16+01:00","dateModified": "2020-11-04T19:46:16+01:00","publisher": {
             "@type": "Organization",
             "name": "Puxuan"},"author": {
@@ -124,8 +124,8 @@ if (!doNotTrack) {
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">初识数据库 -- 1</h1><h2 class="single-subtitle">Database笔记 -- 介绍篇</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://interstellarss.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Puxuan</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>学习笔记</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-11-04">2020-11-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 972 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-11-04">2020-11-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1485 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
@@ -137,6 +137,11 @@ if (!doNotTrack) {
       <ul>
         <li><a href="#why-use-a-dbms-">Why use a DBMS ？</a></li>
         <li><a href="#data-models">Data Models</a></li>
+        <li><a href="#datenabstraktion">Datenabstraktion</a>
+          <ul>
+            <li><a href="#datenunabhängigkeit">Datenunabhängigkeit</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>
@@ -144,8 +149,8 @@ if (!doNotTrack) {
             </div><div class="content" id="content"><h3 id="why-use-a-dbms-">Why use a DBMS ？</h3>
 <p>我想这是我们首先要回答的问题：</p>
 <p><strong>Data independence</strong> 这意味着我们不需要知道数据是如何具体地被储存在disk上面，而只需要了解更高级别的数据模型，以便有效的访问数据。</p>
-<p><strong>Efficient access</strong> 这涉及到如何访问数据库中的数据，如何检索，使用一些检索，进行比较查询之类的功能。因为不适用DBMS而在一个普通的file system中这会涉及到**„Beschränkte Zugriffmöglichkeiten„**的问题，其中这些数据并没有互“相关联”，一组数据的信息与另一组的信息并没有逻辑上的联系。</p>
-<p><strong>Data integrity</strong> 这会涉及到一个”integrity constraints“的概念，举例来说，有一个公司要找更多的人，但是预算不一定够，于是每次要雇佣某个人，都要去检查这个约束，而如果不使用DBMS则可能会造成**„Interitätsverletzung„**的情况出现。</p>
+<p><strong>Efficient access</strong> 这涉及到如何访问数据库中的数据，如何检索，使用一些检索，进行比较查询之类的功能。因为不适用DBMS而在一个普通的file system中这会涉及到<strong>Beschränkte Zugriffmöglichkeiten</strong>的问题，其中这些数据并没有互“相关联”，一组数据的信息与另一组的信息并没有逻辑上的联系。</p>
+<p><strong>Data integrity</strong> 这会涉及到一个”integrity constraints“的概念，举例来说，有一个公司要找更多的人，但是预算不一定够，于是每次要雇佣某个人，都要去检查这个约束，而如果不使用DBMS则可能会造成<strong>Interitätsverletzung</strong>的情况出现。</p>
 <p><strong>Security</strong> 如果使用DBMS，则更容易管理数据库和控制数据库的访问权限，因为并不是所有的用户都有权限去访问数据库各种各样的数据。</p>
 <p><strong>Concurrent access</strong> 这其实是可以归属于**„Verlust von Data„**这一类的问题，而在DBMS中则可以很好的避免。</p>
 <p><strong>Recovery from crashes</strong> 数据库管理系统有一个复杂的恢复组件，以支持用户在所有可预见的错误情况下防止数据丢失。</p>
@@ -159,7 +164,39 @@ if (!doNotTrack) {
 &ndash; Hierarchical data Model
 &ndash; Relational data Model</p>
 <p>当然我们后面会关注的的其实只有Relational data model就是了 :)</p>
-<p>就像名字所描绘的那样，对于Relational data Model中的主要概念是：relation， 对于relation我们基本上可以想像成一系列的“Tabellen”，也即“table with rows and columns”,更深入的理解为“table”与“table”之间的关系。举例来说：对于，学生听讲座，我们有学生组成的表，Vorlesung组成的表，还有“听”的表，所以才有学生组成的表“听”讲座组成的表。同时，每一个“relation”都有一个“schema”或者说“Spalten”，来描述内部储存的数据，也即各列的意义，所表示的“attributes”。</p>
+<p>就像名字所描绘的那样，在Relational data Model中描述了所有的“relations”， 包括“entities”and“relationships”，其中的主要概念是：relation， 对于relation我们基本上可以想像成一系列的“Tabellen”，也即“table with rows and columns”,更深入的理解为“table”与“table”之间的关系。举例来说：对于，学生听讲座，我们有学生组成的表，Vorlesung组成的表，还有“听”的表，所以才有学生组成的表“听”讲座组成的表。同时，每一个“relation”都有一个“schema”或者说“Spalten”，来描述内部储存的数据，也即各列的意义，所表示的“attributes”。</p>
+<h3 id="datenabstraktion">Datenabstraktion</h3>
+<p>下图展示了DBMS的三个抽象层级，分别是physical Ebene, logische Ebene(对应 conceptual Schema)，以及die Schichten(对应external Schema)。</p>
+<figure><a class="lightgallery" href="/images/database/level_of_abstraction.png" title="/images/database/level_of_abstraction.png" data-thumbnail="/images/database/level_of_abstraction.png" data-sub-html="<h2>Level of Abstraction</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/database/level_of_abstraction.png"
+            data-srcset="/images/database/level_of_abstraction.png, /images/database/level_of_abstraction.png 1.5x, /images/database/level_of_abstraction.png 2x"
+            data-sizes="auto"
+            alt="/images/database/level_of_abstraction.png" />
+    </a><figcaption class="image-caption">Level of Abstraction</figcaption>
+    </figure>
+<ul>
+<li>
+<p>Die physische Ebene: 描述了data是如何储存的，并且定义了使用的files和indexes，换句话说总结了上一层逻辑层中的“relations”是如何存储在储存设备上的。</p>
+</li>
+<li>
+<p>Die logische Ebene: 定义了基于data model的逻辑结构，也即确定了“Datenbankschema”，也就是如何去组织数据，值得注意的是也就是在这里描述了前文中提到的“data model”。</p>
+</li>
+<li>
+<p>Die Sichten: 这里其实已经是“external schema”的层面了，在这里描述了不同的用户如何访问“看见”这些数据，不同用户可能访问同一个数据库但是看到的数据可能是不同的，我们可以说这里是不同“views”的集合，允许数据访问被客制化，并且不会储存这些客制化的表格:)</p>
+</li>
+</ul>
+<h4 id="datenunabhängigkeit">Datenunabhängigkeit</h4>
+<ul>
+<li>
+<p>Logische Datenunabhängigkeit: 当然AKA logical data independence, protection from changes in logical structure of the data.</p>
+</li>
+<li>
+<p>Physische Datenunabhängigkeit: AKA physical data independence, protection from changes in physical structure of data.</p>
+</li>
+</ul>
 <section class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
