@@ -6,18 +6,18 @@
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 04 Nov 2020 19:46:16 &#43;0100</lastBuildDate>
             <atom:link href="https://interstellarss.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
-    <title>Database笔记 -- 介绍篇</title>
-    <link>https://interstellarss.github.io/posts/datanbank-1/</link>
+    <title>初识数据库 -- 1</title>
+    <link>https://interstellarss.github.io/posts/database/datanbank-1/</link>
     <pubDate>Wed, 04 Nov 2020 19:46:16 &#43;0100</pubDate>
     <author>作者</author>
-    <guid>https://interstellarss.github.io/posts/datanbank-1/</guid>
+    <guid>https://interstellarss.github.io/posts/database/datanbank-1/</guid>
     <description><![CDATA[]]></description>
 </item><item>
     <title>关于游戏中物理系统的一些小事 -- 导引篇 - 1</title>
-    <link>https://interstellarss.github.io/posts/game_physics_1/</link>
+    <link>https://interstellarss.github.io/posts/game_physics/game_physics_1/</link>
     <pubDate>Fri, 30 Oct 2020 23:43:29 &#43;0100</pubDate>
     <author>作者</author>
-    <guid>https://interstellarss.github.io/posts/game_physics_1/</guid>
+    <guid>https://interstellarss.github.io/posts/game_physics/game_physics_1/</guid>
     <description><![CDATA[游戏物理相关主题概况]]></description>
 </item><item>
     <title>First_post</title>
@@ -29,39 +29,53 @@
 test
   ]]></description>
 </item><item>
+    <title>作为带路专家的网络层</title>
+    <link>https://interstellarss.github.io/posts/computernetwork/network-layer/</link>
+    <pubDate>Mon, 06 Jul 2020 23:16:59 &#43;0200</pubDate>
+    <author>作者</author>
+    <guid>https://interstellarss.github.io/posts/computernetwork/network-layer/</guid>
+    <description><![CDATA[在这里我们会认识到网络层提供的两种不同服务和网络层的核心也即&ndash;IP协议. 我们能够理解: 虚拟互连网络的概念. IP地址与物理地址的关]]></description>
+</item><item>
     <title>当我们谈论 shared memory parallelism 的时候我们在谈论些什么--提升篇</title>
-    <link>https://interstellarss.github.io/posts/shared-memory-parallelism_2/</link>
+    <link>https://interstellarss.github.io/posts/seminar-hpc/shared-memory-parallelism_2/</link>
     <pubDate>Sun, 07 Jun 2020 21:44:12 &#43;0200</pubDate>
     <author>作者</author>
-    <guid>https://interstellarss.github.io/posts/shared-memory-parallelism_2/</guid>
+    <guid>https://interstellarss.github.io/posts/seminar-hpc/shared-memory-parallelism_2/</guid>
     <description><![CDATA[这次带来的是提升篇，其实就是seminar要交的paper的first draft，倒也算是偷懒的一种方式吧。 A brief Overview on Shared Memory Parallelism in Parallel Computing 1. Why parallel? To speed up,]]></description>
 </item><item>
+    <title>基于diamond-square-algorithm生成高度图的C&#43;&#43;实现</title>
+    <link>https://interstellarss.github.io/posts/computer_graphics/implementation-about-diamond-square/</link>
+    <pubDate>Thu, 21 May 2020 11:38:08 &#43;0200</pubDate>
+    <author>作者</author>
+    <guid>https://interstellarss.github.io/posts/computer_graphics/implementation-about-diamond-square/</guid>
+    <description><![CDATA[其实很多时候我们看到的这些渲染真的是很神奇的事，比如一些terrain看似是三维的，其实可以由二维产生，即为每一个像素点赋予一个高度值，这些]]></description>
+</item><item>
+    <title>DFA与NFA的故事(二)</title>
+    <link>https://interstellarss.github.io/posts/theo/something-about-dfa-and-nfa-2/</link>
+    <pubDate>Thu, 14 May 2020 23:56:46 &#43;0200</pubDate>
+    <author>作者</author>
+    <guid>https://interstellarss.github.io/posts/theo/something-about-dfa-and-nfa-2/</guid>
+    <description><![CDATA[我们从(一)可以认识到DFA和NFA是什么样子的，并且知道它们之间的等价性，在“从有穷自动机到正则语言”一篇中我们知道DFA，NFA和正则表]]></description>
+</item><item>
     <title>功能重要单一的数据链路层</title>
-    <link>https://interstellarss.github.io/posts/data-link-layer/</link>
+    <link>https://interstellarss.github.io/posts/computernetwork/data-link-layer/</link>
     <pubDate>Tue, 12 May 2020 09:44:32 &#43;0200</pubDate>
     <author>作者</author>
-    <guid>https://interstellarss.github.io/posts/data-link-layer/</guid>
+    <guid>https://interstellarss.github.io/posts/computernetwork/data-link-layer/</guid>
     <description><![CDATA[连接的特征（Verbindungscharakterisierung） 两个节点之间的连接会有如下的各种属性：传输速率（Übertragung]]></description>
 </item><item>
+    <title>从有穷自动机到正则语言---实现篇</title>
+    <link>https://interstellarss.github.io/posts/theo/something-about-regular-expression-implementation/</link>
+    <pubDate>Tue, 12 May 2020 00:15:53 &#43;0200</pubDate>
+    <author>作者</author>
+    <guid>https://interstellarss.github.io/posts/theo/something-about-regular-expression-implementation/</guid>
+    <description><![CDATA[本篇可以看作是“从有穷自动机到正则表达式”此篇的番外篇，主要是提供JAVA实现从DFA到RE的转换。因为代码完全是从作业中copy的，不知道]]></description>
+</item><item>
     <title>当我们谈论 shared memory parallelism 的时候我们在谈论些什么--前导篇</title>
-    <link>https://interstellarss.github.io/posts/shared-memory-parallelism_1/</link>
+    <link>https://interstellarss.github.io/posts/seminar-hpc/shared-memory-parallelism_1/</link>
     <pubDate>Sun, 03 May 2020 22:35:00 &#43;0200</pubDate>
     <author>作者</author>
-    <guid>https://interstellarss.github.io/posts/shared-memory-parallelism_1/</guid>
+    <guid>https://interstellarss.github.io/posts/seminar-hpc/shared-memory-parallelism_1/</guid>
     <description><![CDATA[在目前正在更的Theo和Network系列上又要开启新的系列了呢，也就是目前看到的 parallel computing 系列。因为这个学期刚好选到一个主题是high performance computing (HPC) 的S]]></description>
-</item><item>
-    <title>充满机遇的物理层</title>
-    <link>https://interstellarss.github.io/posts/physical-layer/</link>
-    <pubDate>Sat, 02 May 2020 00:08:02 &#43;0200</pubDate>
-    <author>作者</author>
-    <guid>https://interstellarss.github.io/posts/physical-layer/</guid>
-    <description><![CDATA[<p>探索计算机网络OSI模型中的物理层的故事.</p>]]></description>
-</item><item>
-    <title>DFA与NFA的故事(一)</title>
-    <link>https://interstellarss.github.io/posts/something-about-dfa-and-nfa/</link>
-    <pubDate>Sat, 25 Apr 2020 19:20:13 &#43;0200</pubDate>
-    <author>作者</author>
-    <guid>https://interstellarss.github.io/posts/something-about-dfa-and-nfa/</guid>
-    <description><![CDATA[对于DFA和NFA形式定义的一些理解，以及正则运算封闭性和DFA与NFA等价性的证明，也就是说DFA的故事是属于NFA的，是特例和常规的故事]]></description>
 </item></channel>
 </rss>

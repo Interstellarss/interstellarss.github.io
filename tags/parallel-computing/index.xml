@@ -5,17 +5,17 @@
         <description>parallel computing - 标签 - 法术研究分享Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 07 Jun 2020 21:44:12 &#43;0200</lastBuildDate><atom:link href="https://interstellarss.github.io/tags/parallel-computing/" rel="self" type="application/rss+xml" /><item>
     <title>当我们谈论 shared memory parallelism 的时候我们在谈论些什么--提升篇</title>
-    <link>https://interstellarss.github.io/posts/shared-memory-parallelism_2/</link>
+    <link>https://interstellarss.github.io/posts/seminar-hpc/shared-memory-parallelism_2/</link>
     <pubDate>Sun, 07 Jun 2020 21:44:12 &#43;0200</pubDate>
     <author>作者</author>
-    <guid>https://interstellarss.github.io/posts/shared-memory-parallelism_2/</guid>
+    <guid>https://interstellarss.github.io/posts/seminar-hpc/shared-memory-parallelism_2/</guid>
     <description><![CDATA[这次带来的是提升篇，其实就是seminar要交的paper的first draft，倒也算是偷懒的一种方式吧。 A brief Overview on Shared Memory Parallelism in Parallel Computing 1. Why parallel? To speed up,]]></description>
 </item><item>
     <title>当我们谈论 shared memory parallelism 的时候我们在谈论些什么--前导篇</title>
-    <link>https://interstellarss.github.io/posts/shared-memory-parallelism_1/</link>
+    <link>https://interstellarss.github.io/posts/seminar-hpc/shared-memory-parallelism_1/</link>
     <pubDate>Sun, 03 May 2020 22:35:00 &#43;0200</pubDate>
     <author>作者</author>
-    <guid>https://interstellarss.github.io/posts/shared-memory-parallelism_1/</guid>
+    <guid>https://interstellarss.github.io/posts/seminar-hpc/shared-memory-parallelism_1/</guid>
     <description><![CDATA[在目前正在更的Theo和Network系列上又要开启新的系列了呢，也就是目前看到的 parallel computing 系列。因为这个学期刚好选到一个主题是high performance computing (HPC) 的S]]></description>
 </item></channel>
 </rss>

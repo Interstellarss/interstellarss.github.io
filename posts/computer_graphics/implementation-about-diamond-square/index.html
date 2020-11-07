@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>基于diamond-square-algorithm生成高度图的C&#43;&#43;实现 - 法术研究分享Blog</title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:title" content="基于diamond-square-algorithm生成高度图的C&#43;&#43;实现" />
+<meta property="og:description" content="其实很多时候我们看到的这些渲染真的是很神奇的事，比如一些terrain看似是三维的，其实可以由二维产生，即为每一个像素点赋予一个高度值，这些" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://interstellarss.github.io/posts/computer_graphics/implementation-about-diamond-square/" />
+<meta property="og:image" content="https://interstellarss.github.io/logo.png"/>
+<meta property="article:published_time" content="2020-05-21T11:38:08+02:00" />
+<meta property="article:modified_time" content="2020-05-21T11:38:08+02:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://interstellarss.github.io/logo.png"/>
+
+<meta name="twitter:title" content="基于diamond-square-algorithm生成高度图的C&#43;&#43;实现"/>
+<meta name="twitter:description" content="其实很多时候我们看到的这些渲染真的是很神奇的事，比如一些terrain看似是三维的，其实可以由二维产生，即为每一个像素点赋予一个高度值，这些"/>
+<meta name="application-name" content="法术研究分享Blog">
+<meta name="apple-mobile-web-app-title" content="法术研究分享Blog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c">
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'G-LMR64333PL', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://interstellarss.github.io/posts/computer_graphics/implementation-about-diamond-square/" /><link rel="prev" href="https://interstellarss.github.io/posts/theo/something-about-dfa-and-nfa-2/" /><link rel="next" href="https://interstellarss.github.io/posts/seminar-hpc/shared-memory-parallelism_2/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "基于diamond-square-algorithm生成高度图的C++实现",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/interstellarss.github.io\/posts\/computer_graphics\/implementation-about-diamond-square\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/interstellarss.github.io\/images\/Apple-Devices-Preview.png",
+                            "width":  3200 ,
+                            "height":  2048 
+                        }],"genre": "posts","keywords": "real-tiem computer graphics","wordcount":  2097 ,
+        "url": "https:\/\/interstellarss.github.io\/posts\/computer_graphics\/implementation-about-diamond-square\/","datePublished": "2020-05-21T11:38:08+02:00","dateModified": "2020-05-21T11:38:08+02:00","publisher": {
+            "@type": "Organization",
+            "name": "Puxuan"},"author": {
+                "@type": "Person",
+                "name": "Puxuan"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="法术研究分享Blog"><span class="header-title-pre"><i class='fas fa-cat'></i></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="法术研究分享Blog"><span class="header-title-pre"><i class='fas fa-cat'></i></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">基于diamond-square-algorithm生成高度图的C&#43;&#43;实现</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://interstellarss.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Puxuan</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>学习笔记</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-05-21">2020-05-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2097 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 5 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
+            </div><div class="content" id="content"><p>其实很多时候我们看到的这些渲染真的是很神奇的事，比如一些terrain看似是三维的，其实可以由二维产生，即为每一个像素点赋予一个高度值，这些高度值构成的点列又可以转换为一张二维图像来存储，需要的时候，相应的地形可以由此图片生成。淡淡的想，一些所谓的空间法术，大概也就是这样了吧。高度图作为维度空间法术的入门想来也是极好的。</p>
+<p>至于法术的入门，我们只关注用正态分布或diamond square来赋值，terrain generator中关于color和normal的值图像我们后面会聊到。</p>
+<p>下面来看代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span><span class="lnt">169
+</span><span class="lnt">170
+</span><span class="lnt">171
+</span><span class="lnt">172
+</span><span class="lnt">173
+</span><span class="lnt">174
+</span><span class="lnt">175
+</span><span class="lnt">176
+</span><span class="lnt">177
+</span><span class="lnt">178
+</span><span class="lnt">179
+</span><span class="lnt">180
+</span><span class="lnt">181
+</span><span class="lnt">182
+</span><span class="lnt">183
+</span><span class="lnt">184
+</span><span class="lnt">185
+</span><span class="lnt">186
+</span><span class="lnt">187
+</span><span class="lnt">188
+</span><span class="lnt">189
+</span><span class="lnt">190
+</span><span class="lnt">191
+</span><span class="lnt">192
+</span><span class="lnt">193
+</span><span class="lnt">194
+</span><span class="lnt">195
+</span><span class="lnt">196
+</span><span class="lnt">197
+</span><span class="lnt">198
+</span><span class="lnt">199
+</span><span class="lnt">200
+</span><span class="lnt">201
+</span><span class="lnt">202
+</span><span class="lnt">203
+</span><span class="lnt">204
+</span><span class="lnt">205
+</span><span class="lnt">206
+</span><span class="lnt">207
+</span><span class="lnt">208
+</span><span class="lnt">209
+</span><span class="lnt">210
+</span><span class="lnt">211
+</span><span class="lnt">212
+</span><span class="lnt">213
+</span><span class="lnt">214
+</span><span class="lnt">215
+</span><span class="lnt">216
+</span><span class="lnt">217
+</span><span class="lnt">218
+</span><span class="lnt">219
+</span><span class="lnt">220
+</span><span class="lnt">221
+</span><span class="lnt">222
+</span><span class="lnt">223
+</span><span class="lnt">224
+</span><span class="lnt">225
+</span><span class="lnt">226
+</span><span class="lnt">227
+</span><span class="lnt">228
+</span><span class="lnt">229
+</span><span class="lnt">230
+</span><span class="lnt">231
+</span><span class="lnt">232
+</span><span class="lnt">233
+</span><span class="lnt">234
+</span><span class="lnt">235
+</span><span class="lnt">236
+</span><span class="lnt">237
+</span><span class="lnt">238
+</span><span class="lnt">239
+</span><span class="lnt">240
+</span><span class="lnt">241
+</span><span class="lnt">242
+</span><span class="lnt">243
+</span><span class="lnt">244
+</span><span class="lnt">245
+</span><span class="lnt">246
+</span><span class="lnt">247
+</span><span class="lnt">248
+</span><span class="lnt">249
+</span><span class="lnt">250
+</span><span class="lnt">251
+</span><span class="lnt">252
+</span><span class="lnt">253
+</span><span class="lnt">254
+</span><span class="lnt">255
+</span><span class="lnt">256
+</span><span class="lnt">257
+</span><span class="lnt">258
+</span><span class="lnt">259
+</span><span class="lnt">260
+</span><span class="lnt">261
+</span><span class="lnt">262
+</span><span class="lnt">263
+</span><span class="lnt">264
+</span><span class="lnt">265
+</span><span class="lnt">266
+</span><span class="lnt">267
+</span><span class="lnt">268
+</span><span class="lnt">269
+</span><span class="lnt">270
+</span><span class="lnt">271
+</span><span class="lnt">272
+</span><span class="lnt">273
+</span><span class="lnt">274
+</span><span class="lnt">275
+</span><span class="lnt">276
+</span><span class="lnt">277
+</span><span class="lnt">278
+</span><span class="lnt">279
+</span><span class="lnt">280
+</span><span class="lnt">281
+</span><span class="lnt">282
+</span><span class="lnt">283
+</span><span class="lnt">284
+</span><span class="lnt">285
+</span><span class="lnt">286
+</span><span class="lnt">287
+</span><span class="lnt">288
+</span><span class="lnt">289
+</span><span class="lnt">290
+</span><span class="lnt">291
+</span><span class="lnt">292
+</span><span class="lnt">293
+</span><span class="lnt">294
+</span><span class="lnt">295
+</span><span class="lnt">296
+</span><span class="lnt">297
+</span><span class="lnt">298
+</span><span class="lnt">299
+</span><span class="lnt">300
+</span><span class="lnt">301
+</span><span class="lnt">302
+</span><span class="lnt">303
+</span><span class="lnt">304
+</span><span class="lnt">305
+</span><span class="lnt">306
+</span><span class="lnt">307
+</span><span class="lnt">308
+</span><span class="lnt">309
+</span><span class="lnt">310
+</span><span class="lnt">311
+</span><span class="lnt">312
+</span><span class="lnt">313
+</span><span class="lnt">314
+</span><span class="lnt">315
+</span><span class="lnt">316
+</span><span class="lnt">317
+</span><span class="lnt">318
+</span><span class="lnt">319
+</span><span class="lnt">320
+</span><span class="lnt">321
+</span><span class="lnt">322
+</span><span class="lnt">323
+</span><span class="lnt">324
+</span><span class="lnt">325
+</span><span class="lnt">326
+</span><span class="lnt">327
+</span><span class="lnt">328
+</span><span class="lnt">329
+</span><span class="lnt">330
+</span><span class="lnt">331
+</span><span class="lnt">332
+</span><span class="lnt">333
+</span><span class="lnt">334
+</span><span class="lnt">335
+</span><span class="lnt">336
+</span><span class="lnt">337
+</span><span class="lnt">338
+</span><span class="lnt">339
+</span><span class="lnt">340
+</span><span class="lnt">341
+</span><span class="lnt">342
+</span><span class="lnt">343
+</span><span class="lnt">344
+</span><span class="lnt">345
+</span><span class="lnt">346
+</span><span class="lnt">347
+</span><span class="lnt">348
+</span><span class="lnt">349
+</span><span class="lnt">350
+</span><span class="lnt">351
+</span><span class="lnt">352
+</span><span class="lnt">353
+</span><span class="lnt">354
+</span><span class="lnt">355
+</span><span class="lnt">356
+</span><span class="lnt">357
+</span><span class="lnt">358
+</span><span class="lnt">359
+</span><span class="lnt">360
+</span><span class="lnt">361
+</span><span class="lnt">362
+</span><span class="lnt">363
+</span><span class="lnt">364
+</span><span class="lnt">365
+</span><span class="lnt">366
+</span><span class="lnt">367
+</span><span class="lnt">368
+</span><span class="lnt">369
+</span><span class="lnt">370
+</span><span class="lnt">371
+</span><span class="lnt">372
+</span><span class="lnt">373
+</span><span class="lnt">374
+</span><span class="lnt">375
+</span><span class="lnt">376
+</span><span class="lnt">377
+</span><span class="lnt">378
+</span><span class="lnt">379
+</span><span class="lnt">380
+</span><span class="lnt">381
+</span><span class="lnt">382
+</span><span class="lnt">383
+</span><span class="lnt">384
+</span><span class="lnt">385
+</span><span class="lnt">386
+</span><span class="lnt">387
+</span><span class="lnt">388
+</span><span class="lnt">389
+</span><span class="lnt">390
+</span><span class="lnt">391
+</span><span class="lnt">392
+</span><span class="lnt">393
+</span><span class="lnt">394
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c++" data-lang="c++">
+<span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;tchar.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;winnt.rh&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;sstream&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;random&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;SimpleImage.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;TextureGenerator.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;time.h&gt;</span><span class="cp">
+</span><span class="cp"></span>
+
+
+<span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="c1">//#pragma comment(lib, &#34;GEDUtilsd.lib&#34;)
+</span><span class="c1"></span>
+<span class="c1">//Declare functions
+</span><span class="c1"></span><span class="kt">float</span> <span class="nf">squareStep</span><span class="p">(</span><span class="kt">float</span><span class="o">*</span> <span class="n">field</span><span class="p">,</span> <span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">,</span> <span class="kt">int</span> <span class="n">reach</span><span class="p">,</span> <span class="kt">int</span> <span class="n">width</span><span class="p">);</span>
+<span class="kt">float</span> <span class="nf">diamondStep</span><span class="p">(</span><span class="kt">float</span><span class="o">*</span> <span class="n">field</span><span class="p">,</span> <span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">,</span> <span class="kt">int</span> <span class="n">reach</span><span class="p">,</span> <span class="kt">int</span> <span class="n">width</span><span class="p">);</span>
+<span class="kt">float</span> <span class="nf">random</span><span class="p">(</span><span class="kt">float</span> <span class="n">min</span><span class="p">,</span> <span class="kt">float</span> <span class="n">max</span><span class="p">);</span>
+<span class="c1">//GEDUtils::SimpleImage transfer(float* field, int width);
+</span><span class="c1"></span><span class="kt">void</span> <span class="nf">smoothArray</span><span class="p">(</span><span class="kt">float</span><span class="o">*</span> <span class="n">field</span><span class="p">,</span> <span class="kt">int64_t</span> <span class="n">width</span><span class="p">,</span> <span class="kt">int64_t</span> <span class="n">height</span><span class="p">);</span>
+<span class="kt">void</span> <span class="nf">diamondSquare</span><span class="p">(</span><span class="kt">float</span><span class="o">*</span> <span class="n">field</span><span class="p">,</span> <span class="kt">int</span> <span class="n">size</span><span class="p">,</span> <span class="kt">int</span> <span class="n">width</span><span class="p">,</span> <span class="kt">float</span> <span class="n">roughness</span><span class="p">);</span>
+
+
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="c1">// Define a macro for easier access to a flattened 2D array
+</span><span class="c1"></span><span class="cp">#define IDX(x, y, w) ((x) + (y) * (w))
+</span><span class="cp"></span><span class="c1">//Define the size of an array
+</span><span class="c1"></span><span class="cp">#define ARR_LEN(array, length){length = sizeof(array)/sizeof(array[0]);}
+</span><span class="cp"></span>
+<span class="cm">/*
+</span><span class="cm">int main()
+</span><span class="cm">{
+</span><span class="cm">    std::cout &lt;&lt; &#34;Hello World!\n&#34;;
+</span><span class="cm">}
+</span><span class="cm">*/</span>
+
+<span class="c1">//use for debugging
+</span><span class="c1"></span><span class="kt">void</span> <span class="nf">printArray</span><span class="p">(</span><span class="kt">float</span><span class="o">*</span> <span class="n">field</span><span class="p">,</span> <span class="kt">uint64_t</span> <span class="n">width</span><span class="p">,</span> <span class="kt">uint64_t</span> <span class="n">height</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">uint64_t</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="n">height</span><span class="p">;</span> <span class="n">y</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">uint64_t</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">width</span><span class="p">;</span> <span class="n">x</span><span class="o">++</span><span class="p">)</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">field</span><span class="p">[</span><span class="n">IDX</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">)]</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; &#34;</span><span class="p">;</span>
+
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+
+<span class="kt">int</span> <span class="nf">_tmain</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="n">_TCHAR</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
+
+
+    <span class="c1">//int len;
+</span><span class="c1"></span>    <span class="cm">/*
+</span><span class="cm">    ARR_LEN(argv, len);
+</span><span class="cm">    if (argc != len) {
+</span><span class="cm">        throw &#34;invalid length&#34;;
+</span><span class="cm">    }
+</span><span class="cm">    */</span>
+
+
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;argc = &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">argc</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Command line arguments received are:&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">argc</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;argument &#34;</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;: &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">argv</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">_tcscmp</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">TEXT</span><span class="p">(</span><span class="s">&#34;-r&#34;</span><span class="p">))</span> <span class="o">!=</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">_tcscmp</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">TEXT</span><span class="p">(</span><span class="s">&#34;-o_height&#34;</span><span class="p">))</span> <span class="o">!=</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">_tcscmp</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">TEXT</span><span class="p">(</span><span class="s">&#34;-o_color&#34;</span><span class="p">))</span> <span class="o">!=</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">_tcscmp</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span> <span class="n">TEXT</span><span class="p">(</span><span class="s">&#34;-o_normal&#34;</span><span class="p">))</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="s">&#34;do not match &#39;-r&#39; or &#39;-o&#39;s&#34;</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">//alternative way for resolution
+</span><span class="c1"></span>    <span class="c1">//std::wstringstream wsstream;
+</span><span class="c1"></span>    <span class="c1">//wsstream &lt;&lt; argv[2];
+</span><span class="c1"></span>    <span class="c1">//int resolution;
+</span><span class="c1"></span>    <span class="c1">//wsstream &gt;&gt; resolution;
+</span><span class="c1"></span>
+    <span class="kt">int</span> <span class="n">resolution</span> <span class="o">=</span> <span class="n">_tstoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">resolution</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="s">&#34;&lt;= 0 for resolution&#34;</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">//preparation for normal mapping
+</span><span class="c1"></span>    <span class="n">std</span><span class="o">::</span><span class="n">default_random_engine</span> <span class="n">e</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">normal_distribution</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">n</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+
+    <span class="kt">int</span> <span class="n">length</span> <span class="o">=</span> <span class="n">resolution</span> <span class="o">*</span> <span class="n">resolution</span><span class="p">;</span>
+
+    <span class="kt">float</span><span class="o">*</span> <span class="n">field</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">float</span><span class="p">[</span><span class="n">length</span><span class="p">];</span>
+
+    <span class="c1">//mapping normal distribution
+</span><span class="c1"></span>    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="n">resolution</span><span class="p">;</span> <span class="n">y</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">resolution</span><span class="p">;</span> <span class="n">x</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kt">float</span> <span class="n">value</span> <span class="o">=</span> <span class="n">n</span><span class="p">(</span><span class="n">e</span><span class="p">);</span>
+            <span class="k">while</span> <span class="p">(</span><span class="n">value</span> <span class="o">&lt;</span> <span class="mf">0.0f</span> <span class="o">||</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="mf">1.0f</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">n</span><span class="p">(</span><span class="n">e</span><span class="p">);</span>
+            <span class="p">}</span>
+
+            <span class="n">field</span><span class="p">[</span><span class="n">IDX</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">resolution</span><span class="p">)]</span> <span class="o">=</span> <span class="n">value</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">?</span> <span class="nl">value</span> <span class="p">:</span> <span class="o">-</span><span class="n">value</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1">//name of height file
+</span><span class="c1"></span>    <span class="n">wstring</span> <span class="n">wsh</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">4</span><span class="p">]);</span>
+    <span class="k">const</span> <span class="kt">wchar_t</span><span class="o">*</span> <span class="n">cstrh</span> <span class="o">=</span> <span class="n">wsh</span><span class="p">.</span><span class="n">c_str</span><span class="p">();</span>
+
+    <span class="c1">//name of color file
+</span><span class="c1"></span>    <span class="n">wstring</span> <span class="n">wsc</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">6</span><span class="p">]);</span>
+    <span class="k">const</span> <span class="kt">wchar_t</span><span class="o">*</span> <span class="n">cstrc</span> <span class="o">=</span> <span class="n">wsc</span><span class="p">.</span><span class="n">c_str</span><span class="p">();</span>
+
+    <span class="c1">//name of normal file
+</span><span class="c1"></span>    <span class="n">wstring</span> <span class="n">wsn</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">8</span><span class="p">]);</span>
+    <span class="k">const</span> <span class="kt">wchar_t</span><span class="o">*</span> <span class="n">cstrn</span> <span class="o">=</span> <span class="n">wsn</span><span class="p">.</span><span class="n">c_str</span><span class="p">();</span>
+
+
+    <span class="c1">//generate a texture generator
+</span><span class="c1"></span>    <span class="n">GEDUtils</span><span class="o">::</span><span class="n">TextureGenerator</span> <span class="n">texGen</span><span class="p">(</span><span class="sa">L</span><span class="s">&#34;..</span><span class="se">\\</span><span class="s">..</span><span class="se">\\</span><span class="s">..</span><span class="se">\\</span><span class="s">..</span><span class="se">\\</span><span class="s">external</span><span class="se">\\</span><span class="s">textures</span><span class="se">\\</span><span class="s">gras15.jpg&#34;</span><span class="p">,</span> <span class="sa">L</span><span class="s">&#34;..</span><span class="se">\\</span><span class="s">..</span><span class="se">\\</span><span class="s">..</span><span class="se">\\</span><span class="s">..</span><span class="se">\\</span><span class="s">external</span><span class="se">\\</span><span class="s">textures</span><span class="se">\\</span><span class="s">ground02.jpg&#34;</span><span class="p">,</span> <span class="sa">L</span><span class="s">&#34;..</span><span class="se">\\</span><span class="s">..</span><span class="se">\\</span><span class="s">..</span><span class="se">\\</span><span class="s">..</span><span class="se">\\</span><span class="s">external/textures/kork02.jpg&#34;</span><span class="p">,</span> <span class="sa">L</span><span class="s">&#34;..</span><span class="se">\\</span><span class="s">..</span><span class="se">\\</span><span class="s">..</span><span class="se">\\</span><span class="s">..</span><span class="se">\\</span><span class="s">external</span><span class="se">\\</span><span class="s">textures</span><span class="se">\\</span><span class="s">rock1.jpg&#34;</span><span class="p">);</span>
+
+
+    <span class="k">try</span> <span class="p">{</span>
+
+        <span class="c1">//this is for normal distribution
+</span><span class="c1"></span>        <span class="cm">/*
+</span><span class="cm">        //copy the created normal distribution values to the heightfield
+</span><span class="cm">        GEDUtils::SimpleImage heightImage = GEDUtils::SimpleImage::SimpleImage((UINT)resolution, (UINT)resolution);
+</span><span class="cm">
+</span><span class="cm">        for (int y = 0; y &lt; resolution; y++) {
+</span><span class="cm">            for (int x = 0; x &lt; resolution; x++) {
+</span><span class="cm">                heightImage.setPixel(x, y, field[IDX(x, y, resolution)]);
+</span><span class="cm">            }
+</span><span class="cm">        }
+</span><span class="cm">
+</span><span class="cm">
+</span><span class="cm">        //save the generated heightField
+</span><span class="cm">        if (!heightImage.save(cstrh)) {
+</span><span class="cm">            throw &#34;Could not save heightField image&#34;;
+</span><span class="cm">        }
+</span><span class="cm">
+</span><span class="cm">
+</span><span class="cm">
+</span><span class="cm">        // Load height image into the image test
+</span><span class="cm">        //GEDUtils::SimpleImage test(cstrh);
+</span><span class="cm">
+</span><span class="cm">        //create a vector to store
+</span><span class="cm">        vector&lt;float&gt; vectorHeight(field, field + length);
+</span><span class="cm">
+</span><span class="cm">
+</span><span class="cm">        //this is for normal distribution
+</span><span class="cm">        //texGen.generateAndStoreImages(vectorHeight,resolution - 1,cstrc,cstrn);
+</span><span class="cm">
+</span><span class="cm">
+</span><span class="cm">        delete[] field;
+</span><span class="cm">        */</span>
+
+
+        <span class="c1">//this is for diamond square
+</span><span class="c1"></span>        <span class="kt">int</span> <span class="n">length2</span> <span class="o">=</span> <span class="p">(</span><span class="n">resolution</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">resolution</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+
+        <span class="kt">float</span><span class="o">*</span> <span class="n">field2</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">float</span><span class="p">[</span><span class="n">length2</span><span class="p">];</span>
+
+        <span class="c1">//assign random value to the corners
+</span><span class="c1"></span>        <span class="n">field2</span><span class="p">[</span><span class="n">IDX</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">resolution</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="n">random</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+        <span class="n">field2</span><span class="p">[</span><span class="n">IDX</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">resolution</span><span class="p">,</span> <span class="n">resolution</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="n">random</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+        <span class="n">field2</span><span class="p">[</span><span class="n">IDX</span><span class="p">(</span><span class="n">resolution</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">resolution</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="n">random</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+        <span class="n">field2</span><span class="p">[</span><span class="n">IDX</span><span class="p">(</span><span class="n">resolution</span><span class="p">,</span> <span class="n">resolution</span><span class="p">,</span> <span class="n">resolution</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="n">random</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+
+        <span class="c1">//give a initial roughness
+</span><span class="c1"></span>        <span class="kt">float</span> <span class="n">roughness</span> <span class="o">=</span> <span class="n">random</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+
+        <span class="c1">//diamond squre
+</span><span class="c1"></span>        <span class="n">diamondSquare</span><span class="p">(</span><span class="n">field2</span><span class="p">,</span> <span class="n">resolution</span><span class="p">,</span> <span class="n">resolution</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">roughness</span><span class="p">);</span>
+
+
+        <span class="c1">//mapping values to a smaller array
+</span><span class="c1"></span>        <span class="kt">float</span><span class="o">*</span> <span class="n">field3</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">float</span><span class="p">[</span><span class="n">length</span><span class="p">];</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="n">resolution</span><span class="p">;</span> <span class="n">y</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">resolution</span><span class="p">;</span> <span class="n">x</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+               <span class="c1">//field3[IDX(x, y, resolution)] = diamondHeight.getPixel(x, y);
+</span><span class="c1"></span>                <span class="n">field3</span><span class="p">[</span><span class="n">IDX</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">resolution</span><span class="p">)]</span> <span class="o">=</span> <span class="n">field2</span><span class="p">[</span><span class="n">IDX</span><span class="p">(</span><span class="n">x</span> <span class="p">,</span> <span class="n">y</span> <span class="p">,</span> <span class="n">resolution</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)];</span>
+
+            <span class="p">}</span>
+        <span class="p">}</span>
+         <span class="k">delete</span><span class="p">[]</span> <span class="n">field2</span><span class="p">;</span>
+
+         <span class="c1">//smooth array, times can be changed
+</span><span class="c1"></span>         <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+             <span class="n">smoothArray</span><span class="p">(</span><span class="n">field3</span><span class="p">,</span> <span class="n">resolution</span><span class="p">,</span> <span class="n">resolution</span><span class="p">);</span>
+         <span class="p">}</span>
+
+
+        <span class="c1">//copy the created normal distribution values to the heightfield
+</span><span class="c1"></span>        <span class="n">GEDUtils</span><span class="o">::</span><span class="n">SimpleImage</span> <span class="n">heightImage2</span> <span class="o">=</span> <span class="n">GEDUtils</span><span class="o">::</span><span class="n">SimpleImage</span><span class="o">::</span><span class="n">SimpleImage</span><span class="p">((</span><span class="n">UINT</span><span class="p">)</span><span class="n">resolution</span><span class="p">,</span> <span class="p">(</span><span class="n">UINT</span><span class="p">)</span><span class="n">resolution</span><span class="p">);</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="n">resolution</span><span class="p">;</span> <span class="n">y</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">resolution</span><span class="p">;</span> <span class="n">x</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">heightImage2</span><span class="p">.</span><span class="n">setPixel</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">field3</span><span class="p">[</span><span class="n">IDX</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">resolution</span><span class="p">)]);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="c1">//save the generated heightField
+</span><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">heightImage2</span><span class="p">.</span><span class="n">save</span><span class="p">(</span><span class="n">cstrh</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="s">&#34;Could not save heightField image&#34;</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="c1">//create a vector to store
+</span><span class="c1"></span>        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">vectorHeight2</span><span class="p">(</span><span class="n">field3</span><span class="p">,</span> <span class="n">field3</span> <span class="o">+</span> <span class="n">length</span><span class="p">);</span>
+
+        <span class="n">texGen</span><span class="p">.</span><span class="n">generateAndStoreImages</span><span class="p">(</span><span class="n">vectorHeight2</span><span class="p">,</span> <span class="n">resolution</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">cstrc</span><span class="p">,</span> <span class="n">cstrn</span><span class="p">);</span>
+
+        <span class="k">delete</span><span class="p">[]</span> <span class="n">field3</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">catch</span> <span class="p">(</span><span class="kt">char</span><span class="o">*</span> <span class="n">exception</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Error: %s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">exception</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">//delete[] field;
+</span><span class="c1"></span>
+    <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+
+<span class="c1">//smooth array
+</span><span class="c1"></span><span class="kt">void</span> <span class="nf">smoothArray</span><span class="p">(</span><span class="kt">float</span><span class="o">*</span> <span class="n">field</span><span class="p">,</span> <span class="kt">int64_t</span> <span class="n">width</span><span class="p">,</span> <span class="kt">int64_t</span> <span class="n">height</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// Allocate a temporary new array
+</span><span class="c1"></span>    <span class="kt">float</span><span class="o">*</span> <span class="n">tmp_field</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">float</span><span class="p">[</span><span class="n">width</span> <span class="o">*</span> <span class="n">height</span><span class="p">];</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int64_t</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="n">height</span><span class="p">;</span> <span class="n">y</span><span class="o">++</span><span class="p">)</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int64_t</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">width</span><span class="p">;</span> <span class="n">x</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="c1">// Start with the value at the current position
+</span><span class="c1"></span>            <span class="kt">float</span> <span class="n">value</span> <span class="o">=</span> <span class="n">field</span><span class="p">[</span><span class="n">IDX</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">)];</span>
+
+            <span class="c1">// Add values around the current position, clamped to [0, length - 1]
+</span><span class="c1"></span>            <span class="n">value</span> <span class="o">+=</span> <span class="n">field</span><span class="p">[</span><span class="n">IDX</span><span class="p">(</span><span class="n">min</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">width</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">)];</span>
+            <span class="n">value</span> <span class="o">+=</span> <span class="n">field</span><span class="p">[</span><span class="n">IDX</span><span class="p">(</span><span class="n">min</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">width</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="n">max</span><span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0ll</span><span class="p">),</span> <span class="n">width</span><span class="p">)];</span>
+            <span class="n">value</span> <span class="o">+=</span> <span class="n">field</span><span class="p">[</span><span class="n">IDX</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">max</span><span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0ll</span><span class="p">),</span> <span class="n">width</span><span class="p">)];</span>
+            <span class="n">value</span> <span class="o">+=</span> <span class="n">field</span><span class="p">[</span><span class="n">IDX</span><span class="p">(</span><span class="n">max</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0ll</span><span class="p">),</span> <span class="n">max</span><span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0ll</span><span class="p">),</span> <span class="n">width</span><span class="p">)];</span>
+            <span class="n">value</span> <span class="o">+=</span> <span class="n">field</span><span class="p">[</span><span class="n">IDX</span><span class="p">(</span><span class="n">max</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0ll</span><span class="p">),</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">)];</span>
+            <span class="n">value</span> <span class="o">+=</span> <span class="n">field</span><span class="p">[</span><span class="n">IDX</span><span class="p">(</span><span class="n">max</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0ll</span><span class="p">),</span> <span class="n">min</span><span class="p">(</span><span class="n">y</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">height</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="n">width</span><span class="p">)];</span>
+            <span class="n">value</span> <span class="o">+=</span> <span class="n">field</span><span class="p">[</span><span class="n">IDX</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">min</span><span class="p">(</span><span class="n">y</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">height</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="n">width</span><span class="p">)];</span>
+            <span class="n">value</span> <span class="o">+=</span> <span class="n">field</span><span class="p">[</span><span class="n">IDX</span><span class="p">(</span><span class="n">min</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">width</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="n">min</span><span class="p">(</span><span class="n">y</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">height</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="n">width</span><span class="p">)];</span>
+
+            <span class="c1">// Save the computed value in the temporary array
+</span><span class="c1"></span>            <span class="n">tmp_field</span><span class="p">[</span><span class="n">IDX</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">)]</span> <span class="o">=</span> <span class="n">value</span> <span class="o">/</span> <span class="mf">9.0f</span><span class="p">;</span>
+        <span class="p">}</span>
+
+    <span class="c1">// Copy the values of the temporary array to the array we weant to modify
+</span><span class="c1"></span>    <span class="k">for</span> <span class="p">(</span><span class="kt">uint64_t</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="n">height</span><span class="p">;</span> <span class="n">y</span><span class="o">++</span><span class="p">)</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">uint64_t</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">width</span><span class="p">;</span> <span class="n">x</span><span class="o">++</span><span class="p">)</span>
+            <span class="n">field</span><span class="p">[</span><span class="n">IDX</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">)]</span> <span class="o">=</span> <span class="n">tmp_field</span><span class="p">[</span><span class="n">IDX</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">)];</span>
+
+    <span class="c1">// Free the memory of our temporary array
+</span><span class="c1"></span>    <span class="k">delete</span><span class="p">[]</span> <span class="n">tmp_field</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+<span class="c1">//body part of diamond square
+</span><span class="c1"></span><span class="kt">void</span> <span class="nf">diamondSquare</span><span class="p">(</span><span class="kt">float</span><span class="o">*</span> <span class="n">field</span><span class="p">,</span> <span class="kt">int</span> <span class="n">size</span><span class="p">,</span> <span class="kt">int</span> <span class="n">width</span><span class="p">,</span><span class="kt">float</span> <span class="n">roughness</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">half</span> <span class="o">=</span> <span class="n">size</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">half</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span><span class="p">;</span>
+
+    <span class="c1">//square steps
+</span><span class="c1"></span>    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="n">half</span><span class="p">;</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="n">width</span><span class="p">;</span> <span class="n">y</span> <span class="o">+=</span> <span class="n">size</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">half</span><span class="p">;</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">width</span><span class="p">;</span> <span class="n">x</span> <span class="o">+=</span> <span class="n">size</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">field</span><span class="p">[</span><span class="n">IDX</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">)]</span> <span class="o">=</span> <span class="n">squareStep</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">x</span> <span class="o">%</span> <span class="n">width</span><span class="p">,</span> <span class="n">y</span> <span class="o">%</span> <span class="n">width</span><span class="p">,</span> <span class="n">half</span><span class="p">,</span> <span class="n">width</span><span class="p">);</span> <span class="o">+</span> <span class="n">random</span><span class="p">(</span><span class="o">-</span><span class="n">roughness</span><span class="p">,</span><span class="n">roughness</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+
+    <span class="c1">// diamond steps
+</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">col</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="n">width</span><span class="p">;</span> <span class="n">y</span> <span class="o">+=</span> <span class="n">half</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">col</span><span class="o">++</span><span class="p">;</span>
+        <span class="c1">//If this is an odd column.
+</span><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">col</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">half</span><span class="p">;</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">width</span><span class="p">;</span> <span class="n">x</span> <span class="o">+=</span> <span class="n">size</span><span class="p">)</span> <span class="p">{</span>
+
+                <span class="n">field</span><span class="p">[</span><span class="n">IDX</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">)]</span> <span class="o">=</span> <span class="n">diamondStep</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">x</span> <span class="o">%</span> <span class="n">width</span><span class="p">,</span> <span class="n">y</span> <span class="o">%</span> <span class="n">width</span><span class="p">,</span> <span class="n">half</span><span class="p">,</span> <span class="n">width</span><span class="p">);</span> <span class="o">+</span> <span class="n">random</span><span class="p">(</span><span class="o">-</span><span class="n">roughness</span><span class="p">,</span> <span class="n">roughness</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">width</span><span class="p">;</span> <span class="n">x</span> <span class="o">+=</span> <span class="n">size</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">field</span><span class="p">[</span><span class="n">IDX</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">)]</span> <span class="o">=</span> <span class="n">diamondStep</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">x</span> <span class="o">%</span> <span class="n">width</span><span class="p">,</span> <span class="n">y</span> <span class="o">%</span> <span class="n">width</span><span class="p">,</span> <span class="n">half</span><span class="p">,</span> <span class="n">width</span><span class="p">);</span> <span class="o">+</span><span class="n">random</span><span class="p">(</span><span class="o">-</span><span class="n">roughness</span><span class="p">,</span> <span class="n">roughness</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1">//iteration on roughness
+</span><span class="c1"></span>    <span class="n">roughness</span> <span class="o">=</span> <span class="n">roughness</span> <span class="o">*</span> <span class="n">roughness</span><span class="p">;</span>
+
+    <span class="n">diamondSquare</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">size</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">roughness</span><span class="p">);</span>
+<span class="p">}</span>
+
+
+<span class="c1">//reach is the distance away from the place we are seeking for average
+</span><span class="c1"></span><span class="kt">float</span> <span class="nf">squareStep</span><span class="p">(</span><span class="kt">float</span><span class="o">*</span> <span class="n">field</span><span class="p">,</span> <span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">,</span> <span class="kt">int</span> <span class="n">reach</span><span class="p">,</span> <span class="kt">int</span> <span class="n">width</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">float</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">float</span> <span class="n">avg</span> <span class="o">=</span> <span class="mf">0.</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">reach</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">y</span> <span class="o">-</span> <span class="n">reach</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">avg</span> <span class="o">=</span> <span class="n">avg</span> <span class="o">+</span> <span class="n">field</span><span class="p">[</span><span class="n">IDX</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">reach</span><span class="p">,</span> <span class="n">y</span> <span class="o">-</span> <span class="n">reach</span><span class="p">,</span> <span class="n">width</span><span class="p">)];</span>
+        <span class="n">count</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">reach</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">y</span> <span class="o">+</span> <span class="n">reach</span> <span class="o">&lt;</span> <span class="n">width</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">avg</span> <span class="o">=</span> <span class="n">avg</span> <span class="o">+</span> <span class="n">field</span><span class="p">[</span><span class="n">IDX</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">reach</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">reach</span><span class="p">,</span> <span class="n">width</span><span class="p">)];</span>
+        <span class="n">count</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">reach</span> <span class="o">&lt;</span> <span class="n">width</span> <span class="o">&amp;&amp;</span> <span class="n">y</span> <span class="o">-</span> <span class="n">reach</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">avg</span> <span class="o">=</span> <span class="n">avg</span> <span class="o">+</span> <span class="n">field</span><span class="p">[</span><span class="n">IDX</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">reach</span><span class="p">,</span> <span class="n">y</span> <span class="o">-</span> <span class="n">reach</span><span class="p">,</span> <span class="n">width</span><span class="p">)];</span>
+        <span class="n">count</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">reach</span> <span class="o">&lt;</span> <span class="n">width</span> <span class="o">&amp;&amp;</span> <span class="n">y</span> <span class="o">+</span> <span class="n">reach</span> <span class="o">&lt;</span> <span class="n">width</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">avg</span> <span class="o">=</span><span class="n">avg</span> <span class="o">+</span> <span class="n">field</span><span class="p">[</span><span class="n">IDX</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">reach</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">reach</span><span class="p">,</span> <span class="n">width</span><span class="p">)];</span>
+        <span class="n">count</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">avg</span> <span class="o">=</span> <span class="n">avg</span> <span class="o">/</span> <span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">count</span><span class="p">;</span>
+
+    <span class="c1">//field[IDX(x, y, width)] = avg;
+</span><span class="c1"></span>    <span class="k">return</span> <span class="n">avg</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+<span class="kt">float</span> <span class="nf">diamondStep</span><span class="p">(</span><span class="kt">float</span><span class="o">*</span> <span class="n">field</span><span class="p">,</span> <span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">,</span> <span class="kt">int</span> <span class="n">reach</span><span class="p">,</span> <span class="kt">int</span> <span class="n">width</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">float</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">float</span> <span class="n">avg</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">reach</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">avg</span> <span class="o">=</span> <span class="n">avg</span> <span class="o">+</span>  <span class="n">field</span><span class="p">[</span><span class="n">IDX</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">reach</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">)];</span>
+        <span class="n">count</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">reach</span> <span class="o">&lt;</span> <span class="n">width</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">avg</span> <span class="o">=</span> <span class="n">avg</span> <span class="o">+</span> <span class="n">field</span><span class="p">[</span><span class="n">IDX</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">reach</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">)];</span>
+        <span class="n">count</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">reach</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">avg</span> <span class="o">=</span> <span class="n">avg</span> <span class="o">+</span> <span class="n">field</span><span class="p">[</span><span class="n">IDX</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">-</span> <span class="n">reach</span><span class="p">,</span> <span class="n">width</span><span class="p">)];</span>
+        <span class="n">count</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">y</span> <span class="o">+</span> <span class="n">reach</span> <span class="o">&lt;</span> <span class="n">width</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">avg</span> <span class="o">=</span> <span class="n">avg</span> <span class="o">+</span> <span class="n">field</span><span class="p">[</span><span class="n">IDX</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">reach</span><span class="p">,</span> <span class="n">width</span><span class="p">)];</span>
+        <span class="n">count</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">avg</span> <span class="o">=</span> <span class="n">avg</span> <span class="o">/</span> <span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">count</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="n">avg</span><span class="p">;</span>
+    <span class="c1">//field[x, y, width] = avg;
+</span><span class="c1"></span><span class="p">}</span>
+
+
+<span class="c1">//generate random number in a range
+</span><span class="c1"></span><span class="kt">float</span> <span class="nf">random</span><span class="p">(</span><span class="kt">float</span> <span class="n">min</span><span class="p">,</span> <span class="kt">float</span> <span class="n">max</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="kt">float</span> <span class="n">random</span> <span class="o">=</span> <span class="n">min</span> <span class="o">+</span> <span class="p">(</span><span class="kt">float</span><span class="p">)(</span><span class="n">rand</span><span class="p">())</span> <span class="o">/</span> <span class="p">((</span><span class="kt">float</span><span class="p">)(</span><span class="n">RAND_MAX</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">max</span> <span class="o">-</span> <span class="n">min</span><span class="p">));</span>
+    <span class="k">return</span> <span class="n">random</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+<span class="cm">/*
+</span><span class="cm">//store the generated field to a simple image
+</span><span class="cm">GEDUtils::SimpleImage transfer(float* field, int width) {
+</span><span class="cm">    GEDUtils::SimpleImage diamond(width - 1, width - 1);
+</span><span class="cm">    for (int j = 0;j &lt; width; j++) {
+</span><span class="cm">        for (int i = 0; j &lt; width; i++) {
+</span><span class="cm">            diamond.setPixel(i, j, field[i, j, width]);
+</span><span class="cm">        }
+</span><span class="cm">    }
+</span><span class="cm">    return diamond;
+</span><span class="cm">}
+</span><span class="cm">*/</span>
+
+
+
+
+</code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2020-05-21</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://interstellarss.github.io/posts/computer_graphics/implementation-about-diamond-square/" data-title="基于diamond-square-algorithm生成高度图的C&#43;&#43;实现" data-hashtags="real-tiem computer graphics"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://interstellarss.github.io/posts/computer_graphics/implementation-about-diamond-square/" data-hashtag="real-tiem computer graphics"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://interstellarss.github.io/posts/computer_graphics/implementation-about-diamond-square/" data-title="基于diamond-square-algorithm生成高度图的C&#43;&#43;实现"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://interstellarss.github.io/posts/computer_graphics/implementation-about-diamond-square/" data-title="基于diamond-square-algorithm生成高度图的C&#43;&#43;实现"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@2.14.0/icons/line.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://interstellarss.github.io/posts/computer_graphics/implementation-about-diamond-square/" data-title="基于diamond-square-algorithm生成高度图的C&#43;&#43;实现"><i class="fab fa-weibo fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/real-tiem-computer-graphics/">real-tiem computer graphics</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/theo/something-about-dfa-and-nfa-2/" class="prev" rel="prev" title="DFA与NFA的故事(二)"><i class="fas fa-angle-left fa-fw"></i>DFA与NFA的故事(二)</a>
+            <a href="/posts/seminar-hpc/shared-memory-parallelism_2/" class="next" rel="next" title="当我们谈论 shared memory parallelism 的时候我们在谈论些什么--提升篇">当我们谈论 shared memory parallelism 的时候我们在谈论些什么--提升篇<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div id="gitalk" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.78.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/copy-tex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.37.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.8/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.0/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"gitalk":{"admin":["Interstellarss"],"clientID":"b4d6ace595e393612b74","clientSecret":"ebc194ba054bc0b1364a73bb34fc5ac4a3fb9793","id":"2020-05-21T11:38:08+02:00","owner":"Interstellarss","repo":"interstellarss.github.io","title":"基于diamond-square-algorithm生成高度图的C++实现"}},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'G-LMR64333PL', { 'anonymize_ip': true });
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=G-LMR64333PL" async></script></body>
+</html>

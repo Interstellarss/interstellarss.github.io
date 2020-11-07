@@ -3,12 +3,26 @@
         <title>theory of computation - 标签 - 法术研究分享Blog</title>
         <link>https://interstellarss.github.io/tags/theory-of-computation/</link>
         <description>theory of computation - 标签 - 法术研究分享Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sat, 25 Apr 2020 19:20:13 &#43;0200</lastBuildDate><atom:link href="https://interstellarss.github.io/tags/theory-of-computation/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 14 May 2020 23:56:46 &#43;0200</lastBuildDate><atom:link href="https://interstellarss.github.io/tags/theory-of-computation/" rel="self" type="application/rss+xml" /><item>
+    <title>DFA与NFA的故事(二)</title>
+    <link>https://interstellarss.github.io/posts/theo/something-about-dfa-and-nfa-2/</link>
+    <pubDate>Thu, 14 May 2020 23:56:46 &#43;0200</pubDate>
+    <author>作者</author>
+    <guid>https://interstellarss.github.io/posts/theo/something-about-dfa-and-nfa-2/</guid>
+    <description><![CDATA[我们从(一)可以认识到DFA和NFA是什么样子的，并且知道它们之间的等价性，在“从有穷自动机到正则语言”一篇中我们知道DFA，NFA和正则表]]></description>
+</item><item>
+    <title>从有穷自动机到正则语言---实现篇</title>
+    <link>https://interstellarss.github.io/posts/theo/something-about-regular-expression-implementation/</link>
+    <pubDate>Tue, 12 May 2020 00:15:53 &#43;0200</pubDate>
+    <author>作者</author>
+    <guid>https://interstellarss.github.io/posts/theo/something-about-regular-expression-implementation/</guid>
+    <description><![CDATA[本篇可以看作是“从有穷自动机到正则表达式”此篇的番外篇，主要是提供JAVA实现从DFA到RE的转换。因为代码完全是从作业中copy的，不知道]]></description>
+</item><item>
     <title>DFA与NFA的故事(一)</title>
-    <link>https://interstellarss.github.io/posts/something-about-dfa-and-nfa/</link>
+    <link>https://interstellarss.github.io/posts/theo/something-about-dfa-and-nfa/</link>
     <pubDate>Sat, 25 Apr 2020 19:20:13 &#43;0200</pubDate>
     <author>作者</author>
-    <guid>https://interstellarss.github.io/posts/something-about-dfa-and-nfa/</guid>
+    <guid>https://interstellarss.github.io/posts/theo/something-about-dfa-and-nfa/</guid>
     <description><![CDATA[对于DFA和NFA形式定义的一些理解，以及正则运算封闭性和DFA与NFA等价性的证明，也就是说DFA的故事是属于NFA的，是特例和常规的故事]]></description>
 </item></channel>
 </rss>
