@@ -119,20 +119,11 @@ if (!doNotTrack) {
     <div id="search-dropdown-mobile"></div>
 </div>
 <main class="main">
-                <div class="container"><div class="toc" id="toc-auto">
-            <h2 class="toc-title">目录</h2>
-            <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animated flipInX">从有穷自动机到正则语言---实现篇</h1><div class="post-meta">
+                <div class="container"><article class="page single"><h1 class="single-title animated flipInX">从有穷自动机到正则语言---实现篇</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://interstellarss.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Puxuan</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>学习笔记</a></span></div>
             <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-05-12">2020-05-12</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 5875 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 12 分钟&nbsp;</div>
-        </div><div class="details toc" id="toc-static"  kept="">
-                <div class="details-summary toc-title">
-                    <span>目录</span>
-                    <span><i class="details-icon fas fa-angle-right"></i></span>
-                </div>
-                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
-            </div><div class="content" id="content"><p>本篇可以看作是“从有穷自动机到正则表达式”此篇的番外篇，主要是提供JAVA实现从DFA到RE的转换。因为代码完全是从作业中copy的，不知道会不会有版权问题，但这也不算商业用途，其中有一部分代码也是我自己写的，所以应该问题不大吧。（作业默认会给出Java和Haskell的一些源码，我不太想写Haskell所以就用Java来实现了，有兴趣的可以自己从copy代码后试一试）</p>
+        </div><div class="content" id="content"><p>本篇可以看作是“从有穷自动机到正则表达式”此篇的番外篇，主要是提供JAVA实现从DFA到RE的转换。因为代码完全是从作业中copy的，不知道会不会有版权问题，但这也不算商业用途，其中有一部分代码也是我自己写的，所以应该问题不大吧。（作业默认会给出Java和Haskell的一些源码，我不太想写Haskell所以就用Java来实现了，有兴趣的可以自己从copy代码后试一试）</p>
 <p>先来看看正则表达式的实现，其中有一个Regex的抽象类，和另一篇博文中关于正则表达式的定义相对应，有6个子类来作为归纳的基础，分别是$\epsilon , \emptyset$, 单个字母，连接，并，星号，下面是代码。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">

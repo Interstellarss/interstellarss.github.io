@@ -119,20 +119,11 @@ if (!doNotTrack) {
     <div id="search-dropdown-mobile"></div>
 </div>
 <main class="main">
-                <div class="container"><div class="toc" id="toc-auto">
-            <h2 class="toc-title">目录</h2>
-            <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animated flipInX">基于diamond-square-algorithm生成高度图的C&#43;&#43;实现</h1><div class="post-meta">
+                <div class="container"><article class="page single"><h1 class="single-title animated flipInX">基于diamond-square-algorithm生成高度图的C&#43;&#43;实现</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://interstellarss.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Puxuan</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>学习笔记</a></span></div>
             <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-05-21">2020-05-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2097 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 5 分钟&nbsp;</div>
-        </div><div class="details toc" id="toc-static"  kept="">
-                <div class="details-summary toc-title">
-                    <span>目录</span>
-                    <span><i class="details-icon fas fa-angle-right"></i></span>
-                </div>
-                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
-            </div><div class="content" id="content"><p>其实很多时候我们看到的这些渲染真的是很神奇的事，比如一些terrain看似是三维的，其实可以由二维产生，即为每一个像素点赋予一个高度值，这些高度值构成的点列又可以转换为一张二维图像来存储，需要的时候，相应的地形可以由此图片生成。淡淡的想，一些所谓的空间法术，大概也就是这样了吧。高度图作为维度空间法术的入门想来也是极好的。</p>
+        </div><div class="content" id="content"><p>其实很多时候我们看到的这些渲染真的是很神奇的事，比如一些terrain看似是三维的，其实可以由二维产生，即为每一个像素点赋予一个高度值，这些高度值构成的点列又可以转换为一张二维图像来存储，需要的时候，相应的地形可以由此图片生成。淡淡的想，一些所谓的空间法术，大概也就是这样了吧。高度图作为维度空间法术的入门想来也是极好的。</p>
 <p>至于法术的入门，我们只关注用正态分布或diamond square来赋值，terrain generator中关于color和normal的值图像我们后面会聊到。</p>
 <p>下面来看代码：</p>
 <div class="highlight"><div class="chroma">
