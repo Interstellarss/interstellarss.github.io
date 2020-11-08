@@ -67,11 +67,11 @@
     <guid>https://interstellarss.github.io/posts/seminar-hpc/shared-memory-parallelism_1/</guid>
     <description><![CDATA[在目前正在更的Theo和Network系列上又要开启新的系列了呢，也就是目前看到的 parallel computing 系列。因为这个学期刚好选到一个主题是high performance computing (HPC) 的S]]></description>
 </item><item>
-    <title>充满机遇的物理层</title>
-    <link>https://interstellarss.github.io/posts/computernetwork/physical-layer/</link>
-    <pubDate>Sat, 02 May 2020 00:08:02 &#43;0200</pubDate>
+    <title>从有穷自动机到正则语言</title>
+    <link>https://interstellarss.github.io/posts/theo/something-about-regular-language/</link>
+    <pubDate>Sun, 03 May 2020 19:14:37 &#43;0200</pubDate>
     <author>作者</author>
-    <guid>https://interstellarss.github.io/posts/computernetwork/physical-layer/</guid>
-    <description><![CDATA[<p>探索计算机网络OSI模型中的物理层的故事.</p>]]></description>
+    <guid>https://interstellarss.github.io/posts/theo/something-about-regular-language/</guid>
+    <description><![CDATA[在上篇中我们了解到DFA与NFA的故事，从中我们初识了正则运算并且了解到其封闭性(虽然我还没有写完)，在本篇中我们将会里了解到正则表达式，进]]></description>
 </item></channel>
 </rss>

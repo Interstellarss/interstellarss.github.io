@@ -18,6 +18,13 @@
     <guid>https://interstellarss.github.io/posts/theo/something-about-regular-expression-implementation/</guid>
     <description><![CDATA[本篇可以看作是“从有穷自动机到正则表达式”此篇的番外篇，主要是提供JAVA实现从DFA到RE的转换。因为代码完全是从作业中copy的，不知道]]></description>
 </item><item>
+    <title>从有穷自动机到正则语言</title>
+    <link>https://interstellarss.github.io/posts/theo/something-about-regular-language/</link>
+    <pubDate>Sun, 03 May 2020 19:14:37 &#43;0200</pubDate>
+    <author>作者</author>
+    <guid>https://interstellarss.github.io/posts/theo/something-about-regular-language/</guid>
+    <description><![CDATA[在上篇中我们了解到DFA与NFA的故事，从中我们初识了正则运算并且了解到其封闭性(虽然我还没有写完)，在本篇中我们将会里了解到正则表达式，进]]></description>
+</item><item>
     <title>DFA与NFA的故事(一)</title>
     <link>https://interstellarss.github.io/posts/theo/something-about-dfa-and-nfa/</link>
     <pubDate>Sat, 25 Apr 2020 19:20:13 &#43;0200</pubDate>
