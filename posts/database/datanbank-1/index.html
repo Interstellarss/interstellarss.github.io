@@ -155,7 +155,7 @@ if (!doNotTrack) {
 <p><strong>Efficient access</strong> 这涉及到如何访问数据库中的数据，如何检索，使用一些检索，进行比较查询之类的功能。因为不适用DBMS而在一个普通的file system中这会涉及到<strong>Beschränkte Zugriffmöglichkeiten</strong>的问题，其中这些数据并没有互“相关联”，一组数据的信息与另一组的信息并没有逻辑上的联系。</p>
 <p><strong>Data integrity</strong> 这会涉及到一个”integrity constraints“的概念，举例来说，有一个公司要找更多的人，但是预算不一定够，于是每次要雇佣某个人，都要去检查这个约束，而如果不使用DBMS则可能会造成<strong>Interitätsverletzung</strong>的情况出现。</p>
 <p><strong>Security</strong> 如果使用DBMS，则更容易管理数据库和控制数据库的访问权限，因为并不是所有的用户都有权限去访问数据库各种各样的数据。</p>
-<p><strong>Concurrent access</strong> 这其实是可以归属于<strong>Verlust von Datad</strong>这一类的问题，而在DBMS中则可以很好的避免。</p>
+<p><strong>Concurrent access</strong> 这其实是可以归属于<strong>Verlust von Daten</strong>这一类的问题，而在DBMS中则可以很好的避免。</p>
 <p><strong>Recovery from crashes</strong> 数据库管理系统有一个复杂的恢复组件，以支持用户在所有可预见的错误情况下防止数据丢失。</p>
 <h3 id="data-models">Data Models</h3>
 <p>A data model is a collection of high-level constructs for describing stored data that hides low-level storage details.</p>

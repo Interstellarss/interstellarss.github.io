@@ -133,11 +133,23 @@ if (!doNotTrack) {
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#泵引理的证明">泵引理的证明</a></li>
+    <li>
+      <ul>
+        <li><a href="#正则表达式及形式化定义">正则表达式及形式化定义</a></li>
+        <li><a href="#正则语言封闭性">正则语言封闭性</a></li>
+        <li><a href="#正则表达式与有穷自动机的等价性">正则表达式与有穷自动机的等价性</a></li>
+        <li><a href="#泵引理">泵引理</a>
+          <ul>
+            <li><a href="#泵引理的证明">泵引理的证明</a></li>
+          </ul>
+        </li>
+        <li><a href="#ardens-lemma">Ardens Lemma</a></li>
+      </ul>
+    </li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><p>在上篇中我们了解到DFA与NFA的故事，从中我们初识了正则运算并且了解到其封闭性(虽然我还没有写完)，在本篇中我们将会里了解到正则表达式，进而到正则语言，我们可以从这个小小的角度对<strong>归纳</strong>的魅力有惊鸿一瞥，还可以了解到有穷自动机，正则表达式，正则语言它们之间的转换。</p>
-<h1 id="正则表达式及形式化定义">正则表达式及形式化定义</h1>
+<h3 id="正则表达式及形式化定义">正则表达式及形式化定义</h3>
 <p>正则表达式其实是正则语言(formal language)的另一种定义。</p>
 <p>我们不妨来看看定义，这里其实就可以就感受到归纳的威力了！
 R是正则表达式(RE)当且仅当R是</p>
@@ -150,9 +162,9 @@ R是正则表达式(RE)当且仅当R是</p>
 <li>$(R_1^ *)，R_1是正则表达式.$</li>
 </ul>
 <p>L(R): R表示的语言</p>
-<h1 id="正则语言封闭性">正则语言封闭性</h1>
+<h3 id="正则语言封闭性">正则语言封闭性</h3>
 <p>有空再写吧，本质还是构造法</p>
-<h1 id="正则表达式与有穷自动机的等价性">正则表达式与有穷自动机的等价性</h1>
+<h3 id="正则表达式与有穷自动机的等价性">正则表达式与有穷自动机的等价性</h3>
 <p>我们已经知道有穷自动机识别的语言是正则语言，而后我们又认识到正则表达式(regular expression，RE)也可以来定义语言，他们两者的关系是怎样的呢？下面我们就来证明正则表达和有穷自动机是等价的。</p>
 <p>等价，参考<a href="https://interstellarss.github.io/posts/something-about-dfa-and-nfa/#dfa%E4%B8%8Enfa%E7%9A%84%E7%AD%89%E4%BB%B7%E6%80%A7" target="_blank" rel="noopener noreffer">上一篇文章</a>也就是说他们能够描述同样的语言。</p>
 <p>我们要证明的也就是以下定理：</p>
@@ -230,7 +242,7 @@ k = 0: Hier gilt</p>
 <p>再来看看另一种证法：
 其实也就是定义一个广义非确定型有穷自动机（GNFA），从DFA构造等价的GFNA，从GFNA构造等价的正则表达式。</p>
 <p>GFNA的特殊在于状态间的转移不</p>
-<h1 id="泵引理">泵引理</h1>
+<h3 id="泵引理">泵引理</h3>
 <p>泵引理（Pumping Lemma für reguläre Sprachen），用来证明一个语言不是正则的神奇工具。有些语言看起来很规则，但是却不是正则语言，因为无法用有穷自动机来描述，我们用泵引理即可很有效地判断不是正则语言的情况，但却无法证明是正则语言，因为只是必要条件而不是充分条件。下面来看看泵引理具体长什么样子，既有中文版，也有德语版：</p>
 <blockquote>
 <p>泵引理：设A是正则语言，则存在常数p（称为泵长度），使得若 s $\in$ A且 |s| $\geq$，则 s = xyz，并且满足下述条件：</p>
@@ -250,7 +262,7 @@ $|uv| \leq n$, und
 $\forall i \geq 0. uv^iw \in R$.</p>
 </blockquote>
 <p>泵引理来证明语言不是正则的其实就是要来用上面的条件来推矛盾，有时候就需要灵感来取一个特殊的s，经过泵的步骤后就不在这个语言中了，就有了矛盾。</p>
-<h2 id="泵引理的证明">泵引理的证明</h2>
+<h4 id="泵引理的证明">泵引理的证明</h4>
 <p>在这个证明中我们会明白如何取这个常数 p，为什么s会被分为三段，为什么xy的长度要小于等于p。
 提前剧透：这里的p其实就是一个相应自动机的状态数。</p>
 <blockquote>
@@ -282,7 +294,7 @@ $|uv| \leq n$
 $v \neq \epsilon$, und
 $\forall l \geq 0 . uv^l w \in R$</p>
 </blockquote>
-<h1 id="ardens-lemma">Ardens Lemma</h1>
+<h3 id="ardens-lemma">Ardens Lemma</h3>
 <p>Ardens Lemma, 也叫 Arden&rsquo;s rule, 用来构造这样的自动机：只有一个初始状态，且其中没有$\epsilon$移动。先来看看数学表达式长什么样，再来翻译翻译到底说了些啥。
 $$
 \text{Sind A, B und X Sprachen mit} \epsilon \notin \text{A, so gilt }\ X = AX \cup B \Rightarrow X = A^<em>B \ \text{其中还有一个类似的推论：}
