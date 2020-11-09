@@ -3,7 +3,14 @@
         <title>学习笔记 - 分类 - 法术研究分享Blog</title>
         <link>https://interstellarss.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
         <description>学习笔记 - 分类 - 法术研究分享Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 04 Nov 2020 19:46:16 &#43;0100</lastBuildDate><atom:link href="https://interstellarss.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 08 Nov 2020 14:44:27 &#43;0100</lastBuildDate><atom:link href="https://interstellarss.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="self" type="application/rss+xml" /><item>
+    <title>直观又调皮的ER Model - 1</title>
+    <link>https://interstellarss.github.io/posts/database/datenbank-2/</link>
+    <pubDate>Sun, 08 Nov 2020 14:44:27 &#43;0100</pubDate>
+    <author>作者</author>
+    <guid>https://interstellarss.github.io/posts/database/datenbank-2/</guid>
+    <description><![CDATA[ER Model 的基础概念]]></description>
+</item><item>
     <title>初识数据库</title>
     <link>https://interstellarss.github.io/posts/database/datanbank-1/</link>
     <pubDate>Wed, 04 Nov 2020 19:46:16 &#43;0100</pubDate>
@@ -66,12 +73,5 @@
     <author>作者</author>
     <guid>https://interstellarss.github.io/posts/seminar-hpc/shared-memory-parallelism_1/</guid>
     <description><![CDATA[在目前正在更的Theo和Network系列上又要开启新的系列了呢，也就是目前看到的 parallel computing 系列。因为这个学期刚好选到一个主题是high performance computing (HPC) 的S]]></description>
-</item><item>
-    <title>从有穷自动机到正则语言</title>
-    <link>https://interstellarss.github.io/posts/theo/something-about-regular-language/</link>
-    <pubDate>Sun, 03 May 2020 19:14:37 &#43;0200</pubDate>
-    <author>作者</author>
-    <guid>https://interstellarss.github.io/posts/theo/something-about-regular-language/</guid>
-    <description><![CDATA[在上篇中我们了解到DFA与NFA的故事，从中我们初识了正则运算并且了解到其封闭性(虽然我还没有写完)，在本篇中我们将会里了解到正则表达式，进]]></description>
 </item></channel>
 </rss>
