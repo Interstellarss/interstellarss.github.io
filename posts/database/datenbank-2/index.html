@@ -47,7 +47,7 @@ if (!doNotTrack) {
                             "url": "https:\/\/interstellarss.github.io\/images\/Apple-Devices-Preview.png",
                             "width":  3200 ,
                             "height":  2048 
-                        }],"genre": "posts","keywords": "Database","wordcount":  640 ,
+                        }],"genre": "posts","keywords": "Database","wordcount":  826 ,
         "url": "https:\/\/interstellarss.github.io\/posts\/database\/datenbank-2\/","datePublished": "2020-11-08T14:44:27+01:00","dateModified": "2020-11-08T14:44:27+01:00","publisher": {
             "@type": "Organization",
             "name": "Puxuan"},"author": {
@@ -124,7 +124,7 @@ if (!doNotTrack) {
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">直观又调皮的ER-Model</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://interstellarss.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Puxuan</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>学习笔记</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-11-08">2020-11-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 640 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-11-08">2020-11-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 826 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -141,6 +141,7 @@ if (!doNotTrack) {
             <li><a href="#funktionalitäten-der-beziehungen">Funktionalitäten der Beziehungen</a></li>
           </ul>
         </li>
+        <li><a href="#generalisierung">Generalisierung</a></li>
         <li><a href="#aggregation">Aggregation</a></li>
       </ul>
     </li>
@@ -206,9 +207,36 @@ if (!doNotTrack) {
  <sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
 </li>
 </ul>
+<h3 id="generalisierung">Generalisierung</h3>
+<p>这个概念更可以理解为是一种「抽象」，就像是java中的父类子类这种关系的感觉，可以通过一种<strong>is-a</strong>关系来展现这种「抽象」行为。</p>
+<ul>
+<li>Overlap constraint
+<ul>
+<li>Determine whether two sublasses are allowed to contain the same entity.</li>
+</ul>
+</li>
+<li>Covering constraint
+<ul>
+<li>determine whether the entities in the subclasses collectively include all entities in the superclass.</li>
+</ul>
+</li>
+</ul>
+<p>Reasons for using <strong>is-a</strong>:</p>
+<ul>
+<li>To add descriptive attributes specific to a subclass</li>
+<li>To identify entites that participate in a relationship</li>
+</ul>
+<p><figure>
+    <img src="/images/database/example_isa.png"
+         alt="Example for is-a"/> <figcaption>
+            <p>Example for is-a</p>
+        </figcaption>
+</figure>
+<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
 <h3 id="aggregation">Aggregation</h3>
 <p>这其实是有一些困惑我的一个概念，因为在书中和我上网查到的资料有些偏差，先看书中是怎么描述的：</p>
-<p>&ldquo;In dieser Hinsicht kann man die Aggregation als einen besonderen Beziehungstyp deuten, der einem übergeordneten Entities Teil &quot;</p>
+<p>&ldquo;&hellip;, werden bei der Aggregation unterschiedliche Entitytypen, die in ihrer Gesamtheit einen strukturierten Objekttypen bilden, einander zugeordnet. In dieser Hinsicht kann man die Aggregation als einen besonderen Beziehungstyp deuten, der einem übergeordneten Entitiestyp mehrere untergeordnete Entitytypen zuordnet. Diese Beziehung wird als <strong>Teil-von(part-of)</strong> bezeichnet, um zu betonen, dass die untergeordneten Entities Teile (also Komponente) der übergeordneten (zusammengesetzten) Entities sind.&quot;<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>然后找到的其他资料是这么描述的：</p>
 <ul>
 <li>sometimes we have to model a relaitonship between a collection of entities and relationships.</li>
 <li>Aggregation allows us to treat a relationship set as an entity set.</li>
