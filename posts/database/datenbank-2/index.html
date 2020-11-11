@@ -47,7 +47,7 @@ if (!doNotTrack) {
                             "url": "https:\/\/interstellarss.github.io\/images\/Apple-Devices-Preview.png",
                             "width":  3200 ,
                             "height":  2048 
-                        }],"genre": "posts","keywords": "Database","wordcount":  253 ,
+                        }],"genre": "posts","keywords": "Database","wordcount":  640 ,
         "url": "https:\/\/interstellarss.github.io\/posts\/database\/datenbank-2\/","datePublished": "2020-11-08T14:44:27+01:00","dateModified": "2020-11-08T14:44:27+01:00","publisher": {
             "@type": "Organization",
             "name": "Puxuan"},"author": {
@@ -124,8 +124,8 @@ if (!doNotTrack) {
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">直观又调皮的ER-Model</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://interstellarss.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Puxuan</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>学习笔记</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-11-08">2020-11-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 253 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-11-08">2020-11-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 640 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
@@ -141,6 +141,7 @@ if (!doNotTrack) {
             <li><a href="#funktionalitäten-der-beziehungen">Funktionalitäten der Beziehungen</a></li>
           </ul>
         </li>
+        <li><a href="#aggregation">Aggregation</a></li>
       </ul>
     </li>
   </ul>
@@ -181,7 +182,46 @@ if (!doNotTrack) {
 </li>
 </ul>
 <h3 id="charakterisierung-von-beziehungstypen">Charakterisierung von Beziehungstypen</h3>
-<h4 id="funktionalitäten-der-beziehungen">Funktionalitäten der Beziehungen</h4></div><div class="post-footer" id="post-footer">
+<p>这里作为上面的一些补充，除了<strong>Beziehungen</strong>的比较形式化的定义$R \in E_1 \x E_2 x &hellip; x E_ns$外，对于这些关系还有一些细节需要讨论。</p>
+<h4 id="funktionalitäten-der-beziehungen">Funktionalitäten der Beziehungen</h4>
+<ul>
+<li>
+<p>1:1-Beziehung, falls jede Entity $e_1$, aus $E_1$ höchstens ein Eintity $e_2$ aus $E_2$ zugeordnet ist und umgekehrt jedem Entity $e_2$ aus $E_2$ maximal ein Entity $e_1$ aus $E_1$ zugeordnet ist.  当然两个entities中也可以是没有关系的就是了。</p>
+</li>
+<li>
+<p>1:N-Beziehung, falls jede Entity $e_1$ aus $E_1$ beliebig viele (also mehrere oder auch gar keine) Entities aus $E_2$ zugeordnet  sein können, aber jedes Entity $e_2$ aus der aus der Menge $E_2$ mit maximal einem Entity aus $E_1$ in Beziehung stehen kann.</p>
+</li>
+<li>
+<p>N:1-Beziehung, falls analoges zu obigem gilt.</p>
+</li>
+<li>
+<p>N:M-Beziehung, wenn keinerlei Restriktionen gelten müssen, d.h. jedes Entity aus $E_1$ mit beliebig vielen Entities aus $E_2$ in Beziehung stehen kann und umgekehrt jedes Entity aus $E_2$ mit beliebig vielen Entities aus $E_1$ assoziiert werden darf.</p>
+<p>这些从下面的图中其实也很好去理解：</p>
+<p><figure>
+    <img src="/images/database/Beziehungen_typen.png"
+         alt="Type of Relationships"/> <figcaption>
+            <p>Type of Relationships</p>
+        </figcaption>
+</figure>
+ <sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+</li>
+</ul>
+<h3 id="aggregation">Aggregation</h3>
+<p>这其实是有一些困惑我的一个概念，因为在书中和我上网查到的资料有些偏差，先看书中是怎么描述的：</p>
+<p>&ldquo;In dieser Hinsicht kann man die Aggregation als einen besonderen Beziehungstyp deuten, der einem übergeordneten Entities Teil &quot;</p>
+<ul>
+<li>sometimes we have to model a relaitonship between a collection of entities and relationships.</li>
+<li>Aggregation allows us to treat a relationship set as an entity set.</li>
+<li>we use <strong>dashed box</strong> around the relationship set to denote aggregation.</li>
+</ul>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>[Kemper, Alfons and Eickler, André, Datenbanksysteme: Eine Einführung, 7.,ISBN:9783486590180] <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
