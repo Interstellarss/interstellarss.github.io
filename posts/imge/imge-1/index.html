@@ -47,7 +47,7 @@ if (!doNotTrack) {
                             "url": "https:\/\/interstellarss.github.io\/images\/Apple-Devices-Preview.png",
                             "width":  3200 ,
                             "height":  2048 
-                        }],"genre": "posts","keywords": "Intergration Methods and Devices","wordcount":  1454 ,
+                        }],"genre": "posts","keywords": "Intergration Methods and Devices","wordcount":  1463 ,
         "url": "https:\/\/interstellarss.github.io\/posts\/imge\/imge-1\/","datePublished": "2020-11-10T16:08:41+01:00","dateModified": "2020-11-10T16:08:41+01:00","publisher": {
             "@type": "Organization",
             "name": "Puxuan"},"author": {
@@ -124,7 +124,7 @@ if (!doNotTrack) {
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">「旋转」的不同实现方法</h1><h2 class="single-subtitle">对于euler angles，rotation matrices，quaternions的讨论</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://interstellarss.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Puxuan</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>学习笔记</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-11-10">2020-11-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1454 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-11-10">2020-11-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1463 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -177,34 +177,29 @@ $$
 </blockquote>
 <h4 id="四元数代数运算">四元数代数运算</h4>
 <p>我们有如下定义：
-$$
-q_1 = s_1 + v_1 \quad q_1=&lt;w_1,x_1,y_1,z_1&gt; \<br>
-q_2 = s_2 + v_2 \quad q_2=&lt;w_2,x_2,y_2,z_2&gt; \</p>
-<p>\Box Addition \quad q_1 + q_2 =
-&lt;w_1+w_2,x_1+x_2,y_1+y_2,z_1+z_2&gt; \<br>
-\Box Multiplication \quad q_1q_2=s_1s_2 - v_1v_2+s_1v_2+s_2v_1+v_1 \times v_2
-$$</p>
+$$ q_1 = s_1 + v_1 \quad q_1=&lt;w_1,x_1,y_1,z_1&gt;  $$
+$$ q_2 = s_2 + v_2 \quad q_2=&lt;w_2,x_2,y_2,z_2&gt; $$
+$$ \Box Addition \quad q_1 + q_2 = &lt;w_1+w_2,x_1+x_2,y_1+y_2,z_1+z_2&gt; $$
+$$ \Box Multiplication \quad q_1q_2=s_1s_2 - v_1v_2+s_1v_2+s_2v_1+v_1 \times v_2 $$</p>
 <p>其中Multiplication可以用矩阵来表示：
 $$
 \begin{vmatrix}
 w_1 &amp; -x_1 &amp; -y_1 &amp; -z_1 \<br>
 x_1 &amp; w_1 &amp; -z_1 &amp; y_1  \<br>
-y_1 &amp; z_1 &amp; w_1 &amp; -x_1 \<br>
+y_1 &amp; z_1 &amp; w_1 &amp; -x_1  \<br>
 z_1 &amp; -y_1 &amp; x_1 &amp; w_1
-\end{vmatrix}
-\begin{vmatrix}
+\end{vmatrix}</p>
+<p>\begin{vmatrix}
 w_2 \<br>
 x_2 \<br>
 y_2 \<br>
 z_2
 \end{vmatrix}
-$$
-我们也可以拓展一下我们的定义：</p>
-<p>$$
-Norm: ||q|| = q = \sqrt{w^2 +x^2+y^2+z^2}  <br>
-单位四元数：||q|| = q = 1<br>
-纯四元数：w = 0 \quad q = &lt;0,x,y,z&gt;
 $$</p>
+<p>我们也可以拓展一下我们的定义：
+$$ Norm: ||q|| = q = \sqrt{w^2 +x^2+y^2+z^2}  $$
+$$单位四元数：||q|| = q = 1 $$
+$$纯四元数：w = 0 \quad q = &lt;0,x,y,z&gt; $$</p>
 <p>下一步我们看看「旋转」的过程是如何进行的</p>
 <p>假设我们需要围绕一个向量a旋转 $\sigma$</p>
 <section class="footnotes" role="doc-endnotes">
@@ -253,7 +248,7 @@ $$</p>
             </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
                 <i class="fas fa-comment fa-fw"></i>
             </a>
-        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/copy-tex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.37.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.8/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.0/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"gitalk":{"admin":["Interstellarss"],"clientID":"b4d6ace595e393612b74","clientSecret":"ebc194ba054bc0b1364a73bb34fc5ac4a3fb9793","id":"2020-11-10T16:08:41+01:00","owner":"Interstellarss","repo":"interstellarss.github.io","title":"「旋转」的不同实现方法"}},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/copy-tex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.37.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.8/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.0/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"gitalk":{"admin":["Interstellarss"],"clientID":"b4d6ace595e393612b74","clientSecret":"ebc194ba054bc0b1364a73bb34fc5ac4a3fb9793","id":"2020-11-10T16:08:41+01:00","owner":"Interstellarss","repo":"interstellarss.github.io","title":"「旋转」的不同实现方法"}},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"$$","right":"$$"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"},{"display":false,"left":"$","right":"$"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
             window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
             gtag('config', 'G-LMR64333PL', { 'anonymize_ip': true });
         </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=G-LMR64333PL" async></script></body>
