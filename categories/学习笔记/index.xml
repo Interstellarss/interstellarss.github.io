@@ -3,7 +3,14 @@
         <title>学习笔记 - 分类 - 法术研究分享Blog</title>
         <link>https://interstellarss.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
         <description>学习笔记 - 分类 - 法术研究分享Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 08 Nov 2020 14:44:27 &#43;0100</lastBuildDate><atom:link href="https://interstellarss.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 10 Nov 2020 16:08:41 &#43;0100</lastBuildDate><atom:link href="https://interstellarss.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="self" type="application/rss+xml" /><item>
+    <title>「旋转」的不同实现方法</title>
+    <link>https://interstellarss.github.io/posts/imge/imge-1/</link>
+    <pubDate>Tue, 10 Nov 2020 16:08:41 &#43;0100</pubDate>
+    <author>作者</author>
+    <guid>https://interstellarss.github.io/posts/imge/imge-1/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
     <title>直观又调皮的ER-Model</title>
     <link>https://interstellarss.github.io/posts/database/datenbank-2/</link>
     <pubDate>Sun, 08 Nov 2020 14:44:27 &#43;0100</pubDate>
@@ -66,12 +73,5 @@
     <author>作者</author>
     <guid>https://interstellarss.github.io/posts/theo/something-about-regular-expression-implementation/</guid>
     <description><![CDATA[本篇可以看作是“从有穷自动机到正则表达式”此篇的番外篇，主要是提供JAVA实现从DFA到RE的转换。因为代码完全是从作业中copy的，不知道]]></description>
-</item><item>
-    <title>当我们谈论 shared memory parallelism 的时候我们在谈论些什么--前导篇</title>
-    <link>https://interstellarss.github.io/posts/seminar-hpc/shared-memory-parallelism_1/</link>
-    <pubDate>Sun, 03 May 2020 22:35:00 &#43;0200</pubDate>
-    <author>作者</author>
-    <guid>https://interstellarss.github.io/posts/seminar-hpc/shared-memory-parallelism_1/</guid>
-    <description><![CDATA[在目前正在更的Theo和Network系列上又要开启新的系列了呢，也就是目前看到的 parallel computing 系列。因为这个学期刚好选到一个主题是high performance computing (HPC) 的S]]></description>
 </item></channel>
 </rss>

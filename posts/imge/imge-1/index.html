@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>「旋转」的不同实现方法 - 法术研究分享Blog</title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:title" content="「旋转」的不同实现方法" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://interstellarss.github.io/posts/imge/imge-1/" />
+<meta property="og:image" content="https://interstellarss.github.io/logo.png"/>
+<meta property="article:published_time" content="2020-11-10T16:08:41+01:00" />
+<meta property="article:modified_time" content="2020-11-10T16:08:41+01:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://interstellarss.github.io/logo.png"/>
+
+<meta name="twitter:title" content="「旋转」的不同实现方法"/>
+<meta name="twitter:description" content=""/>
+<meta name="application-name" content="法术研究分享Blog">
+<meta name="apple-mobile-web-app-title" content="法术研究分享Blog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c">
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'G-LMR64333PL', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://interstellarss.github.io/posts/imge/imge-1/" /><link rel="prev" href="https://interstellarss.github.io/posts/database/datenbank-2/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "「旋转」的不同实现方法",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/interstellarss.github.io\/posts\/imge\/imge-1\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/interstellarss.github.io\/images\/Apple-Devices-Preview.png",
+                            "width":  3200 ,
+                            "height":  2048 
+                        }],"genre": "posts","keywords": "Intergration Methods and Devices","wordcount":  1454 ,
+        "url": "https:\/\/interstellarss.github.io\/posts\/imge\/imge-1\/","datePublished": "2020-11-10T16:08:41+01:00","dateModified": "2020-11-10T16:08:41+01:00","publisher": {
+            "@type": "Organization",
+            "name": "Puxuan"},"author": {
+                "@type": "Person",
+                "name": "Puxuan"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="法术研究分享Blog"><span class="header-title-pre"><i class='fas fa-cat'></i></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="法术研究分享Blog"><span class="header-title-pre"><i class='fas fa-cat'></i></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">「旋转」的不同实现方法</h1><h2 class="single-subtitle">对于euler angles，rotation matrices，quaternions的讨论</h2><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://interstellarss.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Puxuan</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>学习笔记</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-11-10">2020-11-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1454 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#quaternions">Quaternions</a>
+          <ul>
+            <li>
+              <ul>
+                <li><a href="#单位圆在一维空间投影">单位圆在一维空间投影</a></li>
+                <li><a href="#单位球在二维空间投影">单位球在二维空间投影</a></li>
+                <li><a href="#单位超球面在三维空间投影">单位超球面在三维空间投影</a></li>
+              </ul>
+            </li>
+            <li><a href="#四元数代数运算">四元数代数运算</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>我们知道对于「旋转」的表示可以有不同的方法，不同的方法也有其局限性，</p>
+<h3 id="quaternions">Quaternions</h3>
+<p>四元数，也称quaternions，通常记为<strong>H</strong>(因为Hamilton的原因)。</p>
+<p>借用wikipedia上的话 “从明确地角度而言，四元数是复数的不可交换延伸。如把四元数的集合考虑成多维实数空间的话，四元数就代表着一个四维空间，相对于复数为二维空间。“</p>
+<p>我们可以用四维向量来表示：</p>
+<p>$$
+q = &lt;w,x,y,z&gt;<br>
+q = w + xi + yi +zk<br>
+q = s + v
+$$
+&ndash; w,x,y,z 是实数，v是一个三元向量(e.g. a 3D point),</p>
+<p>&ndash; i,j,k complex numbers (&ldquo;quaternion units&rdquo;) with $ i^2 = j^2=k^2=ijk=-1 $</p>
+<p>或许看了上面的式子可能还是一头雾水，到底什么各个参数代表些什么，看到这些参数脑子里也没有关于这个旋转的具体想象。这其实是很正常的，要是能在脑海里面具像化反而有些不太正常吧:) 不论如何，四元数其实是属于“空间法术”的“余孽”。点解咧？下面就通过观察四元数，更准确地说是观察四位单位超球面在三位的投影，来对它进行深入研究了解。</p>
+<p>四元数之所以难以理解，是因为它是一个四维的表示。不过也不是没有办法，因为我们通常用单位四元数来表示旋转，所以我们只需要关注思维中的单位超球面(unit hypersphere)，然后就可以较为轻松地获得它在三维的球极平面投影(stereographic projection)。</p>
+<h5 id="单位圆在一维空间投影">单位圆在一维空间投影</h5>
+<p>我们知道作为二维空间中的单位圆在一维的投影是一条无限延伸的直线，假设我们有建立平面坐标系，另x轴为实轴，y轴为虚轴，从 - i 这一点出发和圆上没一点的连线与x轴的交点即构成其投影。值得注意的是，这条与x轴重合的直线只是该二维空间中单位圆的其中一个投影，二维空间中其他点的投影是没有办法在这个一维空间中表示。</p>
+<h5 id="单位球在二维空间投影">单位球在二维空间投影</h5>
+<p>类似的，对于单位球在二维空间的投影也可以类似地去看待，假设我们有i轴，j轴，两个虚数轴形成一个平面，实数轴与z轴重合。然后与前面投影相似的手法，我们可以用球极平面投影来描述三位的旋转，对于每一个单位球面上的点，我们都可以将其与 -1 相连，这条线与ij平面的交点即是二维的投影点，于是实数轴上的1会投影在平面的原点，北半球的点会投影在ij平面的单位圆内，而南半球的点会投影在单位圆之外，并且任意方向的无穷远处都会是-1的投影。旋转的时候，就是「线」逐渐围成「圆」，「圆」逐渐展开成「线」的过程。</p>
+<h5 id="单位超球面在三维空间投影">单位超球面在三维空间投影</h5>
+<p>接下来就是我们关注的重点了，有了上面的铺垫，我们不难理解为什么四元数是由一个实数项与三个虚数项组成的了。</p>
+<p>对四维空间中的单位球面进行球极平面投影，实数轴的1投影ijk坐标系的原点。当四维超球面投影到三维空间时，与三维空间交于位置不变的三维单位球面，而这个球面对应纯四元数，也就是实属部分为零。实属部分介于0到1之间的投影在了这个三位球的里面，而实数部分小于0的投影在了三位球面以外，-1投影在了各个方向的无穷远处。</p>
+<blockquote>
+<p>正如同三维中的圆投影到二维平面中是一条线一样，四维中的球（不是超球）投影在三维是一个平面，事实上，三维投影中的平面都是四维超球中过 -1 的球面在三维的投影。<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+</blockquote>
+<h4 id="四元数代数运算">四元数代数运算</h4>
+<p>我们有如下定义：
+$$
+q_1 = s_1 + v_1 \quad q_1=&lt;w_1,x_1,y_1,z_1&gt; \<br>
+q_2 = s_2 + v_2 \quad q_2=&lt;w_2,x_2,y_2,z_2&gt; \</p>
+<p>\Box Addition \quad q_1 + q_2 =
+&lt;w_1+w_2,x_1+x_2,y_1+y_2,z_1+z_2&gt; \<br>
+\Box Multiplication \quad q_1q_2=s_1s_2 - v_1v_2+s_1v_2+s_2v_1+v_1 \times v_2
+$$</p>
+<p>其中Multiplication可以用矩阵来表示：
+$$
+\begin{vmatrix}
+w_1 &amp; -x_1 &amp; -y_1 &amp; -z_1 \<br>
+x_1 &amp; w_1 &amp; -z_1 &amp; y_1  \<br>
+y_1 &amp; z_1 &amp; w_1 &amp; -x_1 \<br>
+z_1 &amp; -y_1 &amp; x_1 &amp; w_1
+\end{vmatrix}
+\begin{vmatrix}
+w_2 \<br>
+x_2 \<br>
+y_2 \<br>
+z_2
+\end{vmatrix}
+$$
+我们也可以拓展一下我们的定义：</p>
+<p>$$
+Norm: ||q|| = q = \sqrt{w^2 +x^2+y^2+z^2}  <br>
+单位四元数：||q|| = q = 1<br>
+纯四元数：w = 0 \quad q = &lt;0,x,y,z&gt;
+$$</p>
+<p>下一步我们看看「旋转」的过程是如何进行的</p>
+<p>假设我们需要围绕一个向量a旋转 $\sigma$</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p><a href="https://zhuanlan.zhihu.com/p/53872740" target="_blank" rel="noopener noreffer">可视化理解四元数，愿你不再掉头发</a> <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2020-11-10</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://interstellarss.github.io/posts/imge/imge-1/" data-title="「旋转」的不同实现方法" data-hashtags="Intergration Methods and Devices"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://interstellarss.github.io/posts/imge/imge-1/" data-hashtag="Intergration Methods and Devices"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://interstellarss.github.io/posts/imge/imge-1/" data-title="「旋转」的不同实现方法"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://interstellarss.github.io/posts/imge/imge-1/" data-title="「旋转」的不同实现方法"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@2.14.0/icons/line.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://interstellarss.github.io/posts/imge/imge-1/" data-title="「旋转」的不同实现方法"><i class="fab fa-weibo fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/intergration-methods-and-devices/">Intergration Methods and Devices</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/database/datenbank-2/" class="prev" rel="prev" title="直观又调皮的ER-Model"><i class="fas fa-angle-left fa-fw"></i>直观又调皮的ER-Model</a></div>
+</div>
+<div id="comments"><div id="gitalk" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.78.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/copy-tex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.37.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.8/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.0/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"gitalk":{"admin":["Interstellarss"],"clientID":"b4d6ace595e393612b74","clientSecret":"ebc194ba054bc0b1364a73bb34fc5ac4a3fb9793","id":"2020-11-10T16:08:41+01:00","owner":"Interstellarss","repo":"interstellarss.github.io","title":"「旋转」的不同实现方法"}},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'G-LMR64333PL', { 'anonymize_ip': true });
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=G-LMR64333PL" async></script></body>
+</html>
