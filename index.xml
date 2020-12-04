@@ -3,9 +3,23 @@
         <title>法术研究分享Blog</title>
         <link>https://interstellarss.github.io/</link>
         <description>这是我的全新 Hugo 网站</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 10 Nov 2020 16:08:41 &#43;0100</lastBuildDate>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Fri, 04 Dec 2020 19:49:03 &#43;0100</lastBuildDate>
             <atom:link href="https://interstellarss.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>摄影记录--1</title>
+    <link>https://interstellarss.github.io/posts/photos/photograph1/</link>
+    <pubDate>Fri, 04 Dec 2020 19:49:03 &#43;0100</pubDate>
+    <author>作者</author>
+    <guid>https://interstellarss.github.io/posts/photos/photograph1/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>Relational Model and Relational Algebra</title>
+    <link>https://interstellarss.github.io/posts/database/datenbank-3/</link>
+    <pubDate>Sun, 15 Nov 2020 11:34:02 &#43;0100</pubDate>
+    <author>作者</author>
+    <guid>https://interstellarss.github.io/posts/database/datenbank-3/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
     <title>「旋转」的不同实现方法</title>
     <link>https://interstellarss.github.io/posts/imge/imge-1/</link>
     <pubDate>Tue, 10 Nov 2020 16:08:41 &#43;0100</pubDate>
@@ -26,13 +40,6 @@
     <author>作者</author>
     <guid>https://interstellarss.github.io/posts/database/datanbank-1/</guid>
     <description><![CDATA[简单介绍DBMS的概念以及涵盖的主题]]></description>
-</item><item>
-    <title>关于游戏中物理系统的一些小事 -- 导引篇 - 1</title>
-    <link>https://interstellarss.github.io/posts/game_physics/game_physics_1/</link>
-    <pubDate>Fri, 30 Oct 2020 23:43:29 &#43;0100</pubDate>
-    <author>作者</author>
-    <guid>https://interstellarss.github.io/posts/game_physics/game_physics_1/</guid>
-    <description><![CDATA[游戏物理相关主题概况]]></description>
 </item><item>
     <title>First_post</title>
     <link>https://interstellarss.github.io/posts/first_post/</link>
@@ -70,12 +77,5 @@ test
     <author>作者</author>
     <guid>https://interstellarss.github.io/posts/theo/something-about-dfa-and-nfa-2/</guid>
     <description><![CDATA[我们从(一)可以认识到DFA和NFA是什么样子的，并且知道它们之间的等价性，在“从有穷自动机到正则语言”一篇中我们知道DFA，NFA和正则表]]></description>
-</item><item>
-    <title>功能重要单一的数据链路层</title>
-    <link>https://interstellarss.github.io/posts/computernetwork/data-link-layer/</link>
-    <pubDate>Tue, 12 May 2020 09:44:32 &#43;0200</pubDate>
-    <author>作者</author>
-    <guid>https://interstellarss.github.io/posts/computernetwork/data-link-layer/</guid>
-    <description><![CDATA[连接的特征（Verbindungscharakterisierung） 两个节点之间的连接会有如下的各种属性：传输速率（Übertragung]]></description>
 </item></channel>
 </rss>

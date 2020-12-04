@@ -3,7 +3,14 @@
         <title>学习笔记 - 分类 - 法术研究分享Blog</title>
         <link>https://interstellarss.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
         <description>学习笔记 - 分类 - 法术研究分享Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 10 Nov 2020 16:08:41 &#43;0100</lastBuildDate><atom:link href="https://interstellarss.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 15 Nov 2020 11:34:02 &#43;0100</lastBuildDate><atom:link href="https://interstellarss.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="self" type="application/rss+xml" /><item>
+    <title>Relational Model and Relational Algebra</title>
+    <link>https://interstellarss.github.io/posts/database/datenbank-3/</link>
+    <pubDate>Sun, 15 Nov 2020 11:34:02 &#43;0100</pubDate>
+    <author>作者</author>
+    <guid>https://interstellarss.github.io/posts/database/datenbank-3/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
     <title>「旋转」的不同实现方法</title>
     <link>https://interstellarss.github.io/posts/imge/imge-1/</link>
     <pubDate>Tue, 10 Nov 2020 16:08:41 &#43;0100</pubDate>
@@ -24,13 +31,6 @@
     <author>作者</author>
     <guid>https://interstellarss.github.io/posts/database/datanbank-1/</guid>
     <description><![CDATA[简单介绍DBMS的概念以及涵盖的主题]]></description>
-</item><item>
-    <title>关于游戏中物理系统的一些小事 -- 导引篇 - 1</title>
-    <link>https://interstellarss.github.io/posts/game_physics/game_physics_1/</link>
-    <pubDate>Fri, 30 Oct 2020 23:43:29 &#43;0100</pubDate>
-    <author>作者</author>
-    <guid>https://interstellarss.github.io/posts/game_physics/game_physics_1/</guid>
-    <description><![CDATA[游戏物理相关主题概况]]></description>
 </item><item>
     <title>作为带路专家的网络层</title>
     <link>https://interstellarss.github.io/posts/computernetwork/network-layer/</link>

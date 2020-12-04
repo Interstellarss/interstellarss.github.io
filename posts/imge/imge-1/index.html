@@ -33,7 +33,7 @@ if (!doNotTrack) {
 
 <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://interstellarss.github.io/posts/imge/imge-1/" /><link rel="prev" href="https://interstellarss.github.io/posts/database/datenbank-2/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://interstellarss.github.io/posts/imge/imge-1/" /><link rel="prev" href="https://interstellarss.github.io/posts/database/datenbank-2/" /><link rel="next" href="https://interstellarss.github.io/posts/database/datenbank-3/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -47,7 +47,7 @@ if (!doNotTrack) {
                             "url": "https:\/\/interstellarss.github.io\/images\/Apple-Devices-Preview.png",
                             "width":  3200 ,
                             "height":  2048 
-                        }],"genre": "posts","keywords": "Intergration Methods and Devices","wordcount":  1463 ,
+                        }],"genre": "posts","keywords": "Intergration Methods and Devices","wordcount":  1516 ,
         "url": "https:\/\/interstellarss.github.io\/posts\/imge\/imge-1\/","datePublished": "2020-11-10T16:08:41+01:00","dateModified": "2020-11-10T16:08:41+01:00","publisher": {
             "@type": "Organization",
             "name": "Puxuan"},"author": {
@@ -124,8 +124,8 @@ if (!doNotTrack) {
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">「旋转」的不同实现方法</h1><h2 class="single-subtitle">对于euler angles，rotation matrices，quaternions的讨论</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://interstellarss.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Puxuan</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>学习笔记</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-11-10">2020-11-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1463 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-11-10">2020-11-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1516 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
@@ -201,7 +201,7 @@ $$ Norm: ||q|| = q = \sqrt{w^2 +x^2+y^2+z^2}  $$
 $$单位四元数：||q|| = q = 1 $$
 $$纯四元数：w = 0 \quad q = &lt;0,x,y,z&gt; $$</p>
 <p>下一步我们看看「旋转」的过程是如何进行的</p>
-<p>假设我们需要围绕一个向量a旋转 $\sigma$</p>
+<p>假设我们需要围绕一个向量a旋转 $\theta$角，前面我们有讨论过这个过程如何用旋转矩阵实现，现在来看看四元数在面对这种问题时候的表现吧。</p>
 <section class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
@@ -232,7 +232,8 @@ $$纯四元数：w = 0 \quad q = &lt;0,x,y,z&gt; $$</p>
         </section>
     </div>
 
-    <div class="post-nav"><a href="/posts/database/datenbank-2/" class="prev" rel="prev" title="直观又调皮的ER-Model"><i class="fas fa-angle-left fa-fw"></i>直观又调皮的ER-Model</a></div>
+    <div class="post-nav"><a href="/posts/database/datenbank-2/" class="prev" rel="prev" title="直观又调皮的ER-Model"><i class="fas fa-angle-left fa-fw"></i>直观又调皮的ER-Model</a>
+            <a href="/posts/database/datenbank-3/" class="next" rel="next" title="Relational Model and Relational Algebra">Relational Model and Relational Algebra<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 <div id="comments"><div id="gitalk" class="comment"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
