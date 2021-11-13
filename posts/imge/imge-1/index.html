@@ -8,10 +8,10 @@
         <title>「旋转」的不同实现方法 - 法术研究分享Blog</title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:title" content="「旋转」的不同实现方法" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://interstellarss.github.io/posts/imge/imge-1/" />
-<meta property="og:image" content="https://interstellarss.github.io/logo.png"/>
+<meta property="og:url" content="https://interstellarss.github.io/posts/imge/imge-1/" /><meta property="og:image" content="https://interstellarss.github.io/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2020-11-10T16:08:41+01:00" />
 <meta property="article:modified_time" content="2020-11-10T16:08:41+01:00" />
+
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://interstellarss.github.io/logo.png"/>
 
@@ -47,7 +47,7 @@ if (!doNotTrack) {
                             "url": "https:\/\/interstellarss.github.io\/images\/Apple-Devices-Preview.png",
                             "width":  3200 ,
                             "height":  2048 
-                        }],"genre": "posts","keywords": "Intergration Methods and Devices","wordcount":  1516 ,
+                        }],"genre": "posts","keywords": "Intergration Methods and Devices","wordcount":  1537 ,
         "url": "https:\/\/interstellarss.github.io\/posts\/imge\/imge-1\/","datePublished": "2020-11-10T16:08:41+01:00","dateModified": "2020-11-10T16:08:41+01:00","publisher": {
             "@type": "Organization",
             "name": "Puxuan"},"author": {
@@ -124,7 +124,7 @@ if (!doNotTrack) {
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">「旋转」的不同实现方法</h1><h2 class="single-subtitle">对于euler angles，rotation matrices，quaternions的讨论</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://interstellarss.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Puxuan</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>学习笔记</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-11-10">2020-11-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1516 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-11-10">2020-11-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1537 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -157,8 +157,8 @@ if (!doNotTrack) {
 <p>借用wikipedia上的话 “从明确地角度而言，四元数是复数的不可交换延伸。如把四元数的集合考虑成多维实数空间的话，四元数就代表着一个四维空间，相对于复数为二维空间。“</p>
 <p>我们可以用四维向量来表示：</p>
 <p>$$
-q = &lt;w,x,y,z&gt;<br>
-q = w + xi + yi +zk<br>
+q = &lt;w,x,y,z&gt; <br>
+q = w + xi + yi +zk <br>
 q = s + v
 $$
 &ndash; w,x,y,z 是实数，v是一个三元向量(e.g. a 3D point),</p>
@@ -184,15 +184,15 @@ $$ \Box Multiplication \quad q_1q_2=s_1s_2 - v_1v_2+s_1v_2+s_2v_1+v_1 \times v_2
 <p>其中Multiplication可以用矩阵来表示：
 $$
 \begin{vmatrix}
-w_1 &amp; -x_1 &amp; -y_1 &amp; -z_1 \<br>
-x_1 &amp; w_1 &amp; -z_1 &amp; y_1  \<br>
-y_1 &amp; z_1 &amp; w_1 &amp; -x_1  \<br>
+w_1 &amp; -x_1 &amp; -y_1 &amp; -z_1 \
+x_1 &amp; w_1 &amp; -z_1 &amp; y_1  \
+y_1 &amp; z_1 &amp; w_1 &amp; -x_1  \
 z_1 &amp; -y_1 &amp; x_1 &amp; w_1
 \end{vmatrix}</p>
 <p>\begin{vmatrix}
-w_2 \<br>
-x_2 \<br>
-y_2 \<br>
+w_2 \
+x_2 \
+y_2 \
 z_2
 \end{vmatrix}
 $$</p>
@@ -206,7 +206,7 @@ $$纯四元数：w = 0 \quad q = &lt;0,x,y,z&gt; $$</p>
 <hr>
 <ol>
 <li id="fn:1" role="doc-endnote">
-<p><a href="https://zhuanlan.zhihu.com/p/53872740" target="_blank" rel="noopener noreffer">可视化理解四元数，愿你不再掉头发</a> <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/53872740" target="_blank" rel="noopener noreffer">可视化理解四元数，愿你不再掉头发</a>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </section></div><div class="post-footer" id="post-footer">
@@ -239,7 +239,7 @@ $$纯四元数：w = 0 \quad q = &lt;0,x,y,z&gt; $$</p>
                 Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
             </noscript></div></article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.78.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.89.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
                 </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020 - 2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>

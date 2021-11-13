@@ -8,10 +8,10 @@
         <title>当我们谈论 shared memory parallelism 的时候我们在谈论些什么--提升篇 - 法术研究分享Blog</title><meta name="Description" content="first draft"><meta property="og:title" content="当我们谈论 shared memory parallelism 的时候我们在谈论些什么--提升篇" />
 <meta property="og:description" content="first draft" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://interstellarss.github.io/posts/seminar-hpc/shared-memory-parallelism_2/" />
-<meta property="og:image" content="https://interstellarss.github.io/logo.png"/>
+<meta property="og:url" content="https://interstellarss.github.io/posts/seminar-hpc/shared-memory-parallelism_2/" /><meta property="og:image" content="https://interstellarss.github.io/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2020-06-07T21:44:12+02:00" />
 <meta property="article:modified_time" content="2020-06-07T21:44:12+02:00" />
+
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://interstellarss.github.io/logo.png"/>
 
@@ -216,7 +216,7 @@ $Y = A * x$</li>
 </ol>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -226,7 +226,7 @@ $Y = A * x$</li>
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c" data-lang="c"> <span class="cp">#pragma omp parallel for num_threads(thread_count) \
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"> <span class="cp">#pragma omp parallel for num_threads(thread_count) \
 </span><span class="cp">  default(none) private (i, j) shared(A, x, y, m, n)
 </span><span class="cp"></span>  <span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span> <span class="n">m</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
      <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
@@ -275,7 +275,7 @@ if thread 2 or 3 is executing this code, it will have to reload y. Each thread w
                 Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
             </noscript></div></article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.78.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.89.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
                 </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020 - 2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>

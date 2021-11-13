@@ -8,10 +8,10 @@
         <title>功能重要单一的数据链路层 - 法术研究分享Blog</title><meta name="Description" content="数据链路层介绍"><meta property="og:title" content="功能重要单一的数据链路层" />
 <meta property="og:description" content="数据链路层介绍" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://interstellarss.github.io/posts/computernetwork/data-link-layer/" />
-<meta property="og:image" content="https://interstellarss.github.io/logo.png"/>
+<meta property="og:url" content="https://interstellarss.github.io/posts/computernetwork/data-link-layer/" /><meta property="og:image" content="https://interstellarss.github.io/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2020-05-12T09:44:32+02:00" />
 <meta property="article:modified_time" content="2020-05-12T09:44:32+02:00" />
+
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://interstellarss.github.io/logo.png"/>
 
@@ -197,9 +197,8 @@ C = t_p r = \frac{d}{vc_0} r
 $$
 单位是bit。</p>
 <h4 id="übertragungsrichtung">Übertragungsrichtung</h4>
-<figure>
-    <img src="https://cdn.jsdelivr.net/gh/Interstellarss/CDN@0.1.4/images/data-link-layer/ubertragungsrichtung.jpg"
-         alt="image"/> <figcaption>
+<figure><img src="https://cdn.jsdelivr.net/gh/Interstellarss/CDN@0.1.4/images/data-link-layer/ubertragungsrichtung.jpg"
+         alt="image"/><figcaption>
             <p>Übertragungsrichtung</p>
         </figcaption>
 </figure>
@@ -207,9 +206,8 @@ $$
 <h3 id="广播信道的数据链路层">广播信道的数据链路层</h3>
 <p>一般来说这里我们会用到时分复用（Zeitmultiplex），即用一个信道实现不同端口之间的通信，基于分组网络（以太网，无线局域网）中的非确定性方法（并发访问）。
 至于复用我想教授的slide上面的图已经很清楚了：
-<figure>
-    <img src="https://cdn.jsdelivr.net/gh/Interstellarss/CDN@0.1.4/images/data-link-layer/Multiplexing.jpg"
-         alt="image"/> <figcaption>
+<figure><img src="https://cdn.jsdelivr.net/gh/Interstellarss/CDN@0.1.4/images/data-link-layer/Multiplexing.jpg"
+         alt="image"/><figcaption>
             <p>Multiplexing</p>
         </figcaption>
 </figure>
@@ -219,9 +217,8 @@ $$
 <p>CSMA 指的其实是 Carrier Sense Multiple Access, 是对于前面sorted ALOHA的一种简单的优化，也即“listen before talk”。</p>
 <h5 id="csmacd">CSMA/CD</h5>
 <p>中文翻译也即 载波监听碰撞监听多点接入/碰撞检测，以太网即用此协议，分为载波监听和碰撞检测两部分：即“发送前先监听”，每个站在发送数据前要先检测一下总线上是否有其他站在发送数据，如果有，暂时不发送数据，等待信道空闲时再发送，总线上没有“载波”，这里只是一个习惯称呼；-碰撞检测：即“边发送边监听”，适配器边发送数据边检测信道上的信号电压，以便判断自己在发送数据时其他站是否也在发送数据。同时发送数据时，总线上的信号电压变化幅度大，超过一定门限值时，就认为总线上至少两个站同时在发送数据，表明有碰撞。这时总线上的信号失真，无法恢复。所以，每一个正在发送数据的站，一旦发现有碰撞，适配器就要立即停止发送，以免浪费网络资源，等待一段随机时间后再发送。 如果考虑上信号在链路上的传播时延，那么过程类似这样；</p>
-<figure>
-    <img src="https://cdn.jsdelivr.net/gh/Interstellarss/CDN@0.1.4/images/data-link-layer/CSMA_CD.jpg"
-         alt="image"/> <figcaption>
+<figure><img src="https://cdn.jsdelivr.net/gh/Interstellarss/CDN@0.1.4/images/data-link-layer/CSMA_CD.jpg"
+         alt="image"/><figcaption>
             <p>CSMA/CD</p>
         </figcaption>
 </figure>
@@ -277,7 +274,7 @@ $$
                 Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
             </noscript></div></article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.78.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.89.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
                 </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020 - 2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>

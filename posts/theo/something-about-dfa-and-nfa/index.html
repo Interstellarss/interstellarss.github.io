@@ -8,10 +8,10 @@
         <title>DFA与NFA的故事(一) - 法术研究分享Blog</title><meta name="Description" content="有穷自动机笔记1"><meta property="og:title" content="DFA与NFA的故事(一)" />
 <meta property="og:description" content="有穷自动机笔记1" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://interstellarss.github.io/posts/theo/something-about-dfa-and-nfa/" />
-<meta property="og:image" content="https://interstellarss.github.io/logo.png"/>
+<meta property="og:url" content="https://interstellarss.github.io/posts/theo/something-about-dfa-and-nfa/" /><meta property="og:image" content="https://interstellarss.github.io/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2020-04-25T19:20:13+02:00" />
 <meta property="article:modified_time" content="2020-04-25T19:20:13+02:00" />
+
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://interstellarss.github.io/logo.png"/>
 
@@ -145,7 +145,7 @@ if (!doNotTrack) {
 <p>对于确定型有穷自动机，也即deterministic finite automaton 或者说 deterministischer endlicher Automat，我们可以给出相应的形式定义，这里借用Tobias教授在课上给的定义：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -155,7 +155,7 @@ if (!doNotTrack) {
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">Ein deterministischer endlicher Automat (deterministic infinite automaton, DFA)
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Ein deterministischer endlicher Automat (deterministic infinite automaton, DFA)
  M = (Q, ∑, δ, q0, F), besteht aus
 
 einer endlichen Menge von Zuständen Q,
@@ -169,20 +169,20 @@ einer Menge F ⊆ Q von Endzuständen (akzeptierenden Zust.)
 关于这个扩展转移函数我们可以做类似的定义：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">δ: Q × ∑* → Q
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">δ: Q × ∑* → Q
 </code></pre></td></tr></table>
 </div>
 </div><p>这里的∑*代表的是由∑构成的字符串，也就是说自动机也可以对字符串的输入进行反应，这也是为了方便而定义的。
 该装置接受的语言记作：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">L(M):= {w∈∑*|δ(q0, w)∈F}
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">L(M):= {w∈∑*|δ(q0, w)∈F}
 </code></pre></td></tr></table>
 </div>
 </div><p>就是说从初始状态出发读完输入串w之后所处的状态是一个接受状态，那么就接受这个串。被DFA识别的语言也叫 正则语言。</p>
@@ -190,14 +190,14 @@ einer Menge F ⊆ Q von Endzuständen (akzeptierenden Zust.)
 <p>对于非确定型有穷自动机(nondeterministic finite automaton 或者说 nichtdeterministischer endlicher Automat)与确定型的区别就在于非确定性：下一个状态可以不唯一确定，可以进行ε移动，多种选择(含0种选择)，我们还是来看看Tobias教授ppt上的定义：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">Ein nichtdeterministischer endlicher Automat (nondeterministic infinite automaton, NFA) ist ein 5-Tupel N = (Q, ∑, δ, q0, F), so dass
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Ein nichtdeterministischer endlicher Automat (nondeterministic infinite automaton, NFA) ist ein 5-Tupel N = (Q, ∑, δ, q0, F), so dass
    Q, ∑, q0 und F sind wie bei einem DFA
    δ: Q × ∑ → P(Q)
    P(Q) = Menge aller Teilmengen von Q = 2^Q.
@@ -208,10 +208,10 @@ einer Menge F ⊆ Q von Endzuständen (akzeptierenden Zust.)
 该装置接受的语言记作：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">L(N):= {w∈∑*|δ({q0}, w) ∩ F ≠ Ø}
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">L(N):= {w∈∑*|δ({q0}, w) ∩ F ≠ Ø}
 </code></pre></td></tr></table>
 </div>
 </div><p>现在我们自然而然地会去想DFA与NFA之间有怎样的故事呢？DFA和NFA的能力是否一样？这也就是说它们是否识别同样的语言呢？
@@ -225,12 +225,12 @@ einer Menge F ⊆ Q von Endzuständen (akzeptierenden Zust.)
 <p>下面给出严格的证明：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">设 NFA N = (Q, ∑, δ, q0, F),构造 DFA M = (Q&#39;, ∑, δ&#39;, q0&#39;, F&#39;), L(M) = L(N).
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">设 NFA N = (Q, ∑, δ, q0, F),构造 DFA M = (Q&#39;, ∑, δ&#39;, q0&#39;, F&#39;), L(M) = L(N).
 令Q&#39; = P(Q). 对R∈Q&#39;和a∈∑, E(R)={q|从R出发沿0个或多个ε移动可达q};
 δ&#39;(R,a)=∪(r∈R)(R ∩ F ≠ Ø).
 </code></pre></td></tr></table>
@@ -267,7 +267,7 @@ einer Menge F ⊆ Q von Endzuständen (akzeptierenden Zust.)
                 Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
             </noscript></div></article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.78.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.89.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
                 </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020 - 2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>
