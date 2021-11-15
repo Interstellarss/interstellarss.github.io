@@ -47,7 +47,7 @@ if (!doNotTrack) {
                             "url": "https:\/\/interstellarss.github.io\/images\/Apple-Devices-Preview.png",
                             "width":  3200 ,
                             "height":  2048 
-                        }],"genre": "posts","keywords": "Virtualization_Tech","wordcount":  481 ,
+                        }],"genre": "posts","keywords": "Virtualization_Tech","wordcount":  586 ,
         "url": "https:\/\/interstellarss.github.io\/posts\/vt\/process_virtual_machine\/","datePublished": "2021-11-15T15:50:20+01:00","dateModified": "2021-11-15T15:50:20+01:00","publisher": {
             "@type": "Organization",
             "name": "作者"},"author": {
@@ -124,8 +124,8 @@ if (!doNotTrack) {
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Something about Process-Virtual-Machine</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>作者</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>学习笔记</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-11-15">2021-11-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 481 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-11-15">2021-11-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 586 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
@@ -153,11 +153,12 @@ if (!doNotTrack) {
 </blockquote>
 <p>Of course,</p>
 <h3 id="same-isa-binary-optimizers">Same-ISA Binary Optimizers</h3>
+<p>Most dynamic binary translators not only translate from source to target code but also perform some code optimizations. <strong>Optimization</strong> of a program binary is the primary purpose of the virtual machine.</p>
 <h3 id="high-level-language-virtual-machines-platform-independence">High-Level Language Virtual Machines: Platform Independence</h3>
 <blockquote>
 <p>Full cross-plattform portability is more easily achieved by taking a step back and designing it into an overall software framework. One way of accomplishing this is to design a process-level VM at the same time as an application does not directly correspond to any real platform. Rather, it is designed for ease of application program development. These high-level languafe VMs (HLL VMs) are similar to the process VMs described earliear. However, they are focused on minimizing hardware-specific and OS-specific features because thes would compromise platform independence.</p>
 <p>In a conventional system, the compiler consists of a fronted that performs lexical, syntax, and semantic analysis to generate simple intermediate code &ndash; similar to machine code but more abstract. Typically the intermediate code does not contain specific register assignments, for example. Then a code generator takes the intermediate code and generates a binary containing machine code for a specific ISA and OS.  This binary file is distributed and executed on platforms that support the given ISA/OS combination. To execute the program on a different platform, however, it must be recompiled for that platform.</p>
-<p>In HLL VMs, this model is changed. Ths steps are similar to the conventional ones, but the point at which program distribution takes place is at a higher level. A conventional compiler fronted generates abstract machine code, which is very similar to an intermediate form. In many HLL VMs, this is a rather generic stack-based ISA. This virtual ISA is in essence the machine code for a virtual machine. <sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>In HLL VMs, this model is changed. Ths steps are similar to the conventional ones, but the point at which program distribution takes place is at a higher level. A conventional compiler fronted generates abstract machine code, which is very similar to an intermediate form. In many HLL VMs, this is a rather generic stack-based ISA. This virtual ISA is in essence the machine code for a virtual machine.  The portable virtual ISA code is distributed for execution on different platforms. For each platform, a VM capable fo executing the virtual ISA is implemented. In its simplest form, the VM contains an interpreter that takes each instruction, decodes it, and then performs as part of the VM. In more sophisticated, higher performance VMs, the abstract machine code may be compiled (binary translated) into host machine code for direct excution on the host platform. <sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
 </blockquote>
 <section class="footnotes" role="doc-endnotes">
 <hr>
