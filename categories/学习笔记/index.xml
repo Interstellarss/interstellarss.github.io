@@ -3,7 +3,14 @@
         <title>学习笔记 - 分类 - 法术研究分享Blog</title>
         <link>https://interstellarss.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
         <description>学习笔记 - 分类 - 法术研究分享Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 15 Nov 2020 11:34:02 &#43;0100</lastBuildDate><atom:link href="https://interstellarss.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Mon, 15 Nov 2021 15:50:20 &#43;0100</lastBuildDate><atom:link href="https://interstellarss.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="self" type="application/rss+xml" /><item>
+    <title>Something about Process-Virtual-Machine</title>
+    <link>https://interstellarss.github.io/posts/vt/process_virtual_machine/</link>
+    <pubDate>Mon, 15 Nov 2021 15:50:20 &#43;0100</pubDate>
+    <author>作者</author>
+    <guid>https://interstellarss.github.io/posts/vt/process_virtual_machine/</guid>
+    <description><![CDATA[Process-level VMs provide user applications with a virtual ABI environ- ment. In their various implementations, process VMs can provide replication, emulation, and optimization. The following subsections describe each of these. Multiprogramming Emulators and Dynamic Binary Translators Process-level virtual machines is to support program binaries compiles to a different instruction set thatn the one executed by the host&rsquo;s hardware, i.e., to emulate one instruction set on hardware designed for another. Application]]></description>
+</item><item>
     <title>Relational Model and Relational Algebra</title>
     <link>https://interstellarss.github.io/posts/database/datenbank-3/</link>
     <pubDate>Sun, 15 Nov 2020 11:34:02 &#43;0100</pubDate>
@@ -66,12 +73,5 @@
     <author>作者</author>
     <guid>https://interstellarss.github.io/posts/computernetwork/data-link-layer/</guid>
     <description><![CDATA[连接的特征（Verbindungscharakterisierung） 两个节点之间的连接会有如下的各种属性：传输速率（Übertragung]]></description>
-</item><item>
-    <title>从有穷自动机到正则语言---实现篇</title>
-    <link>https://interstellarss.github.io/posts/theo/something-about-regular-expression-implementation/</link>
-    <pubDate>Tue, 12 May 2020 00:15:53 &#43;0200</pubDate>
-    <author>作者</author>
-    <guid>https://interstellarss.github.io/posts/theo/something-about-regular-expression-implementation/</guid>
-    <description><![CDATA[本篇可以看作是“从有穷自动机到正则表达式”此篇的番外篇，主要是提供JAVA实现从DFA到RE的转换。因为代码完全是从作业中copy的，不知道]]></description>
 </item></channel>
 </rss>
