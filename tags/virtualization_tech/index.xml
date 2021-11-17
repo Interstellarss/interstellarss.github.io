@@ -3,7 +3,14 @@
         <title>Virtualization_Tech - 标签 - 法术研究分享Blog</title>
         <link>https://interstellarss.github.io/tags/virtualization_tech/</link>
         <description>Virtualization_Tech - 标签 - 法术研究分享Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Mon, 15 Nov 2021 15:50:20 &#43;0100</lastBuildDate><atom:link href="https://interstellarss.github.io/tags/virtualization_tech/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 16 Nov 2021 20:50:20 &#43;0100</lastBuildDate><atom:link href="https://interstellarss.github.io/tags/virtualization_tech/" rel="self" type="application/rss+xml" /><item>
+    <title>Something about ISA Emulation -- 1</title>
+    <link>https://interstellarss.github.io/posts/vt/isa_emulation/</link>
+    <pubDate>Tue, 16 Nov 2021 20:50:20 &#43;0100</pubDate>
+    <author>作者</author>
+    <guid>https://interstellarss.github.io/posts/vt/isa_emulation/</guid>
+    <description><![CDATA[A complete ISA consists of many parts, including the register set and memory architecture, the instructions , and the trap and interrupt architecture. A virtual machine implementation is usually concerned with all aspects of ISA emulation. Here we will be focusing on (user-level) instruction emulation. Instruction set emulation can be carried out basiclly in 2 techniques: interpretation, and binary translation. Interpretation involves a cycle of fetching a source instrction, analyzing]]></description>
+</item><item>
     <title>Something about Process-Virtual-Machine</title>
     <link>https://interstellarss.github.io/posts/vt/process_virtual_machine/</link>
     <pubDate>Mon, 15 Nov 2021 15:50:20 &#43;0100</pubDate>
