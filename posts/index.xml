@@ -3,12 +3,19 @@
         <title>所有文章 - 法术研究分享Blog</title>
         <link>https://interstellarss.github.io/posts/</link>
         <description>所有文章 | 法术研究分享Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 16 Nov 2021 20:50:20 &#43;0100</lastBuildDate><atom:link href="https://interstellarss.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 02 Mar 2022 10:03:37 &#43;0100</lastBuildDate><atom:link href="https://interstellarss.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Something about ISA Emulation -- 2</title>
+    <link>https://interstellarss.github.io/posts/vt/isa_emulation2/</link>
+    <pubDate>Wed, 02 Mar 2022 10:03:37 &#43;0100</pubDate>
+    <author>作者</author>
+    <guid>https://interstellarss.github.io/posts/vt/isa_emulation2/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
     <title>Something about ISA Emulation -- 1</title>
-    <link>https://interstellarss.github.io/posts/vt/isa_emulation/</link>
+    <link>https://interstellarss.github.io/posts/vt/isa_emulation1/</link>
     <pubDate>Tue, 16 Nov 2021 20:50:20 &#43;0100</pubDate>
     <author>作者</author>
-    <guid>https://interstellarss.github.io/posts/vt/isa_emulation/</guid>
+    <guid>https://interstellarss.github.io/posts/vt/isa_emulation1/</guid>
     <description><![CDATA[A complete ISA consists of many parts, including the register set and memory architecture, the instructions , and the trap and interrupt architecture. A virtual machine implementation is usually concerned with all aspects of ISA emulation. Here we will be focusing on (user-level) instruction emulation. Instruction set emulation can be carried out basiclly in 2 techniques: interpretation, and binary translation. Interpretation involves a cycle of fetching a source instrction, analyzing]]></description>
 </item><item>
     <title>Something about Process-Virtual-Machine</title>
@@ -66,12 +73,5 @@
     <author>作者</author>
     <guid>https://interstellarss.github.io/posts/seminar-hpc/shared-memory-parallelism_2/</guid>
     <description><![CDATA[这次带来的是提升篇，其实就是seminar要交的paper的first draft，倒也算是偷懒的一种方式吧。 A brief Overview on Shared Memory Parallelism in Parallel Computing 1. Why parallel? To speed up,]]></description>
-</item><item>
-    <title>基于diamond-square-algorithm生成高度图的C&#43;&#43;实现</title>
-    <link>https://interstellarss.github.io/posts/computer_graphics/implementation-about-diamond-square/</link>
-    <pubDate>Thu, 21 May 2020 11:38:08 &#43;0200</pubDate>
-    <author>作者</author>
-    <guid>https://interstellarss.github.io/posts/computer_graphics/implementation-about-diamond-square/</guid>
-    <description><![CDATA[其实很多时候我们看到的这些渲染真的是很神奇的事，比如一些terrain看似是三维的，其实可以由二维产生，即为每一个像素点赋予一个高度值，这些]]></description>
 </item></channel>
 </rss>

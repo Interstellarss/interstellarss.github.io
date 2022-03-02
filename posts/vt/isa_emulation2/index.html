@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Something about ISA Emulation -- 2 - 法术研究分享Blog</title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:title" content="Something about ISA Emulation -- 2" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://interstellarss.github.io/posts/vt/isa_emulation2/" /><meta property="og:image" content="https://interstellarss.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-03-02T10:03:37+01:00" />
+<meta property="article:modified_time" content="2022-03-02T10:03:37+01:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://interstellarss.github.io/logo.png"/>
+
+<meta name="twitter:title" content="Something about ISA Emulation -- 2"/>
+<meta name="twitter:description" content=""/>
+<meta name="application-name" content="法术研究分享Blog">
+<meta name="apple-mobile-web-app-title" content="法术研究分享Blog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c">
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'G-LMR64333PL', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://interstellarss.github.io/posts/vt/isa_emulation2/" /><link rel="prev" href="https://interstellarss.github.io/posts/vt/isa_emulation1/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Something about ISA Emulation -- 2",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/interstellarss.github.io\/posts\/vt\/isa_emulation2\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/interstellarss.github.io\/images\/Apple-Devices-Preview.png",
+                            "width":  3200 ,
+                            "height":  2048 
+                        }],"genre": "posts","keywords": "Virtualization_Tech","wordcount":  581 ,
+        "url": "https:\/\/interstellarss.github.io\/posts\/vt\/isa_emulation2\/","datePublished": "2022-03-02T10:03:37+01:00","dateModified": "2022-03-02T10:03:37+01:00","publisher": {
+            "@type": "Organization",
+            "name": "Puxuan"},"author": {
+                "@type": "Person",
+                "name": "Puxuan"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="法术研究分享Blog"><span class="header-title-pre"><i class='fas fa-cat'></i></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="法术研究分享Blog"><span class="header-title-pre"><i class='fas fa-cat'></i></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Something about ISA Emulation -- 2</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://interstellarss.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Puxuan</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>学习笔记</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-02">2022-03-02</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 581 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#binary-translation">Binary Translation</a>
+          <ul>
+            <li><a href="#dynamic-binary-translation">Dynamic Binary Translation</a></li>
+            <li><a href="#code-cache">Code Cache</a></li>
+            <li><a href="#code-cache-invalidation">Code Cache: Invalidation</a></li>
+            <li><a href="#code-cache-eviction-handling">Code Cache: Eviction handling</a></li>
+            <li><a href="#chaining">Chaining</a></li>
+            <li><a href="#superblocks-sb">Superblocks (SB)</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h3 id="binary-translation">Binary Translation</h3>
+<p>Work on multiple instructions at once</p>
+<ul>
+<li>
+<p>less management</p>
+</li>
+<li>
+<p>use sequence (of codes) without control flow change
+(“basic block” = BB)</p>
+<ul>
+<li>„dynamic BB“: ends at jump/branch instruction</li>
+<li>„static BB“ (term for compilers): ends at jump instr. or before jump target</li>
+</ul>
+</li>
+<li>
+<p>piecewise translation</p>
+<ul>
+<li>
+<p>only when execution is required</p>
+</li>
+<li>
+<p>detection of instruction borders now simple (compare with static translation: what is code?)</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="dynamic-binary-translation">Dynamic Binary Translation</h4>
+<ul>
+<li>Components required
+<ul>
+<li><strong>code cache (CC)</strong>
+sometimes called translation cache (TC)
+<ul>
+<li>used to store translated basic blocks (BBs)</li>
+<li>has to be invalidated when original code
+<ul>
+<li>is removed („unmapped“)</li>
+<li>is modified</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>translation table
+<ul>
+<li>maps start addresses of BBs: SPC =&gt; TPC</li>
+<li>looked up for (indirect) jumps</li>
+</ul>
+</li>
+<li>original code and data
+<ul>
+<li>are kept for potential accesses</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="code-cache">Code Cache</h4>
+<ul>
+<li>properties in common with processor cashes
+<ul>
+<li>limited size
+=&gt; replacement strategy (LRU, LFU, FIFO, &hellip;)</li>
+<li>processor caches have
+<ul>
+<li>tags</li>
+<li>assoziativity</li>
+<li>cache line length</li>
+<li>coherency protocol</li>
+</ul>
+</li>
+<li>differences to processor caches
+<ul>
+<li>on a cache miss &hellip;
+<ul>
+<li>differenttranslationspossibleforsameBB</li>
+<li>cachehierarchy?</li>
+</ul>
+</li>
+<li>variable sizes of translated code</li>
+<li>interdependencies among entries (see chaining &hellip;)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="code-cache-invalidation">Code Cache: Invalidation</h4>
+<ul>
+<li>required for self modifying code („SMC“)</li>
+<li>detection
+<ul>
+<li>use host MMU (Memory Management Unit)
+<ul>
+<li>guest code is write-protected</li>
+<li>on a write: invalidate all code on given page</li>
+<li>fall back: interpretation</li>
+<li>very slow with frequent modifications</li>
+</ul>
+</li>
+<li>check for modification before every BB execution
+<ul>
+<li>copy of original guest code required</li>
+<li>slow</li>
+<li>modification of currently running BB?</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="code-cache-eviction-handling">Code Cache: Eviction handling</h4>
+<ul>
+<li>
+<p>Cache is full, but translation to be stored</p>
+</li>
+<li>
+<p>LRU</p>
+<ul>
+<li>
+<p>evict the translated BB least recently used</p>
+</li>
+<li>
+<p>problems</p>
+<ul>
+<li>
+<p>need to maintain order of uses =&gt; Overhead (time stamps / linked lists)</p>
+</li>
+<li>
+<p>fragmentation of cache storage</p>
+<p>– possible solution: buddy lists</p>
+</li>
+<li>
+<p>eviction events happen often, so need to be fast</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>=&gt; LRU is rarely used. What is better?</strong></p>
+<ul>
+<li>
+<p>Goal: minimum runtime overhead</p>
+</li>
+<li>
+<p>Solutions:</p>
+<ul>
+<li>
+<p>complete flush when full</p>
+<ul>
+<li>
+<p>advantage: regular retranslation
+– adaptation of optimizations to current runtime behavior
+– old/unneeded translations get removed</p>
+</li>
+<li>
+<p>disadvantage
+– frequently used BBs have to be translated often</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>– flush on detection of execution phase change
+– blocks with FIFO replacement</p>
+<h4 id="chaining">Chaining</h4>
+<ul>
+<li>
+<p>Observation: expensive actions</p>
+<ul>
+<li>lookup SPC =&gt; TPC</li>
+<li>indirect jump</li>
+</ul>
+</li>
+<li>
+<p>Chaining = Linking translated BBs</p>
+</li>
+<li>
+<p><strong>on known successor</strong></p>
+<ul>
+<li>last guest instruction is
+<ul>
+<li>unconditional jump</li>
+<li>conditional jump (2 cases: follow/pass-through)</li>
+</ul>
+</li>
+<li>lookup jump targets at translation time
+<ul>
+<li>what if successor not translated yet?</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>on unknown successor</p>
+<ul>
+<li>indirect jump
+<ul>
+<li>convert into if-then-else chains (profile targets!)</li>
+</ul>
+</li>
+<li>return from function
+<ul>
+<li>use shadow stack (similar to return prediction)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="superblocks-sb">Superblocks (SB)</h4>
+<ul>
+<li>Motivation
+<ul>
+<li>reduce number of jumps for given guest code (same as with chaining)</li>
+<li>larger translation units allow for more optimization possibilities (see next slides)</li>
+</ul>
+</li>
+<li>Superblock
+<ul>
+<li>One entry, multiple “side exits”
+<ul>
+<li>we may have branch which go out of SB  in the middle, if you have a unconditional jumps in ur original code you may just go on. I you have a conditional jump you may have a side exits at that point</li>
+</ul>
+</li>
+<li>Combine sequence of BBs
+<ul>
+<li>works best if the execution path of the full SB is similar to later executions (it is “hot”) =&gt; predict from past</li>
+<li>also called “trace” (“tracing JITs”) =&gt; execution path of BBs</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2022-03-02</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://interstellarss.github.io/posts/vt/isa_emulation2/" data-title="Something about ISA Emulation -- 2" data-hashtags="Virtualization_Tech"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://interstellarss.github.io/posts/vt/isa_emulation2/" data-hashtag="Virtualization_Tech"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://interstellarss.github.io/posts/vt/isa_emulation2/" data-title="Something about ISA Emulation -- 2"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://interstellarss.github.io/posts/vt/isa_emulation2/" data-title="Something about ISA Emulation -- 2"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@2.14.0/icons/line.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://interstellarss.github.io/posts/vt/isa_emulation2/" data-title="Something about ISA Emulation -- 2"><i class="fab fa-weibo fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/virtualization_tech/">Virtualization_Tech</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/vt/isa_emulation1/" class="prev" rel="prev" title="Something about ISA Emulation -- 1"><i class="fas fa-angle-left fa-fw"></i>Something about ISA Emulation -- 1</a></div>
+</div>
+<div id="comments"><div id="gitalk" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.89.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/copy-tex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.37.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.8/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.0/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"gitalk":{"admin":["Interstellarss"],"clientID":"b4d6ace595e393612b74","clientSecret":"ebc194ba054bc0b1364a73bb34fc5ac4a3fb9793","id":"2022-03-02T10:03:37+01:00","owner":"Interstellarss","repo":"interstellarss.github.io","title":"Something about ISA Emulation -- 2"}},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"$$","right":"$$"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"},{"display":false,"left":"$","right":"$"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'G-LMR64333PL', { 'anonymize_ip': true });
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=G-LMR64333PL" async></script></body>
+</html>
