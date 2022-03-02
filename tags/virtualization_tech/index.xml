@@ -11,18 +11,18 @@
     <guid>https://interstellarss.github.io/posts/vt/isa_emulation2/</guid>
     <description><![CDATA[]]></description>
 </item><item>
+    <title>Something about Process-Virtual-Machine</title>
+    <link>https://interstellarss.github.io/posts/vt/process_virtual_machine/</link>
+    <pubDate>Thu, 10 Feb 2022 15:50:20 &#43;0100</pubDate>
+    <author>作者</author>
+    <guid>https://interstellarss.github.io/posts/vt/process_virtual_machine/</guid>
+    <description><![CDATA[Process VM Emulation of a user-level process (with possibly different ISA, different OS) – components required? – techniques? – correctness verification? Process VM with same OS, same ISA – use case? motivation process migration flexible control of used OS resources „OS-level virtualization“ enough not discussed here Virtualization of]]></description>
+</item><item>
     <title>Something about ISA Emulation -- 1</title>
     <link>https://interstellarss.github.io/posts/vt/isa_emulation1/</link>
     <pubDate>Tue, 16 Nov 2021 20:50:20 &#43;0100</pubDate>
     <author>作者</author>
     <guid>https://interstellarss.github.io/posts/vt/isa_emulation1/</guid>
     <description><![CDATA[A complete ISA consists of many parts, including the register set and memory architecture, the instructions , and the trap and interrupt architecture. A virtual machine implementation is usually concerned with all aspects of ISA emulation. Here we will be focusing on (user-level) instruction emulation. Instruction set emulation can be carried out basiclly in 2 techniques: interpretation, and binary translation. Interpretation involves a cycle of fetching a source instrction, analyzing]]></description>
-</item><item>
-    <title>Something about Process-Virtual-Machine</title>
-    <link>https://interstellarss.github.io/posts/vt/process_virtual_machine/</link>
-    <pubDate>Mon, 15 Nov 2021 15:50:20 &#43;0100</pubDate>
-    <author>作者</author>
-    <guid>https://interstellarss.github.io/posts/vt/process_virtual_machine/</guid>
-    <description><![CDATA[Process-level VMs provide user applications with a virtual ABI environ- ment. In their various implementations, process VMs can provide replication, emulation, and optimization. The following subsections describe each of these. Multiprogramming Emulators and Dynamic Binary Translators Process-level virtual machines is to support program binaries compiles to a different instruction set thatn the one executed by the host&rsquo;s hardware, i.e., to emulate one instruction set on hardware designed for another. Application]]></description>
 </item></channel>
 </rss>

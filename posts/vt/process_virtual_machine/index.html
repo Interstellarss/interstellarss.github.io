@@ -6,17 +6,17 @@
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
         <title>Something about Process-Virtual-Machine - 法术研究分享Blog</title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:title" content="Something about Process-Virtual-Machine" />
-<meta property="og:description" content="Process-level VMs provide user applications with a virtual ABI environ- ment. In their various implementations, process VMs can provide replication, emulation, and optimization. The following subsections describe each of these. Multiprogramming Emulators and Dynamic Binary Translators Process-level virtual machines is to support program binaries compiles to a different instruction set thatn the one executed by the host&rsquo;s hardware, i.e., to emulate one instruction set on hardware designed for another. Application" />
+<meta property="og:description" content="Process VM Emulation of a user-level process (with possibly different ISA, different OS) – components required? – techniques? – correctness verification? Process VM with same OS, same ISA – use case? motivation process migration flexible control of used OS resources „OS-level virtualization“ enough not discussed here Virtualization of" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://interstellarss.github.io/posts/vt/process_virtual_machine/" /><meta property="og:image" content="https://interstellarss.github.io/logo.png"/><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2021-11-15T15:50:20+01:00" />
-<meta property="article:modified_time" content="2021-11-15T15:50:20+01:00" />
+<meta property="article:published_time" content="2022-02-10T15:50:20+01:00" />
+<meta property="article:modified_time" content="2022-02-10T15:50:20+01:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://interstellarss.github.io/logo.png"/>
 
 <meta name="twitter:title" content="Something about Process-Virtual-Machine"/>
-<meta name="twitter:description" content="Process-level VMs provide user applications with a virtual ABI environ- ment. In their various implementations, process VMs can provide replication, emulation, and optimization. The following subsections describe each of these. Multiprogramming Emulators and Dynamic Binary Translators Process-level virtual machines is to support program binaries compiles to a different instruction set thatn the one executed by the host&rsquo;s hardware, i.e., to emulate one instruction set on hardware designed for another. Application"/>
+<meta name="twitter:description" content="Process VM Emulation of a user-level process (with possibly different ISA, different OS) – components required? – techniques? – correctness verification? Process VM with same OS, same ISA – use case? motivation process migration flexible control of used OS resources „OS-level virtualization“ enough not discussed here Virtualization of"/>
 <meta name="application-name" content="法术研究分享Blog">
 <meta name="apple-mobile-web-app-title" content="法术研究分享Blog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c">
 
@@ -33,7 +33,7 @@ if (!doNotTrack) {
 
 <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://interstellarss.github.io/posts/vt/process_virtual_machine/" /><link rel="prev" href="https://interstellarss.github.io/posts/photos/photograph1/" /><link rel="next" href="https://interstellarss.github.io/posts/vt/isa_emulation1/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://interstellarss.github.io/posts/vt/process_virtual_machine/" /><link rel="prev" href="https://interstellarss.github.io/posts/vt/isa_emulation1/" /><link rel="next" href="https://interstellarss.github.io/posts/vt/isa_emulation2/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -47,12 +47,12 @@ if (!doNotTrack) {
                             "url": "https:\/\/interstellarss.github.io\/images\/Apple-Devices-Preview.png",
                             "width":  3200 ,
                             "height":  2048 
-                        }],"genre": "posts","keywords": "Virtualization_Tech","wordcount":  586 ,
-        "url": "https:\/\/interstellarss.github.io\/posts\/vt\/process_virtual_machine\/","datePublished": "2021-11-15T15:50:20+01:00","dateModified": "2021-11-15T15:50:20+01:00","publisher": {
+                        }],"genre": "posts","keywords": "Virtualization_Tech","wordcount":  1652 ,
+        "url": "https:\/\/interstellarss.github.io\/posts\/vt\/process_virtual_machine\/","datePublished": "2022-02-10T15:50:20+01:00","dateModified": "2022-02-10T15:50:20+01:00","publisher": {
             "@type": "Organization",
-            "name": "作者"},"author": {
+            "name": "Puxuan"},"author": {
                 "@type": "Person",
-                "name": "作者"
+                "name": "Puxuan"
             },"description": ""
     }
     </script></head>
@@ -123,9 +123,9 @@ if (!doNotTrack) {
             <h2 class="toc-title">目录</h2>
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Something about Process-Virtual-Machine</h1><div class="post-meta">
-            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>作者</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>学习笔记</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-11-15">2021-11-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 586 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
+            <div class="post-meta-line"><span class="post-author"><a href="https://interstellarss.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Puxuan</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>学习笔记</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-02-10">2022-02-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1652 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
@@ -135,26 +135,282 @@ if (!doNotTrack) {
   <ul>
     <li>
       <ul>
-        <li><a href="#multiprogramming">Multiprogramming</a></li>
-        <li><a href="#emulators-and-dynamic-binary-translators">Emulators and Dynamic Binary Translators</a></li>
-        <li><a href="#same-isa-binary-optimizers">Same-ISA Binary Optimizers</a></li>
-        <li><a href="#high-level-language-virtual-machines-platform-independence">High-Level Language Virtual Machines: Platform Independence</a></li>
+        <li><a href="#process-vm">Process VM</a>
+          <ul>
+            <li><a href="#components-of-a-process-vm">Components of a Process VM</a></li>
+            <li><a href="#types-of-compatibility">Types of Compatibility</a></li>
+            <li><a href="#state-mapping-guest--host">State Mapping Guest =&gt; Host</a></li>
+            <li><a href="#emulation-of-memory">Emulation of Memory</a></li>
+            <li><a href="#emulation-of-exceptions-and-interrupts">Emulation of Exceptions and Interrupts</a></li>
+            <li><a href="#emulators-and-dynamic-binary-translators">Emulators and Dynamic Binary Translators</a></li>
+            <li><a href="#same-isa-binary-optimizers">Same-ISA Binary Optimizers</a></li>
+            <li><a href="#high-level-language-virtual-machines-platform-independence">High-Level Language Virtual Machines: Platform Independence</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><p>Process-level VMs provide user applications with a virtual ABI environ- ment. In their various implementations, process VMs can provide replication, emulation, and optimization. The following subsections describe each of these.</p>
-<h3 id="multiprogramming">Multiprogramming</h3>
-<h3 id="emulators-and-dynamic-binary-translators">Emulators and Dynamic Binary Translators</h3>
+            </div><div class="content" id="content"><h3 id="process-vm">Process VM</h3>
+<ul>
+<li>
+<p>Emulation of a user-level process (with possibly different ISA, different OS)
+– components required?
+– techniques?
+– correctness verification?</p>
+</li>
+<li>
+<p>Process VM with same OS, same ISA – use case?</p>
+<ul>
+<li>motivation
+<ul>
+<li>process migration</li>
+<li>flexible control of used OS resources</li>
+</ul>
+</li>
+<li>„OS-level virtualization“ enough</li>
+<li>not discussed here</li>
+</ul>
+</li>
+<li>
+<p><strong>Virtualization of a process environment</strong></p>
+<ul>
+<li>emulation of user ISA + OS environment (ABI)</li>
+<li>every guest process gets own environment</li>
+<li>guest and host OS often the same</li>
+</ul>
+</li>
+<li>
+<p><strong>View of the host machine user</strong></p>
+<ul>
+<li>processes running inside Process VM look exactly the same as host processes</li>
+<li>Wanted: easy usage of VM (automatic startup on demand)</li>
+</ul>
+</li>
+</ul>
+<p>Process-level VMs provide user applications with a virtual ABI environ- ment. In their various implementations, process VMs can provide replication, emulation, and optimization. The following subsections describe each of these.</p>
+<h4 id="components-of-a-process-vm">Components of a Process VM</h4>
+<ul>
+<li>Initialization
+– loader for code/data into guest memory
+– creation of tables, translation cache
+– redirection of exceptions
+• for all potentially happening exceptions
+• example: division by zero scenarios:
+– guest does own handling
+– guest ISA does not generate this exception</li>
+<li>Emulation Manager, translation
+– see ISA part</li>
+<li>emulation of OS calls
+– needs mapping of guest to host OS</li>
+<li>emulation of exceptions
+– e.g. page fault, division by zero
+– detection by interpreter / by hardware (OS)
+– reconstruction of precise state needed</li>
+<li>handling of interrupts
+– examples: signals, OS callbacks</li>
+</ul>
+<h4 id="types-of-compatibility">Types of Compatibility</h4>
+<ul>
+<li>
+<p>Strict Compatibility („Intrinsic“)
+– every operation of a real machine is precisely emulated by Process VM, including
+- processor errata
+- visible implementation behavior (e.g. „undefined“ behavior)
+- usually not included: performance
+– real properties have to be known!
+– result: guest process is unable to detect any difference in virtual vs. real environment
+– complete check of VM implementation required
+– example: „emulation“ of Intel x86 processor by AMD HW</p>
+</li>
+<li>
+<p><strong>Problems</strong>
+– exec has to be known completely
+– precise mapping can be very inefficient
+– high development costs</p>
+</li>
+<li>
+<p>Real motivation for a Process VM?
+– example: MS Office running on PowerPC/Linux
+– observation
+- not every operation is used
+- precise mapping of reality not required for execution! e.g. „don ́t care bits“ in result of a OS call
+– relaxation of compatibility possible</p>
+</li>
+<li>
+<p>Relaxed Compatibility („Extrinsic“)</p>
+<ul>
+<li>construction of exec&quot; such that exec ́ is sufficiently approximated, e.g.
+- only mapping for operations generated by a given compiler
+- implementation by similar operations (80 bit floating point emulated by 64 bit FP)</li>
+<li>„sufficiently“ defined by guest SW able to run
+- significantly simpler verification
+- ISA documentation is enough
+- precise mapping of operations can be replaced by more efficient, similar ones</li>
+</ul>
+</li>
+</ul>
+<h4 id="state-mapping-guest--host">State Mapping Guest =&gt; Host</h4>
+<ul>
+<li>
+<p>Memory
+– direct mapping with fixed offset
+- guest address A =&gt; host address A ́ = offset + A
+- special case: offset = 0
+– possible if guest OS allocates address ranges (i.e. user-level guest needs to be able to cope with arbitrary addresses from guest OS)
+– efficient emulation possible
+– issues
+- available host memory smaller than guest memory
+- 64bit guest on 32bit host =&gt; needs indirect address mapping in software (= the general resolution)</p>
+</li>
+<li>
+<p>Address Mapping in Software</p>
+<p>A ́ = (A &amp; (PageLen-1)) + AddrTab[ A / PageLen]</p>
+<ul>
+<li>effort per access into guest memory:
+- temporary register + 6 host instructions + 2x host memory access
+- length of AddrTab: guest memory size / PageLen * pointer size host</li>
+</ul>
+</li>
+</ul>
+<h4 id="emulation-of-memory">Emulation of Memory</h4>
+<ul>
+<li>
+<p>Compatibility: often a tradeoff between
+– performance and
+– compatibility</p>
+</li>
+<li>
+<p>Issues
+– how to protect VM from accesses of guest?
+– linear address space vs. segmentation
+– memory protection</p>
+<ul>
+<li>capabilities: Read/Write/Execute (RWE)</li>
+<li>granularity: page size
+– x86 can use either 4 KB or 2/4 MB
+– MIPS/IA-64: almost any power-of-two</li>
+</ul>
+<p>=&gt; Use HW if possible (e.g. mprotect + SEGF handler)</p>
+</li>
+</ul>
+<h4 id="emulation-of-exceptions-and-interrupts">Emulation of Exceptions and Interrupts</h4>
+<ul>
+<li>
+<p>Notifications from the outside that something has happened
+– delivered to OS by hardware
+– delivered to user space from OS</p>
+<ul>
+<li>Linux/UNIX: spontaneous call into a signal handler</li>
+</ul>
+</li>
+<li>
+<p>Exceptions („Trap“)
+– synchronous with program execution, deterministic
+– examples: memory violation, division by 0</p>
+</li>
+<li>
+<p>Interrupt
+– Asynchronous, external event
+– examples</p>
+<ul>
+<li>asynchronous I/O (notify if data available)</li>
+<li>asychronnous inter-process communication (IPC)</li>
+</ul>
+</li>
+<li>
+<p>Classes of notifications for specific events
+– visible in ABI (i.e. for user level)
+• guest OS sends a signal / terminates program
+• example: program registered handler for SEGFAULT
+– invisible in ABI
+• exception/interrupt does not result in triggering an notification for the program
+• example:
+– ABI does not know about SEGFAULTs
+– handling completely done by guest OS</p>
+</li>
+<li>
+<p>Issues
+– exception ABI-invisible in host, visible in guest</p>
+<ul>
+<li>needs interpretative detection</li>
+</ul>
+<p>– exception ABI-visible in host, invisible in guest</p>
+<ul>
+<li>needs check whether exception should be ignored</li>
+</ul>
+<p>– one exception type in host-ABI for multiple exception types in guest</p>
+<ul>
+<li>needs differentiation in SW</li>
+<li>example:  host has same overflow exception for integers and FP</li>
+</ul>
+</li>
+<li>
+<p>Requirement for compatibility
+– „Precise Exception Handling“ (PEH):
+if instruction X triggers exception, then</p>
+<ul>
+<li>all instructions before X are executed</li>
+<li>no instruction after X is executed</li>
+<li>X itself not executed yet</li>
+</ul>
+<p>– assumption: host supports PEH</p>
+</li>
+<li>
+<p>Specifics with interrupts
+also needs semantics of PEH, but
+X can be choosen by VM (to some extent)
+e.g. after execution of a BB</p>
+</li>
+<li>
+<p><strong>Detection of Exception Situations</strong></p>
+<ul>
+<li>
+<p>manual check
+– part of interpretation = interpretative detection</p>
+</li>
+<li>
+<p>hook into HW-triggered exception</p>
+<p>– needs equal semantic of exception situations in guest and host ISAs</p>
+<p>– registration of notification for all possible exception types at host OS by VMM</p>
+<p>– translation of host OS notifications into according guest OS notifications</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Detection of Interrupts</strong></p>
+<ul>
+<li>
+<p>delays acceptable
+– interpretation</p>
+<ul>
+<li>finish current guest instruction</li>
+<li>create exception state (e.g. stack &hellip;)</li>
+<li>call into interrupt handler</li>
+</ul>
+<p>– binary translation</p>
+<ul>
+<li>delay until jumping back into emulation manager</li>
+<li>chaining can result in unacceptable delays
+– in interrupt handler of VMM: unchain current translation</li>
+<li>required:
+– no loop in translation block (ok with BBs)
+– state is consistent at end of translation block</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="emulators-and-dynamic-binary-translators">Emulators and Dynamic Binary Translators</h4>
 <blockquote>
 <p>Process-level virtual machines is to support program binaries compiles to a different instruction set thatn the one executed by the host&rsquo;s hardware, i.e., to emulate one instruction set on hardware designed for another.  Application programs are compiled for a source ISA, but the hardware implements a different target ISA.</p>
 <p>The most straight forward emulation methos is <strong>interpretation</strong> An interpreter program executing the targest ISA fetches, decodes, and emulates the execution of individual source instructions. This can be a relatively slow process, requiring tens of native target instructions for each source instrction interpreted.</p>
 <p>For better performance, <strong>binary translation</strong> is typically used. With binary translation, blocks of source instrctions are converted to targed instructions that perform equivalent functions. There can be a relatively high overhead associated with the translation process, but once a block of instructions is translated, the translated instructions can be cached and repeatedly executed much faster than they can be interpreted. Because binary translation is the most important feature of this type of process virtual machine, they are sometimes called <strong>dynamic binary translators</strong>. <sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
 </blockquote>
 <p>Of course,</p>
-<h3 id="same-isa-binary-optimizers">Same-ISA Binary Optimizers</h3>
+<h4 id="same-isa-binary-optimizers">Same-ISA Binary Optimizers</h4>
 <p>Most dynamic binary translators not only translate from source to target code but also perform some code optimizations. <strong>Optimization</strong> of a program binary is the primary purpose of the virtual machine.</p>
-<h3 id="high-level-language-virtual-machines-platform-independence">High-Level Language Virtual Machines: Platform Independence</h3>
+<h4 id="high-level-language-virtual-machines-platform-independence">High-Level Language Virtual Machines: Platform Independence</h4>
 <blockquote>
 <p>Full cross-plattform portability is more easily achieved by taking a step back and designing it into an overall software framework. One way of accomplishing this is to design a process-level VM at the same time as an application does not directly correspond to any real platform. Rather, it is designed for ease of application program development. These high-level languafe VMs (HLL VMs) are similar to the process VMs described earliear. However, they are focused on minimizing hardware-specific and OS-specific features because thes would compromise platform independence.</p>
 <p>In a conventional system, the compiler consists of a fronted that performs lexical, syntax, and semantic analysis to generate simple intermediate code &ndash; similar to machine code but more abstract. Typically the intermediate code does not contain specific register assignments, for example. Then a code generator takes the intermediate code and generates a binary containing machine code for a specific ISA and OS.  This binary file is distributed and executed on platforms that support the given ISA/OS combination. To execute the program on a different platform, however, it must be recompiled for that platform.</p>
@@ -172,7 +428,7 @@ if (!doNotTrack) {
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>更新于 2021-11-15</span>
+                <span>更新于 2022-02-10</span>
             </div>
             <div class="post-info-license"></div>
         </div>
@@ -191,8 +447,8 @@ if (!doNotTrack) {
         </section>
     </div>
 
-    <div class="post-nav"><a href="/posts/photos/photograph1/" class="prev" rel="prev" title="摄影记录--1"><i class="fas fa-angle-left fa-fw"></i>摄影记录--1</a>
-            <a href="/posts/vt/isa_emulation1/" class="next" rel="next" title="Something about ISA Emulation -- 1">Something about ISA Emulation -- 1<i class="fas fa-angle-right fa-fw"></i></a></div>
+    <div class="post-nav"><a href="/posts/vt/isa_emulation1/" class="prev" rel="prev" title="Something about ISA Emulation -- 1"><i class="fas fa-angle-left fa-fw"></i>Something about ISA Emulation -- 1</a>
+            <a href="/posts/vt/isa_emulation2/" class="next" rel="next" title="Something about ISA Emulation -- 2">Something about ISA Emulation -- 2<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 <div id="comments"><div id="gitalk" class="comment"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
@@ -208,7 +464,7 @@ if (!doNotTrack) {
             </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
                 <i class="fas fa-comment fa-fw"></i>
             </a>
-        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/copy-tex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.37.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.8/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.0/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"gitalk":{"admin":["Interstellarss"],"clientID":"b4d6ace595e393612b74","clientSecret":"ebc194ba054bc0b1364a73bb34fc5ac4a3fb9793","id":"2021-11-15T15:50:20+01:00","owner":"Interstellarss","repo":"interstellarss.github.io","title":"Something about Process-Virtual-Machine"}},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"$$","right":"$$"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"},{"display":false,"left":"$","right":"$"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/copy-tex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.37.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.8/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.0/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"gitalk":{"admin":["Interstellarss"],"clientID":"b4d6ace595e393612b74","clientSecret":"ebc194ba054bc0b1364a73bb34fc5ac4a3fb9793","id":"2022-02-10T15:50:20+01:00","owner":"Interstellarss","repo":"interstellarss.github.io","title":"Something about Process-Virtual-Machine"}},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"$$","right":"$$"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"},{"display":false,"left":"$","right":"$"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
             window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
             gtag('config', 'G-LMR64333PL', { 'anonymize_ip': true });
         </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=G-LMR64333PL" async></script></body>
