@@ -47,7 +47,7 @@ if (!doNotTrack) {
                             "url": "https:\/\/interstellarss.github.io\/images\/Apple-Devices-Preview.png",
                             "width":  3200 ,
                             "height":  2048 
-                        }],"genre": "posts","keywords": "Virtualization_Tech","wordcount":  1648 ,
+                        }],"genre": "posts","keywords": "Virtualization_Tech","wordcount":  1649 ,
         "url": "https:\/\/interstellarss.github.io\/posts\/vt\/process_virtual_machine\/","datePublished": "2022-02-10T15:50:20+01:00","dateModified": "2022-02-10T15:50:20+01:00","publisher": {
             "@type": "Organization",
             "name": "Puxuan"},"author": {
@@ -124,7 +124,7 @@ if (!doNotTrack) {
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Something about Process-Virtual-Machine</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://interstellarss.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Puxuan</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>学习笔记</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-02-10">2022-02-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1648 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-02-10">2022-02-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1649 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -191,51 +191,64 @@ if (!doNotTrack) {
 <p>Process-level VMs provide user applications with a virtual ABI environ- ment. In their various implementations, process VMs can provide replication, emulation, and optimization. The following subsections describe each of these.</p>
 <h4 id="components-of-a-process-vm">Components of a Process VM</h4>
 <ul>
-<li>Initialization
-– loader for code/data into guest memory
-– creation of tables, translation cache
-– redirection of exceptions
-• for all potentially happening exceptions
-• example: division by zero scenarios:
-– guest does own handling
-– guest ISA does not generate this exception</li>
-<li>Emulation Manager, translation
-– see ISA part</li>
-<li>emulation of OS calls
-– needs mapping of guest to host OS</li>
-<li>emulation of exceptions
-– e.g. page fault, division by zero
-– detection by interpreter / by hardware (OS)
-– reconstruction of precise state needed</li>
-<li>handling of interrupts
-– examples: signals, OS callbacks</li>
+<li>
+<p>Initialization</p>
+<p>– loader for code/data into guest memory</p>
+<p>– creation of tables, translation cache</p>
+<p>– redirection of exceptions</p>
+<p>​	• for all potentially happening exceptions</p>
+<p>​	• example: division by zero scenarios:</p>
+<p>​		– guest does own handling</p>
+<p>​		– guest ISA does not generate this exception</p>
+</li>
+<li>
+<p>Emulation Manager, translation</p>
+<p>– see ISA part</p>
+</li>
+<li>
+<p>emulation of OS calls</p>
+<p>– needs mapping of guest to host OS</p>
+</li>
+<li>
+<p>emulation of exceptions</p>
+<p>– e.g. page fault, division by zero</p>
+<p>– detection by interpreter / by hardware (OS)</p>
+<p>– reconstruction of precise state needed</p>
+</li>
+<li>
+<p>handling of interrupts
+– examples: signals, OS callbacks</p>
+</li>
 </ul>
 <h4 id="types-of-compatibility">Types of Compatibility</h4>
 <ul>
 <li>
 <p>Strict Compatibility („Intrinsic“)
-– every operation of a real machine is precisely emulated by Process VM, including
-- processor errata
-- visible implementation behavior (e.g. „undefined“ behavior)
-- usually not included: performance
-– real properties have to be known!
-– result: guest process is unable to detect any difference in virtual vs. real environment
-– complete check of VM implementation required
-– example: „emulation“ of Intel x86 processor by AMD HW</p>
+– every operation of a real machine is precisely emulated by Process VM, including</p>
+<ul>
+<li>processor errata</li>
+<li>visible implementation behavior (e.g. „undefined“ behavior)</li>
+<li>usually not included: performance</li>
+</ul>
+<p>– real properties have to be known!</p>
+<p>– result: guest process is unable to detect any difference in virtual vs. real environment</p>
+<p>– complete check of VM implementation required</p>
+<p>– example: „emulation“ of Intel x86 processor by AMD HW</p>
 </li>
 <li>
-<p><strong>Problems</strong>
-– exec has to be known completely
-– precise mapping can be very inefficient
-– high development costs</p>
+<p><strong>Problems</strong></p>
+<p>– exec has to be known completely</p>
+<p>– precise mapping can be very inefficient</p>
+<p>– high development costs</p>
 </li>
 <li>
-<p>Real motivation for a Process VM?
-– example: MS Office running on PowerPC/Linux
-– observation
+<p>Real motivation for a Process VM?</p>
+<p>– example: MS Office running on PowerPC/Linux</p>
+<p>– observation
 - not every operation is used
-- precise mapping of reality not required for execution! e.g. „don ́t care bits“ in result of a OS call
-– relaxation of compatibility possible</p>
+- precise mapping of reality not required for execution! e.g. „don ́t care bits“ in result of a OS call</p>
+<pre><code>    – relaxation of compatibility possible
+</code></pre>
 </li>
 <li>
 <p>Relaxed Compatibility („Extrinsic“)</p>
@@ -253,8 +266,8 @@ if (!doNotTrack) {
 <h4 id="state-mapping-guest--host">State Mapping Guest =&gt; Host</h4>
 <ul>
 <li>
-<p>Memory
-– direct mapping with fixed offset</p>
+<p>Memory</p>
+<p>– direct mapping with fixed offset</p>
 <ul>
 <li>guest address A =&gt; host address A ́ = offset + A</li>
 <li>special case: offset = 0
