@@ -47,7 +47,7 @@ if (!doNotTrack) {
                             "url": "https:\/\/interstellarss.github.io\/images\/Apple-Devices-Preview.png",
                             "width":  3200 ,
                             "height":  2048 
-                        }],"genre": "posts","keywords": "Virtualization_Tech","wordcount":  369 ,
+                        }],"genre": "posts","keywords": "Virtualization_Tech","wordcount":  697 ,
         "url": "https:\/\/interstellarss.github.io\/posts\/vt\/isa_emulation\/","datePublished": "2021-11-16T20:50:20+01:00","dateModified": "2021-11-16T20:50:20+01:00","publisher": {
             "@type": "Organization",
             "name": "作者"},"author": {
@@ -124,8 +124,8 @@ if (!doNotTrack) {
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Something about ISA Emulation -- 1</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>作者</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>学习笔记</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-11-16">2021-11-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 369 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-11-16">2021-11-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 697 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
@@ -139,6 +139,7 @@ if (!doNotTrack) {
           <ul>
             <li><a href="#optimizaiton-threaded-interpretation">Optimizaiton &ldquo;Threaded Interpretation&rdquo;</a></li>
             <li><a href="#interpretation-using-predecoding">Interpretation using Predecoding</a></li>
+            <li><a href="#interpretation---cisc">Interpretation - CISC</a></li>
           </ul>
         </li>
       </ul>
@@ -206,15 +207,66 @@ The choice of one or the otehr depends on the number of times a block of source 
 </li>
 </ul>
 <h4 id="optimizaiton-threaded-interpretation">Optimizaiton &ldquo;Threaded Interpretation&rdquo;</h4>
+<p><strong>Observation:</strong> Jumps are time consuming</p>
 <ul>
-<li>decode next instruction at end of emulation routine of curretn instruction</li>
+<li>control conflicts in CPU pipeline</li>
+<li>lots of branch mispredictions in dispatcher</li>
+</ul>
+<p><strong>Solution:</strong></p>
+<p>decode next instruction at end of emulation routine of curretn instruction.</p>
+<p><strong>Inditect vs direct</strong></p>
+<ul>
+<li>This code is very similar to the indirect threaded code, except the dispatch table lookup is removed. The address of the interpreter routine is loaded from a field in the intermediate code, and a register indirect jump goes directly to the routine. Although fast, this causes the intermediate form to become dependent on the exact locations of the interpreter routines and consequently limits portability. If the interpreter code is ported to a different target machine, it must be regenerated for the target machine that executes it. However, there are programming techniques and compiler features that can mitigate this problem to some extent.</li>
 </ul>
 <h4 id="interpretation-using-predecoding">Interpretation using Predecoding</h4>
-<p>Properties:</p>
+<p><strong>Motivation</strong>:</p>
+<p>Although the centralized dispatch loop has been eliminated in the indirect threaded interpreter, there remains the overhead created by the centralized dispatch table. Looking up an interpreter routine in this table still requires a memory access and a register indirect branch. It would be desirable, for even better efficiency, to eliminate the access to the centralized table.</p>
+<p><strong>Observation:</strong></p>
+<ul>
+<li>opcodes consist of multiple parts
+faster: one opcode (instead of op + ex_op)</li>
+<li>operands are coded in bits
+faster: operands aligned</li>
+</ul>
+<p><strong>Properties</strong>:</p>
 <ul>
 <li>Space for predecoded data needed</li>
 <li>faster interpretaion</li>
 <li>significant benefit for interpretaion of CISC</li>
+</ul>
+<p><strong>TPC &amp; SPC:</strong></p>
+<ul>
+<li>Why still SPC?
+<ul>
+<li>Whenever it maybe used somewhere else</li>
+<li>You could have some kind of code which try to read the machine code itself from the PC for whatever reasons.</li>
+</ul>
+</li>
+<li>why TPC + 1 but SPC + 4?
+<ul>
+<li>TPC is in C, and the pre-decode array is also in C, so the compiler does the work. However, SPC + 4, if one instruction is in 4 byte.</li>
+</ul>
+</li>
+</ul>
+<h4 id="interpretation---cisc">Interpretation - CISC</h4>
+<p>**Potential issues with predecoding: **</p>
+<ul>
+<li>much space needed
+<ul>
+<li>better: space-tuned formats for different instructions</li>
+</ul>
+</li>
+<li>detection of instruction borders
+<ul>
+<li>could be data interleaved with code</li>
+<li>correct predecoding almost impossible</li>
+</ul>
+</li>
+</ul>
+<p><strong>Use a two-step process</strong></p>
+<ul>
+<li>at first interpretation: do predecoding on the fly, filling predecode table</li>
+<li>all further executions: use predecoded data generated by first run</li>
 </ul>
 <section class="footnotes" role="doc-endnotes">
 <hr>
@@ -254,7 +306,7 @@ The choice of one or the otehr depends on the number of times a block of source 
             </noscript></div></article></div>
             </main><footer class="footer">
         <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.89.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
-                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020 - 2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>
 

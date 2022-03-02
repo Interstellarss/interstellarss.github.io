@@ -2,14 +2,14 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>https://interstellarss.github.io/categories/</loc><lastmod>2021-11-16T20:50:20&#43;01:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://interstellarss.github.io/posts/</loc><lastmod>2021-11-16T20:50:20&#43;01:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://interstellarss.github.io/posts/vt/isa_emulation/</loc><lastmod>2021-11-16T20:50:20&#43;01:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://interstellarss.github.io/tags/</loc><lastmod>2021-11-16T20:50:20&#43;01:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://interstellarss.github.io/tags/virtualization_tech/</loc><lastmod>2021-11-16T20:50:20&#43;01:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://interstellarss.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc><lastmod>2021-11-16T20:50:20&#43;01:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://interstellarss.github.io/</loc><lastmod>2021-11-16T20:50:20&#43;01:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://interstellarss.github.io/posts/vt/process_virtual_machine/</loc><lastmod>2021-11-15T15:50:20&#43;01:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://interstellarss.github.io/categories/</loc><lastmod>2021-11-16T20:50:20&#43;01:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://interstellarss.github.io/posts/</loc><lastmod>2021-11-16T20:50:20&#43;01:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://interstellarss.github.io/posts/vt/isa_emulation/</loc><lastmod>2021-11-16T20:50:20&#43;01:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://interstellarss.github.io/tags/</loc><lastmod>2021-11-16T20:50:20&#43;01:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://interstellarss.github.io/tags/virtualization_tech/</loc><lastmod>2021-11-16T20:50:20&#43;01:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://interstellarss.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc><lastmod>2021-11-16T20:50:20&#43;01:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://interstellarss.github.io/</loc><lastmod>2021-11-16T20:50:20&#43;01:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://interstellarss.github.io/posts/vt/process_virtual_machine/</loc><lastmod>2021-11-15T15:50:20&#43;01:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://interstellarss.github.io/tags/barcelona/</loc><lastmod>2020-12-04T19:49:03&#43;01:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://interstellarss.github.io/categories/%E6%91%84%E5%BD%B1%E8%AE%B0%E5%BD%95/</loc><lastmod>2020-12-04T19:49:03&#43;01:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://interstellarss.github.io/posts/photos/photograph1/</loc><lastmod>2020-12-04T19:49:03&#43;01:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
