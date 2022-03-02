@@ -47,7 +47,7 @@ if (!doNotTrack) {
                             "url": "https:\/\/interstellarss.github.io\/images\/Apple-Devices-Preview.png",
                             "width":  3200 ,
                             "height":  2048 
-                        }],"genre": "posts","keywords": "Virtualization_Tech","wordcount":  1652 ,
+                        }],"genre": "posts","keywords": "Virtualization_Tech","wordcount":  1648 ,
         "url": "https:\/\/interstellarss.github.io\/posts\/vt\/process_virtual_machine\/","datePublished": "2022-02-10T15:50:20+01:00","dateModified": "2022-02-10T15:50:20+01:00","publisher": {
             "@type": "Organization",
             "name": "Puxuan"},"author": {
@@ -124,7 +124,7 @@ if (!doNotTrack) {
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Something about Process-Virtual-Machine</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://interstellarss.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Puxuan</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>学习笔记</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-02-10">2022-02-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1652 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-02-10">2022-02-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1648 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -254,14 +254,18 @@ if (!doNotTrack) {
 <ul>
 <li>
 <p>Memory
-– direct mapping with fixed offset
-- guest address A =&gt; host address A ́ = offset + A
-- special case: offset = 0
+– direct mapping with fixed offset</p>
+<ul>
+<li>guest address A =&gt; host address A ́ = offset + A</li>
+<li>special case: offset = 0
 – possible if guest OS allocates address ranges (i.e. user-level guest needs to be able to cope with arbitrary addresses from guest OS)
-– efficient emulation possible
-– issues
-- available host memory smaller than guest memory
-- 64bit guest on 32bit host =&gt; needs indirect address mapping in software (= the general resolution)</p>
+– efficient emulation possible</li>
+</ul>
+<p>– issues</p>
+<ul>
+<li>available host memory smaller than guest memory</li>
+<li>64bit guest on 32bit host =&gt; needs indirect address mapping in software (= the general resolution)</li>
+</ul>
 </li>
 <li>
 <p>Address Mapping in Software</p>
