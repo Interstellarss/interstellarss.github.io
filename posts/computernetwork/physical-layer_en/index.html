@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>A physical layer full of opportunities - my blog for notes</title><meta name="Description" content="探索计算机网络OSI模型中的物理层的故事."><meta property="og:title" content="A physical layer full of opportunities" />
+<meta property="og:description" content="探索计算机网络OSI模型中的物理层的故事." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://interstellarss.github.io/posts/computernetwork/physical-layer_en/" /><meta property="og:image" content="https://interstellarss.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2020-05-02T00:08:02+02:00" />
+<meta property="article:modified_time" content="2020-05-02T00:08:02+02:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://interstellarss.github.io/logo.png"/>
+
+<meta name="twitter:title" content="A physical layer full of opportunities"/>
+<meta name="twitter:description" content="探索计算机网络OSI模型中的物理层的故事."/>
+<meta name="application-name" content="my blog for notes">
+<meta name="apple-mobile-web-app-title" content="my blog for notes"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c">
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'G-LMR64333PL', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://interstellarss.github.io/posts/computernetwork/physical-layer_en/" /><link rel="prev" href="https://interstellarss.github.io/posts/theo/something-about-dfa-and-nfa/" /><link rel="next" href="https://interstellarss.github.io/posts/theo/something-about-regular-language/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "A physical layer full of opportunities",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/interstellarss.github.io\/posts\/computernetwork\/physical-layer_en\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/interstellarss.github.io\/images\/Apple-Devices-Preview.png",
+                            "width":  3200 ,
+                            "height":  2048 
+                        }],"genre": "posts","keywords": "computer network","wordcount":  1801 ,
+        "url": "https:\/\/interstellarss.github.io\/posts\/computernetwork\/physical-layer_en\/","datePublished": "2020-05-02T00:08:02+02:00","dateModified": "2020-05-02T00:08:02+02:00","publisher": {
+            "@type": "Organization",
+            "name": "Puxuan"},"author": {
+                "@type": "Person",
+                "name": "Puxuan"
+            },"description": "探索计算机网络OSI模型中的物理层的故事."
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="my blog for notes"><span class="header-title-pre"><i class='fas fa-cat'></i></span><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/"> About </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="my blog for notes"><span class="header-title-pre"><i class='fas fa-cat'></i></span><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/" title="">About</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">A physical layer full of opportunities</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://interstellarss.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Puxuan</a></span>&nbsp;<span class="post-category">included in <a href="/categories/notes/"><i class="far fa-folder fa-fw"></i>Notes</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-05-02">2020-05-02</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1801 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;4 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#signals-and-information">Signals and Information</a></li>
+    <li><a href="#signaldarstellung">Signaldarstellung</a>
+      <ul>
+        <li><a href="#mathematical-basics">Mathematical Basics</a>
+          <ul>
+            <li><a href="#fourier-series">Fourier series</a></li>
+            <li><a href="#fourier-transform">Fourier transform</a></li>
+          </ul>
+        </li>
+        <li><a href="#sampling-reconstruction-and-quantification">Sampling, Reconstruction and Quantification</a>
+          <ul>
+            <li><a href="#abtastung">Abtastung</a></li>
+            <li><a href="#reconstruction">Reconstruction</a>
+              <ul>
+                <li><a href="#shannons-theorem">Shannon&rsquo;s Theorem</a></li>
+              </ul>
+            </li>
+            <li><a href="#quantification">Quantification</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#transmission-channel">Transmission channel</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>Exploring the story of the physical layer in the OSI model of computer networks.</p>
+<p>Now we come to the first layer of the OSI model of computer networks: the physical layer. Here I will use the professor&rsquo;s slides as a framework to briefly discuss the story of what happens in the physical layer, mainly focusing on the transformation process between digital and analog signals, which is a battle between discrete and continuous. The reason why it is full of opportunities is that there are hidden spells between discrete and continuous waiting for us to acquire.</p>
+<h2 id="signals-and-information">Signals and Information</h2>
+<p>To understand all the interesting things that happen in the physical layer (mainly mathematical stories, of course), there is still some preparatory work to be done.
+Let&rsquo;s take a look at what the physical layer actually does.</p>
+<blockquote>
+<p>The physical layer uses the transmission medium to establish, manage and release the physical link for both ends of the communication to achieve transparent transmission of the bit stream and to ensure that the bit stream is correctly transmitted to the opposite end. The physical layer carries the bitstream in bits. I know I&rsquo;ve made this clear, but you may still be walking on clouds and not know what&rsquo;s going on. So let me use a real life example to help you understand better.</p>
+</blockquote>
+<blockquote>
+<p>For example, if you are talking to a friend, the content of your speech needs to be programmed by your brain, and then the content of what you are going to say is sent to your mouth, and your mouth makes the other person hear what you are saying by making a sound. And you don&rsquo;t have to think about how the sound waves will be transmitted to the other person&rsquo;s ears when you speak, and you can&rsquo;t see how the sound waves are transmitted to the other person&rsquo;s ears. Here the sound waves can be understood as a &lsquo;bit stream&rsquo;, and your mouth is providing the &lsquo;physical layer&rsquo;.</p>
+<p>The mouth is responsible for starting the conversation (establishing the link), judging the start and end of the conversation (managing the link), and ending the conversation (releasing the link). And the mouth also does not have to think about how the sound waves reach the other person&rsquo;s ears, so the sound waves are transparent to the mouth. Transparency' in the network = low management cost.</p>
+</blockquote>
+<p>We know that binary codes can be conveyed through changes in the strength of a signal, and these codes are recognized as different symbols through which a variety of information can be conveyed.
+In information theory we can actually quantify information by introducing the concept of entropy (entropy) in physics, and the amount of information contained in the received message is also called information entropy. In fact, in 1948 <a href="https://en.wikipedia.org/wiki/Claude_Shannon" target="_blank" rel="noopener noreffer">Shannon</a> did just that, by introducing the entropy of thermodynamics into informatics.
+We can then define information in this way.</p>
+<p>Information, on the one hand, can be understood as the uncertainty of being able to predict changes in the signal. Thus the information content of x in an alphabet X depends on the probability of occurrence of that x at the time of observation of the information carrying signal, and is then defined as
+$$
+I(x)=-\log_{2}{p(x)}
+$$
+The unit is bit.</p>
+<p>The information entropy can then be given by finding the expectation：
+$$
+H(X)=\sum_{x\in X} p(x)I(x) = - \sum_{x\in X}p(x)\log_{2}{p(x)}
+$$</p>
+<h2 id="signaldarstellung">Signaldarstellung</h2>
+<p>There are two types of signals transmitted in the physical layer transmission medium, analog signals, and digital signals, examples of which are given in the following figure.</p>
+<figure><img src="https://cdn.jsdelivr.net/gh/Interstellarss/CDN@0.1.1/images/physical-layer/analogAndDigital.png"
+         alt="image"/><figcaption>
+            <p>Analog signal and digital signal</p>
+        </figcaption>
+</figure>
+
+<p>Since the computer can only recognize digital signals, but to propagate in the WAN but in the form of analog signals (the case of fiber optics is different again, this is an afterthought), we will set up a modem to convert the digital signals into analog signals and the reverse process.</p>
+<p>And next we will discuss the details of these two processes.</p>
+<h3 id="mathematical-basics">Mathematical Basics</h3>
+<p>At the beginning, it is said that the story of the physical layer is a contest between discrete and continuous. Although there is only a contest between the two relative concepts of discrete and continuous, the two can be converted into each other using the right method, which is the magical mathematical spell we are going to explain in this part.</p>
+<p>Of course if you have enough enlightenment you can comprehend the two epic level spells again.</p>
+<h4 id="fourier-series">Fourier series</h4>
+<p>In mathematics, the Fourier series decomposes any periodic function or periodic signal into a collection of (possibly infinite elements) simple oscillatory functions, i.e., sine and cosine functions, and is also the core of the sampling theorem we will talk about later.</p>
+<p>I give here directly the definition above the professorslides.</p>
+<p>Ein periodisches Signal s(t) lässt sich als Summe gewichteter Sinus- und Kosinus-Schwingungen darstellen.
+Die so entstehende Reihenentwicklung von s(t) bezeichnet man als Fourierreihe:</p>
+<p>$$
+s(t)=\frac{a_0}{2} + \sum_{k=1}^{\infty} {a_k\cos{k{\omega}t} + b_k\sin{k{\omega}t}}
+$$</p>
+<p>Here the $a_0$ is the offset relative to the y-axis, while $a_k$ and $b_k$The two coefficients can be defined by：</p>
+<p>$$
+a_k = \frac{2}{T}\int_0^T {s(t)\cos{k{\omega}t}} {\rm d}t
+$$</p>
+<p>$$
+b_k = \frac{2}{T}\int_0^T {s(t)\sin{k{\omega}t}}  {\rm d}t
+$$</p>
+<h4 id="fourier-transform">Fourier transform</h4>
+<p>The Fourier transform is a linear integral transform used to transform a signal between the space-time and frequency domains. In fact, to borrow from Wikipedia, the Fourier transform is like a chemical analysis that determines the basic components of a substance; a signal comes from nature and can be analyzed to determine its basic components.</p>
+<p>Die Fourier-Transformierte einer stetigen, integrierbaren Funktion s(t) ist gegeben als
+$$
+s(t) \longrightarrow S(f) = \frac{1}{\sqrt{2\pi}}\int_{t=-\infty}^{\infty} {s(t)(\cos{2\pi  ft}-i\sin{2\pi ft})} {\rm d}t
+$$
+Of which $i=\sqrt{-1}$ , Of course, it can also be written in exponential form here, so I won&rsquo;t go over it again。</p>
+<h3 id="sampling-reconstruction-and-quantification">Sampling, Reconstruction and Quantification</h3>
+<p>With the previous mathematical foundation, we can begin to learn about the signal processing process of sampling (Abtastung), reconstruction (Rekonstruktion), and quantization (Quantisierung), which leads to the exciting transformation between discrete and continuous. More specifically, the combination of sampling (time domain discrete) and quantization (value domain discrete) converts analog signals into digital signals, while reconstruction can be considered the inverse of sampling. The famous &ldquo;Nyquist-Shannon sampling theorem&rdquo;, is a basic bridge between continuous and discrete signals, and is actually more like a constraint for conversion. We will talk about this in more detail later.</p>
+<h4 id="abtastung">Abtastung</h4>
+<p>Let&rsquo;s start here by looking at what Wikipedia has to say：</p>
+<blockquote>
+<p>In the field of signal processing, sampling is the process of converting a signal from an analog signal in the continuous time domain to a discrete signal in the discrete time domain, implemented with a sampler. Usually sampling is performed jointly with quantization, and the analog signal is first sampled by a sampler at a certain time interval to obtain a temporally discrete signal, which is then also numerically discretized by an analog-to-digital converter (ADC) to obtain a digital signal that is both numerically and temporally discrete.</p>
+</blockquote>
+<blockquote>
+<p>The signal obtained by sampling is a discrete form of a continuous signal (for example, a real-life signal indicating pressure or speed). Continuous signals are typically sampled by an analog-to-digital converter (ADC) at regular intervals, when the value of the continuous signal at that point in time is represented as a discrete, or quantized, value.</p>
+</blockquote>
+<blockquote>
+<p>The discrete form of the signal thus obtained often introduces some errors into the data. The errors come from two main sources, the sampling frequency related to the spectrum of the continuous analog signal, and the word length used for quantization. The sampling frequency refers to the frequency at which a continuous signal is sampled. It represents the accuracy of the discrete signal in and time and spatial domains. The word length (number of bits) is used to represent the value of the discrete signal, and it reflects the accuracy of the signal&rsquo;s magnitude.</p>
+</blockquote>
+<p>Let&rsquo;s see what the professor&rsquo;s slide says:</p>
+<p>Das Signal s(t) wird mittels des Einheitsimpulses (Dirac-Impulses) $\sigma[t]$ in äquidistanten Abständen $T_a$ (Abtastintervall) für n $\in$ Z abgetastet:
+$$
+\hat{x}=s(t) \sum_{n=-\infty}^{\infty}\sigma[t-nT_a]=
+\begin{cases}
+1, &amp; t=nT_a \newline
+0, &amp; sonst\
+\end{cases}
+$$
+Da $\hat{s}(t)$ nur zu den Zeitpunkten nTa für ganzzahlige n von Null verschieden ist, vereinbaren wir die Schreibweise $\hat{s}[n]$ für zeitdiskrete aber wertkontinuierliche Signale.</p>
+<figure><img src="https://cdn.jsdelivr.net/gh/Interstellarss/CDN@0.1.2/images/physical-layer/Abtastung.png"
+         alt="image"/><figcaption>
+            <p>Zeitkontinuierliches Signal und Abtastwerte</p>
+        </figcaption>
+</figure>
+
+<h4 id="reconstruction">Reconstruction</h4>
+<p>In this process the digital signal is converted to an analog signal as if the sampling process were reversed, called demodulation, and on an ideal system the output is instantaneously changed to that intensity every time a new data is read after a fixed time of sampling. After such instantaneous conversion, the discrete signal will essentially have a large amount of high frequency energy and harmonics associated with the multiple of the sampling rate. To destroy these harmonics and make the signal smooth, the signal must pass through some analog filter that suppresses any energy that is outside the expected frequency domain.</p>
+<p>The multiplication in the time domain corresponds to the convolution in the frequency domain.
+$$
+s(t) \delta [t -nT] \rightarrow \frac{1}{T}S(f)*\delta[f - n/T]
+$$</p>
+<figure><img src="https://cdn.jsdelivr.net/gh/Interstellarss/CDN@0.1.4/images/physical-layer/reconstruction.png"
+         alt="image"/><figcaption>
+            <p>Reconstruction</p>
+        </figcaption>
+</figure>
+
+<h5 id="shannons-theorem">Shannon&rsquo;s Theorem</h5>
+<p>Shannon&rsquo;s theorem gives the relationship between the upper limit of the transmission rate of channel communication and the signal-to-noise ratio and bandwidth.</p>
+<blockquote>
+<p>Abtasttheorem von Shannon und Nyquist Ein auf |f | $\leq$ B bandbegrenztes Signal s(t) ist &gt;vollständig durch äquidistante Abtastwerte ˆ s[n] beschrieben, sofern diese nicht weiter als $T_a \leq$1/2B auseinander liegen. Die Abtastfrequenz, welche eine vollständige Signalrekonstruktion &gt;erlaubt, ist folglich durch:<br>
+$$
+f_a \geq 2B
+$$
+nach unten beschränkt.</p>
+</blockquote>
+<h4 id="quantification">Quantification</h4>
+<p>&hellip;&hellip;&hellip;</p>
+<h2 id="transmission-channel">Transmission channel</h2>
+<p>For noiseless, M channels, we will have $M = 2^N$ kinds of distinguishable symbols, how does the achievable data rate vary?</p>
+<p>Let us first recall the entropy.
+Assume that the source transmits all signals with the same probability such that the entropy (and hence the average information) of the source is maximum.</p>
+<p>For a transmission rate over a channel of width B, we obtain the maximum transmission rate of</p>
+<blockquote>
+<p>Harleys Gesetz
+$C_H = 2B \log_{2}(M) bit$</p>
+</blockquote>
+<p>There is also a new definition: Signal Power (Signallesitung)
+The expected value of the square of the signal amplitude corresponds to the square of the signal power. The amplitude of the variance (dispersion) signal corresponds to the signal power without the DC component and represents the power of the information-carrying volume signal.</p>
+<p>&hellip;&hellip;</p></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2020-05-02</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://interstellarss.github.io/posts/computernetwork/physical-layer_en/" data-title="A physical layer full of opportunities" data-hashtags="computer network"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://interstellarss.github.io/posts/computernetwork/physical-layer_en/" data-hashtag="computer network"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://interstellarss.github.io/posts/computernetwork/physical-layer_en/" data-title="A physical layer full of opportunities"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://interstellarss.github.io/posts/computernetwork/physical-layer_en/" data-title="A physical layer full of opportunities"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@2.14.0/icons/line.svg"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://interstellarss.github.io/posts/computernetwork/physical-layer_en/" data-title="A physical layer full of opportunities"><i class="fab fa-weibo fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/computer-network/">computer network</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/theo/something-about-dfa-and-nfa/" class="prev" rel="prev" title="DFA与NFA的故事(一)"><i class="fas fa-angle-left fa-fw"></i>DFA与NFA的故事(一)</a>
+            <a href="/posts/theo/something-about-regular-language/" class="next" rel="next" title="从有穷自动机到正则语言">从有穷自动机到正则语言<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div id="gitalk" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.89.2">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.2.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/copy-tex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.37.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.8/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.2.0/dist/js/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.2.0/dist/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.0/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/typeit@7.0.4/dist/typeit.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":10},"comment":{"gitalk":{"admin":["Interstellarss"],"clientID":"b4d6ace595e393612b74","clientSecret":"ebc194ba054bc0b1364a73bb34fc5ac4a3fb9793","id":"2020-05-02T00:08:02+02:00","owner":"Interstellarss","repo":"interstellarss.github.io","title":"A physical layer full of opportunities"}},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"$$","right":"$$"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"},{"display":false,"left":"$","right":"$"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'G-LMR64333PL', { 'anonymize_ip': true });
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=G-LMR64333PL" async></script></body>
+</html>

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Functionally important and single data link layer - my blog for notes</title><meta name="Description" content="数据链路层介绍"><meta property="og:title" content="Functionally important and single data link layer" />
+<meta property="og:description" content="数据链路层介绍" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://interstellarss.github.io/posts/computernetwork/data-link-layer_en/" /><meta property="og:image" content="https://interstellarss.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2020-05-12T09:44:32+02:00" />
+<meta property="article:modified_time" content="2020-05-12T09:44:32+02:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://interstellarss.github.io/logo.png"/>
+
+<meta name="twitter:title" content="Functionally important and single data link layer"/>
+<meta name="twitter:description" content="数据链路层介绍"/>
+<meta name="application-name" content="my blog for notes">
+<meta name="apple-mobile-web-app-title" content="my blog for notes"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c">
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'G-LMR64333PL', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://interstellarss.github.io/posts/computernetwork/data-link-layer_en/" /><link rel="prev" href="https://interstellarss.github.io/posts/theo/something-about-regular-expression-implementation/" /><link rel="next" href="https://interstellarss.github.io/posts/theo/something-about-dfa-and-nfa-2/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Functionally important and single data link layer",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/interstellarss.github.io\/posts\/computernetwork\/data-link-layer_en\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/interstellarss.github.io\/images\/Apple-Devices-Preview.png",
+                            "width":  3200 ,
+                            "height":  2048 
+                        }],"genre": "posts","keywords": "computer network","wordcount":  1303 ,
+        "url": "https:\/\/interstellarss.github.io\/posts\/computernetwork\/data-link-layer_en\/","datePublished": "2020-05-12T09:44:32+02:00","dateModified": "2020-05-12T09:44:32+02:00","publisher": {
+            "@type": "Organization",
+            "name": "Puxuan"},"author": {
+                "@type": "Person",
+                "name": "Puxuan"
+            },"description": "数据链路层介绍"
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="my blog for notes"><span class="header-title-pre"><i class='fas fa-cat'></i></span><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/"> About </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="my blog for notes"><span class="header-title-pre"><i class='fas fa-cat'></i></span><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/" title="">About</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Functionally important and single data link layer</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://interstellarss.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Puxuan</a></span>&nbsp;<span class="post-category">included in <a href="/categories/notes/"><i class="far fa-folder fa-fw"></i>Notes</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-05-12">2020-05-12</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1303 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;3 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#verbindungscharakterisierung">Verbindungscharakterisierung</a>
+      <ul>
+        <li><a href="#point-to-point-channels">Point-to-point channels</a>
+          <ul>
+            <li><a href="#übertragungsrate">Übertragungsrate</a></li>
+            <li><a href="#ausbreitungsverzögerung">Ausbreitungsverzögerung</a></li>
+            <li><a href="#gesamtverzögerung">Gesamtverzögerung</a></li>
+            <li><a href="#bandbreitenverzögerungsprodukt">Bandbreitenverzögerungsprodukt</a></li>
+            <li><a href="#übertragungsrichtung">Übertragungsrichtung</a></li>
+          </ul>
+        </li>
+        <li><a href="#data-link-layer-for-broadcast-channels">Data Link Layer for Broadcast Channels</a>
+          <ul>
+            <li><a href="#aloha-and-sorted-aloha">ALOHA and Sorted ALOHA</a></li>
+            <li><a href="#csma-csmacd-csmaca">CSMA, CSMA/CD, CSMA/CA</a>
+              <ul>
+                <li><a href="#csmacd">CSMA/CD</a></li>
+              </ul>
+            </li>
+            <li><a href="#csmaca">CSMA/CA</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#encapsulation-into-frames">Encapsulation into frames</a>
+      <ul>
+        <li><a href="#mac-address">MAC Address</a>
+          <ul>
+            <li><a href="#mac-frame-template">MAC Frame Template</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#error-detection">Error Detection</a>
+      <ul>
+        <li><a href="#crc-residual-test">CRC residual test</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="verbindungscharakterisierung">Verbindungscharakterisierung</h2>
+<p>The connection between two nodes will have various properties as follows：Übertragungsrate, Übertragungsverzögerung, Übertragungsrichtung, and Mehrfachzugriff (Multiplexing)。</p>
+<h3 id="point-to-point-channels">Point-to-point channels</h3>
+<h4 id="übertragungsrate">Übertragungsrate</h4>
+<p>The time that the data is placed on top of the channel we call Serialisierungszeit and is denoted as $t_s$,  L is the size of the data to be transferred, r is the transfer rate, and so
+$$
+t_s = \frac{L}{r}
+$$
+Here, $t_s$ can be thought of as the transmission delay, the time that will be used to transmit this data.</p>
+<h4 id="ausbreitungsverzögerung">Ausbreitungsverzögerung</h4>
+<p>As the name implies, the propagation delay, unlike the above, is the time it will take for the signal to travel from one segment to the other in the channel.
+$$
+t_p = \frac{d}{vc_0}
+$$
+$c_0$is the speed of light, and v is a constant, related to the transmission medium.</p>
+<h4 id="gesamtverzögerung">Gesamtverzögerung</h4>
+<p>$t_d$  That is, the total delay is the sum of the above two items</p>
+<h4 id="bandbreitenverzögerungsprodukt">Bandbreitenverzögerungsprodukt</h4>
+<p>This is known as broadband delay, precisely because propagation in the channel inevitably takes time and we need a certain capacity to store.
+$$
+C = t_p r = \frac{d}{vc_0} r
+$$
+The unit is bit.</p>
+<h4 id="übertragungsrichtung">Übertragungsrichtung</h4>
+<figure><img src="https://cdn.jsdelivr.net/gh/Interstellarss/CDN@0.1.4/images/data-link-layer/ubertragungsrichtung.jpg"
+         alt="image"/><figcaption>
+            <p>Übertragungsrichtung</p>
+        </figcaption>
+</figure>
+
+<h3 id="data-link-layer-for-broadcast-channels">Data Link Layer for Broadcast Channels</h3>
+<p>Generally speaking here we will use time division multiplexing (Zeitmultiplex), i.e. the use of a channel to achieve communication between different ports, based on a non-deterministic approach (concurrent access) in packet networks (Ethernet, wireless LANs).
+As for multiplexing I think the diagram above the professor&rsquo;s SLIDE is clear:
+<figure><img src="https://cdn.jsdelivr.net/gh/Interstellarss/CDN@0.1.4/images/data-link-layer/Multiplexing.jpg"
+         alt="image"/><figcaption>
+            <p>Multiplexing</p>
+        </figcaption>
+</figure>
+</p>
+<h4 id="aloha-and-sorted-aloha">ALOHA and Sorted ALOHA</h4>
+<h4 id="csma-csmacd-csmaca">CSMA, CSMA/CD, CSMA/CA</h4>
+<p>CSMA actually refers to Carrier Sense Multiple Access, which is a simple optimization of the previous sorted ALOHA, i.e. &ldquo;listen before talk&rdquo;.。</p>
+<h5 id="csmacd">CSMA/CD</h5>
+<p>Known as Carrier Listening Collision Listening Multipoint Access/Collision Detection, which is the protocol used by Ethernet, divided into two parts: i.e. &ldquo;Listening before sending&rdquo;, each station has to detect whether there are other stations on the bus sending data before sending data, and if so, temporarily do not send data and wait for the channel to be free before sending. There is no &ldquo;carrier&rdquo; on the bus, it is just a customary name here; - Collision detection: i.e. &ldquo;listen while sending&rdquo;, the adapter detects the signal voltage on the channel while sending data, so as to determine whether other stations are also sending data when it is sending data. The adapter detects the signal voltage on the channel while sending data in order to determine whether other stations are sending data while it is sending data. When the signal voltage on the bus varies greatly when the data is sent at the same time and exceeds a certain threshold value, it is considered that at least two stations on the bus are sending data at the same time, indicating a collision. In this case, the signal on the bus is distorted and cannot be recovered. Therefore, every station that is sending data, once a collision is detected, the adapter has to stop sending immediately to avoid wasting network resources and wait for a random period of time before sending again. If the propagation delay of the upper signal over the link is considered, the process is similar to this.</p>
+<figure><img src="https://cdn.jsdelivr.net/gh/Interstellarss/CDN@0.1.4/images/data-link-layer/CSMA_CD.jpg"
+         alt="image"/><figcaption>
+            <p>CSMA/CD</p>
+        </figcaption>
+</figure>
+
+<p>Each endpoint has the possibility to encounter a collision within a short period of time after it sends the data, which is the maximum time for two one-way trips, and this time is called the &ldquo;contention period&rdquo;. Only by passing the contention period can we be sure that the transmission will not collide. It is for this reason that Ethernet specifies a minimum length of 64 bytes for data frames, and all frames less than this length are considered to be dropped due to collisions. When we receive at least 64 bytes we can assume that there is no collision between them.</p>
+<p>CSMA/CD cannot transmit and receive at the same time, so it is Halbdulplex, which is a half-duplex protocol, i.e. alternating communication in both directions.</p>
+<h4 id="csmaca">CSMA/CA</h4>
+<p>CSMA/CD cannot be used in wired LANs (wireless LANs), because even if the sent message is long enough, collision cannot always be detected. CA here is actually colision avoidance, which means that it cannot detect conflicts on the channel while sending packets, but can only try to &ldquo;avoid&rdquo; them. For example, if computer A and computer C send a control message to computer B at the same time, they will arrive at computer B at the same time, resulting in a conflict. When such a conflict occurs, the sender can wait for a random period of time, and then resend the control message. Because control messages are much shorter than data frames, the likelihood of a second conflict is also much lower than with traditional Ethernet. Eventually a control message will arrive correctly, and then Computer B sends a response message. Usually CSMA/CA uses the ACK signal to avoid conflicts, that is, the client only confirms that the sent data has arrived correctly at the destination when it receives the ACK signal back on the network.</p>
+<p>Here&rsquo;s what the professor&rsquo;s slide says：</p>
+<blockquote>
+<ol>
+<li>Wenn Medium frei, übertrage mit Wahrscheinlichkeit p oder verzögere mit Wahrscheinlichkeit 1 − p um eine feste Zeit dann 1.</li>
+<li>Wenn Medium belegt, warte bis frei, dann 1.</li>
+</ol>
+</blockquote>
+<h2 id="encapsulation-into-frames">Encapsulation into frames</h2>
+<p>Encapsulation simply means splitting and packing packets in advance, attaching the destination address, local address, and some bytes for error correction to the packet being sent. The rules that are followed and negotiated between the two communicating parties when processing the packet are the protocol.</p>
+<p>The packet transmitted at the network layer is transmitted in the data link layer as a frame (Rahmen). The packet arrives at the data link layer, and the protocol header and protocol tail of the data link layer are added to form a data frame.</p>
+<h3 id="mac-address">MAC Address</h3>
+<p>is the address in the ROM of the adapter (hence the name adapter address or adapter identifier EUI-48) that is solidified in each computer on the LAN, determined by the hardware vendor, and does not change. As long as the adapter remains the same, it remains the same. It is the &ldquo;name&rdquo; or identifier of each station. If a host or router connected to the LAN has more than one adapter installed, then such host or router has more than one &ldquo;address&rdquo;, that is, this 48-bit address should be the identifier of an interface. Of course, it is possible to change the mac address with the appropriate software.</p>
+<h4 id="mac-frame-template">MAC Frame Template</h4>
+<h2 id="error-detection">Error Detection</h2>
+<h3 id="crc-residual-test">CRC residual test</h3>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2020-05-12</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://interstellarss.github.io/posts/computernetwork/data-link-layer_en/" data-title="Functionally important and single data link layer" data-hashtags="computer network"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://interstellarss.github.io/posts/computernetwork/data-link-layer_en/" data-hashtag="computer network"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://interstellarss.github.io/posts/computernetwork/data-link-layer_en/" data-title="Functionally important and single data link layer"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://interstellarss.github.io/posts/computernetwork/data-link-layer_en/" data-title="Functionally important and single data link layer"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@2.14.0/icons/line.svg"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://interstellarss.github.io/posts/computernetwork/data-link-layer_en/" data-title="Functionally important and single data link layer"><i class="fab fa-weibo fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/computer-network/">computer network</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/theo/something-about-regular-expression-implementation/" class="prev" rel="prev" title="从有穷自动机到正则语言---实现篇"><i class="fas fa-angle-left fa-fw"></i>从有穷自动机到正则语言---实现篇</a>
+            <a href="/posts/theo/something-about-dfa-and-nfa-2/" class="next" rel="next" title="DFA与NFA的故事(二)">DFA与NFA的故事(二)<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div id="gitalk" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.89.2">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.2.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/copy-tex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.37.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.8/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.2.0/dist/js/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.2.0/dist/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.0/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/typeit@7.0.4/dist/typeit.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":10},"comment":{"gitalk":{"admin":["Interstellarss"],"clientID":"b4d6ace595e393612b74","clientSecret":"ebc194ba054bc0b1364a73bb34fc5ac4a3fb9793","id":"2020-05-12T09:44:32+02:00","owner":"Interstellarss","repo":"interstellarss.github.io","title":"Functionally important and single data link layer"}},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"$$","right":"$$"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"},{"display":false,"left":"$","right":"$"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'G-LMR64333PL', { 'anonymize_ip': true });
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=G-LMR64333PL" async></script></body>
+</html>

@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-        <title>Relational Model and Relational Algebra - my Blog for notes</title><meta name="Description" content="This is my new Hugo sites"><meta property="og:title" content="Relational Model and Relational Algebra" />
+        <title>Relational Model and Relational Algebra - my blog for notes</title><meta name="Description" content="This is my new Hugo sites"><meta property="og:title" content="Relational Model and Relational Algebra" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://interstellarss.github.io/posts/database/datenbank-3/" /><meta property="og:image" content="https://interstellarss.github.io/logo.png"/><meta property="article:section" content="posts" />
@@ -17,8 +17,8 @@
 
 <meta name="twitter:title" content="Relational Model and Relational Algebra"/>
 <meta name="twitter:description" content=""/>
-<meta name="application-name" content="my Blog for Notes">
-<meta name="apple-mobile-web-app-title" content="my Blog for Notes"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c">
+<meta name="application-name" content="my blog for notes">
+<meta name="apple-mobile-web-app-title" content="my blog for notes"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c">
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -47,7 +47,7 @@ if (!doNotTrack) {
                             "url": "https:\/\/interstellarss.github.io\/images\/Apple-Devices-Preview.png",
                             "width":  3200 ,
                             "height":  2048 
-                        }],"genre": "posts","keywords": "Database","wordcount":  804 ,
+                        }],"genre": "posts","keywords": "Database","wordcount":  509 ,
         "url": "https:\/\/interstellarss.github.io\/posts\/database\/datenbank-3\/","datePublished": "2020-11-15T11:34:02+01:00","dateModified": "2020-11-15T11:34:02+01:00","publisher": {
             "@type": "Organization",
             "name": "Puxuan"},"author": {
@@ -61,7 +61,7 @@ if (!doNotTrack) {
         <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
     <div class="header-wrapper">
         <div class="header-title">
-            <a href="/" title="my Blog for notes"><span class="header-title-pre"><i class='fas fa-cat'></i></span><span id="id-1" class="typeit"></span></a>
+            <a href="/" title="my blog for notes"><span class="header-title-pre"><i class='fas fa-cat'></i></span><span id="id-1" class="typeit"></span></a>
         </div>
         <div class="menu">
             <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/"> About </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
@@ -85,7 +85,7 @@ if (!doNotTrack) {
     <div class="header-container">
         <div class="header-wrapper">
             <div class="header-title">
-                <a href="/" title="my Blog for notes"><span class="header-title-pre"><i class='fas fa-cat'></i></span><span id="id-2" class="typeit"></span></a>
+                <a href="/" title="my blog for notes"><span class="header-title-pre"><i class='fas fa-cat'></i></span><span id="id-2" class="typeit"></span></a>
             </div>
             <div class="menu-toggle" id="menu-toggle-mobile">
                 <span></span><span></span><span></span>
@@ -124,8 +124,8 @@ if (!doNotTrack) {
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Relational Model and Relational Algebra</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://interstellarss.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Puxuan</a></span>&nbsp;<span class="post-category">included in <a href="/categories/notes/"><i class="far fa-folder fa-fw"></i>Notes</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-11-15">2020-11-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;804 words&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;2 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-11-15">2020-11-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;509 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;3 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -153,7 +153,7 @@ if (!doNotTrack) {
             <li><a href="#pi-projection">$\pi$ Projection</a></li>
             <li><a href="#join-join-verbund">$\Join$ Join (Verbund)</a>
               <ul>
-                <li><a href="#der-natürliche-verbund自然连接">Der natürliche Verbund(自然连接)</a></li>
+                <li><a href="#der-natürliche-verbund">Der natürliche Verbund</a></li>
               </ul>
             </li>
             <li><a href="#div-division">$\div$ Division</a></li>
@@ -218,25 +218,26 @@ if (!doNotTrack) {
 <h3 id="relational-algebra">Relational Algebra</h3>
 <h4 id="cup-union">$\cup$ Union</h4>
 <h4 id="--difference">- Difference</h4>
-<p>R和S的差是由属于R但不属于S的元组组成的集合。记作：
+<p>The difference between R and S is the set consisting of tuples that belong to R but not to S. Notated as:
 $$
 R - S = \lbrace t | t \in R \and t \notin S \rbrace
 $$</p>
 <h4 id="delta-selection">$\delta$ Selection</h4>
-<p>选择运算是根据一定条件F在给定的关系R中选取若干个元组，组成一个新关系，记作：
+<p>The selection operation is the selection of a number of tuples in a given relation R according to certain conditions F to form a new relation, denoted as:
 $$
 \delta_F(R) = \lbrace t | t \in R \and F(t)= true \rbrace
 $$
-其中，$\delta$为选择运算符，F表示选择事件，它是由运算对象（属性名、常数、简单函数）、算术比较运算符（&lt;,≤,&gt;,≥,=,≠）和逻辑运算符（$\land,\lor,\neg $）连接起来的逻辑表达式，取值为“true”或“false”， 其基本形式为
+Where $\delta$ is the selection operator, F means select event, it is a logical expression connected by the operation object (property name, constant, simple function), arithmetic comparison operator (&lt;,≤,&gt;,≥,=,≠) and logical operator ($\land,\lor,\neg $), which takes the value of &ldquo;true&rdquo; or &ldquo;false&rdquo;, its basic form is:
 $$</p>
 <p>$$</p>
 <h4 id="pi-projection">$\pi$ Projection</h4>
-<p>投影运算也是单目运算，是从一个关系中选取某些属性（列），并对这些属性重新排列，最后从得出的结果中删除重复的行，从而得到一个新的关系。即对关系从列的角度进行的垂直分解运算，从左到右按照指定的若干属性及顺序取出相应列，删去重复元组。</p>
+<p>The projection operation is also a monomial operation, which selects certain attributes (columns) from a relation, rearranges these attributes, and finally removes the duplicate rows from the resulting result to obtain a new relation. That is, the vertical decomposition operation is performed on the relation from the perspective of columns, and the corresponding columns are taken out from left to right according to a specified number of attributes and order, and the duplicate tuples are deleted.</p>
 <h4 id="join-join-verbund">$\Join$ Join (Verbund)</h4>
-<p>连接运算是二目运算，是从两个关系的笛卡儿积中选取属性间满足一定条件的元组，组成新的关系，连接又称θ连接。</p>
-<h5 id="der-natürliche-verbund自然连接">Der natürliche Verbund(自然连接)</h5>
+<p>The join operation is a binomial operation, which is a Cartesian product of two relations in which a tuple between attributes satisfying certain conditions is selected to form a new relation, and the join is also called theta join.</p>
+<h5 id="der-natürliche-verbund">Der natürliche Verbund</h5>
+<p>&hellip;</p>
 <h4 id="div-division">$\div$ Division</h4>
-<p>除运算是二目运算，给定关系 R（X，Y）和 S（Y，Z），其中 X，Y，Z 为属性或属性集。R中的Y和S中的Y可以有不同的属性名，但必须出自相同的域集。</p>
+<p>The division operation is a binomial operation given the relations R(X, Y) and S(Y, Z), where X, Y, Z are attributes or sets of attributes. y in R and y in S can have different attribute names, but must come from the same set of domains.</p>
 <section class="footnotes" role="doc-endnotes">
 <hr>
 <ol>

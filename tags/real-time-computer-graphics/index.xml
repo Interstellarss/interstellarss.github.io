@@ -1,8 +1,8 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>real-time computer graphics - Tag - my Blog for notes</title>
+        <title>real-time computer graphics - Tag - my blog for notes</title>
         <link>https://interstellarss.github.io/tags/real-time-computer-graphics/</link>
-        <description>real-time computer graphics - Tag - my Blog for notes</description>
+        <description>real-time computer graphics - Tag - my blog for notes</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 21 May 2020 11:38:08 &#43;0200</lastBuildDate><atom:link href="https://interstellarss.github.io/tags/real-time-computer-graphics/" rel="self" type="application/rss+xml" /><item>
     <title>Generation of height maps based on diamond-square-algorithm in C&#43;&#43;</title>
     <link>https://interstellarss.github.io/posts/computer_graphics/implementation-about-diamond-square/</link>

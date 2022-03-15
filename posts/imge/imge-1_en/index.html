@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-        <title>Different Approaches to 「Rotation」 - my Blog for notes</title><meta name="Description" content="This is my new Hugo sites"><meta property="og:title" content="Different Approaches to 「Rotation」" />
+        <title>Different Approaches to 「Rotation」 - my blog for notes</title><meta name="Description" content="This is my new Hugo sites"><meta property="og:title" content="Different Approaches to 「Rotation」" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://interstellarss.github.io/posts/imge/imge-1_en/" /><meta property="og:image" content="https://interstellarss.github.io/logo.png"/><meta property="article:section" content="posts" />
@@ -17,8 +17,8 @@
 
 <meta name="twitter:title" content="Different Approaches to 「Rotation」"/>
 <meta name="twitter:description" content=""/>
-<meta name="application-name" content="my Blog for Notes">
-<meta name="apple-mobile-web-app-title" content="my Blog for Notes"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c">
+<meta name="application-name" content="my blog for notes">
+<meta name="apple-mobile-web-app-title" content="my blog for notes"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c">
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -47,7 +47,7 @@ if (!doNotTrack) {
                             "url": "https:\/\/interstellarss.github.io\/images\/Apple-Devices-Preview.png",
                             "width":  3200 ,
                             "height":  2048 
-                        }],"genre": "posts","keywords": "Intergration Methods and Devices","wordcount":  1021 ,
+                        }],"genre": "posts","keywords": "Intergration Methods and Devices","wordcount":  999 ,
         "url": "https:\/\/interstellarss.github.io\/posts\/imge\/imge-1_en\/","datePublished": "2020-11-10T16:08:41+01:00","dateModified": "2020-11-10T16:08:41+01:00","publisher": {
             "@type": "Organization",
             "name": "Puxuan"},"author": {
@@ -61,7 +61,7 @@ if (!doNotTrack) {
         <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
     <div class="header-wrapper">
         <div class="header-title">
-            <a href="/" title="my Blog for notes"><span class="header-title-pre"><i class='fas fa-cat'></i></span><span id="id-1" class="typeit"></span></a>
+            <a href="/" title="my blog for notes"><span class="header-title-pre"><i class='fas fa-cat'></i></span><span id="id-1" class="typeit"></span></a>
         </div>
         <div class="menu">
             <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/"> About </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
@@ -85,7 +85,7 @@ if (!doNotTrack) {
     <div class="header-container">
         <div class="header-wrapper">
             <div class="header-title">
-                <a href="/" title="my Blog for notes"><span class="header-title-pre"><i class='fas fa-cat'></i></span><span id="id-2" class="typeit"></span></a>
+                <a href="/" title="my blog for notes"><span class="header-title-pre"><i class='fas fa-cat'></i></span><span id="id-2" class="typeit"></span></a>
             </div>
             <div class="menu-toggle" id="menu-toggle-mobile">
                 <span></span><span></span><span></span>
@@ -124,8 +124,8 @@ if (!doNotTrack) {
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Different Approaches to 「Rotation」</h1><h2 class="single-subtitle">对于euler angles，rotation matrices，quaternions的讨论</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://interstellarss.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Puxuan</a></span>&nbsp;<span class="post-category">included in <a href="/categories/notes/"><i class="far fa-folder fa-fw"></i>Notes</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-11-10">2020-11-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1021 words&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;3 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-11-10">2020-11-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;999 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;2 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -173,7 +173,7 @@ $$
 <p>Next is the focus of our attention. With the above layouts, it is easy to understand why quaternions are composed of a real term with three imaginary terms.</p>
 <p>For a spherical polar plane projection of the unit sphere in four dimensions, the 1 of the real number axis projects the origin of the ijk coordinate system. When the four-dimensional hypersphere is projected into three-dimensional space, it intersects the three-dimensional unit sphere in the same position as the three-dimensional space, and this sphere corresponds to the pure quaternion, i.e., the real part is zero. The real part between 0 and 1 is projected inside this three-dimensional sphere, while the real part less than 0 is projected outside the three-dimensional sphere, and -1 is projected at infinity in all directions.</p>
 <blockquote>
-<p>正如同三维中的圆投影到二维平面中是一条线一样，四维中的球（不是超球）投影在三维是一个平面，事实上，三维投影中的平面都是四维超球中过 -1 的球面在三维的投影。<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>Just as a circle in three dimensions is projected as a line in the two-dimensional plane, a sphere (not a hypersphere) in four dimensions is projected as a plane in three dimensions; in fact, the plane in the three-dimensional projection is the projection of the sphere past -1 in the four-dimensional hypersphere in three dimensions.<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
 </blockquote>
 <h4 id="quaternion-algebraic-operations">Quaternion algebraic operations</h4>
 <p>We have the following definitions:

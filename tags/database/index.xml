@@ -1,8 +1,8 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>Database - Tag - my Blog for notes</title>
+        <title>Database - Tag - my blog for notes</title>
         <link>https://interstellarss.github.io/tags/database/</link>
-        <description>Database - Tag - my Blog for notes</description>
+        <description>Database - Tag - my blog for notes</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 15 Nov 2020 11:34:02 &#43;0100</lastBuildDate><atom:link href="https://interstellarss.github.io/tags/database/" rel="self" type="application/rss+xml" /><item>
     <title>Relational Model and Relational Algebra</title>
     <link>https://interstellarss.github.io/posts/database/datenbank-3/</link>
