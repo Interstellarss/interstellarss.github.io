@@ -1,27 +1,28 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>computer network - 标签 - 法术研究分享Blog</title>
+        <title>computer network - Tag - my Blog for notes</title>
         <link>https://interstellarss.github.io/tags/computer-network/</link>
-        <description>computer network - 标签 - 法术研究分享Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Mon, 06 Jul 2020 23:16:59 &#43;0200</lastBuildDate><atom:link href="https://interstellarss.github.io/tags/computer-network/" rel="self" type="application/rss+xml" /><item>
-    <title>作为带路专家的网络层</title>
-    <link>https://interstellarss.github.io/posts/computernetwork/network-layer/</link>
+        <description>computer network - Tag - my Blog for notes</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 06 Jul 2020 23:16:59 &#43;0200</lastBuildDate><atom:link href="https://interstellarss.github.io/tags/computer-network/" rel="self" type="application/rss+xml" /><item>
+    <title>The network layer as a &#39;lead&#39; expert</title>
+    <link>https://interstellarss.github.io/posts/computernetwork/network-layer_en/</link>
     <pubDate>Mon, 06 Jul 2020 23:16:59 &#43;0200</pubDate>
-    <author>作者</author>
-    <guid>https://interstellarss.github.io/posts/computernetwork/network-layer/</guid>
-    <description><![CDATA[在这里我们会认识到网络层提供的两种不同服务和网络层的核心也即&ndash;IP协议. 我们能够理解: 虚拟互连网络的概念. IP地址与物理地址的关]]></description>
+    <author>Author</author>
+    <guid>https://interstellarss.github.io/posts/computernetwork/network-layer_en/</guid>
+    <description><![CDATA[Here we will recognize the two different services provided by the network layer and the core of the network layer, namely the IP protocol. We can understand:
+ the concept of virtual interconnection networks. the relationship between IP addresses and physical addresses the traditional classification of IP addresses (including subnet masks)  Address Resolution Protocol ARP In practical applications, we often encounter the problem that we already know the IP address of a machine (host or router) and need to find out its corresponding hardware address.]]></description>
 </item><item>
     <title>功能重要单一的数据链路层</title>
     <link>https://interstellarss.github.io/posts/computernetwork/data-link-layer/</link>
     <pubDate>Tue, 12 May 2020 09:44:32 &#43;0200</pubDate>
-    <author>作者</author>
+    <author>Author</author>
     <guid>https://interstellarss.github.io/posts/computernetwork/data-link-layer/</guid>
     <description><![CDATA[连接的特征（Verbindungscharakterisierung） 两个节点之间的连接会有如下的各种属性：传输速率（Übertragung]]></description>
 </item><item>
     <title>充满机遇的物理层</title>
     <link>https://interstellarss.github.io/posts/computernetwork/physical-layer/</link>
     <pubDate>Sat, 02 May 2020 00:08:02 &#43;0200</pubDate>
-    <author>作者</author>
+    <author>Author</author>
     <guid>https://interstellarss.github.io/posts/computernetwork/physical-layer/</guid>
     <description><![CDATA[<p>探索计算机网络OSI模型中的物理层的故事.</p>]]></description>
 </item></channel>

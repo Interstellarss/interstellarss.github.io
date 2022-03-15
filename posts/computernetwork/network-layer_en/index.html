@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>The network layer as a &#39;lead&#39; expert - my Blog for notes</title><meta name="Description" content="Explore the story of the network layer in the OSI model of computer networks."><meta property="og:title" content="The network layer as a &#39;lead&#39; expert" />
+<meta property="og:description" content="Explore the story of the network layer in the OSI model of computer networks." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://interstellarss.github.io/posts/computernetwork/network-layer_en/" /><meta property="og:image" content="https://interstellarss.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2020-07-06T23:16:59+02:00" />
+<meta property="article:modified_time" content="2020-07-06T23:16:59+02:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://interstellarss.github.io/logo.png"/>
+
+<meta name="twitter:title" content="The network layer as a &#39;lead&#39; expert"/>
+<meta name="twitter:description" content="Explore the story of the network layer in the OSI model of computer networks."/>
+<meta name="application-name" content="my Blog for Notes">
+<meta name="apple-mobile-web-app-title" content="my Blog for Notes"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c">
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'G-LMR64333PL', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://interstellarss.github.io/posts/computernetwork/network-layer_en/" /><link rel="prev" href="https://interstellarss.github.io/posts/seminar-hpc/shared-memory-parallelism_2/" /><link rel="next" href="https://interstellarss.github.io/posts/imge/imge-1_en/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "The network layer as a 'lead' expert",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/interstellarss.github.io\/posts\/computernetwork\/network-layer_en\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/interstellarss.github.io\/images\/Apple-Devices-Preview.png",
+                            "width":  3200 ,
+                            "height":  2048 
+                        }],"genre": "posts","keywords": "computer network","wordcount":  2918 ,
+        "url": "https:\/\/interstellarss.github.io\/posts\/computernetwork\/network-layer_en\/","datePublished": "2020-07-06T23:16:59+02:00","dateModified": "2020-07-06T23:16:59+02:00","publisher": {
+            "@type": "Organization",
+            "name": "Puxuan"},"author": {
+                "@type": "Person",
+                "name": "Puxuan"
+            },"description": "Explore the story of the network layer in the OSI model of computer networks."
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="my Blog for notes"><span class="header-title-pre"><i class='fas fa-cat'></i></span><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/"> About </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="my Blog for notes"><span class="header-title-pre"><i class='fas fa-cat'></i></span><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/" title="">About</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">The network layer as a &#39;lead&#39; expert</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://interstellarss.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Puxuan</a></span>&nbsp;<span class="post-category">included in <a href="/categories/notes/"><i class="far fa-folder fa-fw"></i>Notes</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-07-06">2020-07-06</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;2918 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;14 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#address-resolution-protocol-arp">Address Resolution Protocol ARP</a></li>
+        <li><a href="#ipv4">IPv4</a></li>
+        <li><a href="#flow-of-ip-layer-forwarding-packets">Flow of IP layer forwarding packets</a></li>
+        <li><a href="#icmpinternet-control-message-protocol">ICMP(Internet Control Message Protocol)</a>
+          <ul>
+            <li><a href="#types-of-icmp-messages">Types of ICMP messages</a></li>
+          </ul>
+        </li>
+        <li><a href="#ipv6">IPv6</a>
+          <ul>
+            <li><a href="#ipv6-basic-header">IPv6 Basic Header</a></li>
+            <li><a href="#ipv6-basic-prefix-segments-role">IPv6 Basic Prefix Segments Role</a></li>
+            <li><a href="#ipv6-addresses">IPv6 Addresses</a></li>
+            <li><a href="#icmpv6">ICMPv6</a></li>
+          </ul>
+        </li>
+        <li><a href="#routing">Routing</a>
+          <ul>
+            <li><a href="#longest-prefix-matching">Longest Prefix Matching</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>Here we will recognize the two different services provided by the network layer and the core of the network layer, namely the IP protocol. We can understand:</p>
+<ol>
+<li>the concept of virtual interconnection networks.</li>
+<li>the relationship between IP addresses and physical addresses</li>
+<li>the traditional classification of IP addresses (including subnet masks)</li>
+</ol>
+<h3 id="address-resolution-protocol-arp">Address Resolution Protocol ARP</h3>
+<p>In practical applications, we often encounter the problem that we already know the IP address of a machine (host or router) and need to find out its corresponding hardware address. The address resolution protocol ARP is used to solve such a problem. Since it is the IP protocol that uses the ARP protocol, it is usually classified as a network layer. However, the purpose of the ARP protocol is to resolve the hardware address used at the data link layer from the IP address used at the network layer.</p>
+<p>The following is an overview of the main points of the ARP protocol.</p>
+<blockquote>
+<p>We know that the network layer uses IP addresses, but when transmitting data frames over the links of the actual network, the hardware address of that network must eventually be used. However, there is no simple mapping between IP addresses and the hardware addresses of the network below due to the different formats (for example, IP addresses have 32 bits, while the hardware addresses of a LAN are 48 bits). In addition, new hosts may often be added to a network, or some hosts may be removed. Changing network adapters can also cause the hardware addresses of hosts to change. Address Resolution Protocol ARP solves this problem by storing a mapping table from IP addresses to hardware addresses in the host&rsquo;s ARP cache, and this mapping table is also dynamically updated (added or deleted on timeout) frequently.</p>
+<p>Each host has an ARP cache, which contains the mapping table from IP addresses to hardware addresses of the hosts and routers on the LAN, and these are the addresses that the host knows at present. How does the host know these addresses? We can use the following example to illustrate.</p>
+<p>When host A wants to send an IP datagram to a host B on the LAN, it first checks if there is an IP address of host B in its ARP cache. If there is, it will find out the corresponding hardware address in the ARP cache, and then write the hardware address to the MAC frame, and then send the MAC frame to this hardware address through the LAN.</p>
+<p>There may also be items where the IP address of host B cannot be checked. This may be because Host B has only just entered the network, or it may be that Host A has just been powered up and its cache is still empty. In this case, Host A runs ARP automatically and then follows the steps below to find out the hardware address of Host B.</p>
+<ol>
+<li>
+<p>The ARP process broadcasts and sends an ARP request packet on the local area network. An example of the main content of the ARP request packet is: &ldquo;My IP address is 209.0.0.5 and my hardware address is 00-00-C0-15-AD-18. I want to know the hardware address of the host with IP address 209.0.0.6.&rdquo;</p>
+</li>
+<li>
+<p>This ARP request packet is received by all ARP processes running on all hosts on this LAN.</p>
+</li>
+<li>
+<p>The IP address of host B matches the IP address to be queried in the ARP request packet, so it receives this ARP request packet and sends an ARP response packet to host A, and writes its own hardware address in this ARP response packet. Since the IP addresses of all the other hosts do not match the IP address in the ARP request packet, they ignore the ARP request packet. The main content of the ARP response packet is: &ldquo;My IP address is 209.0.0.6, and my hardware address is 08-00-2B-00-EE-0A.&rdquo; Note that although the ARP request packet is sent broadcast, the ARP response packet is plain unicast, i.e., it is sent from a source address to a destination address.</p>
+</li>
+<li>
+<p>Once host A receives the ARP response packet from host B, it writes the mapping from host B&rsquo;s IP address to the hardware address in its ARP cache.</p>
+</li>
+</ol>
+<p>When host A sends a datagram to B, it is likely that host B will have to send another datagram to A shortly thereafter, and thus host B may also have to send an ARP request packet to A. To reduce the amount of traffic on the network, host A writes its IP address to the hardware address mapping into the ARP request packet when it sends its ARP request packet. When host B receives A&rsquo;s ARP request packet, it writes this address mapping of host A into host B&rsquo;s own ARP cache. It is convenient for host B to send datagrams to A later.</p>
+<p>As you can see, the ARP cache is very useful. If the ARP cache is not used, then any host that communicates once must send the ARP request packet over the network by broadcast, which greatly increases the amount of communication over the network. The next time a host communicates with a host with the same destination address, it can find the required hardware address directly from the cache instead of sending the ARP request packet by broadcast.</p>
+<p>ARP sets a survival time (e.g., 10 to 20 minutes) for each mapped address item stored in the cache. Any item that exceeds the survival time is removed from the cache. It is important to set the survival time of such address mapping items. Imagine a situation where hosts A and B communicate. Host A communicates with B. A&rsquo;s ARP cache has B&rsquo;s hardware address stored in it. But B&rsquo;s network adapter suddenly breaks down and B immediately replaces it with a new one, so B&rsquo;s hardware address changes. Assuming that A wants to continue communicating with B, A finds B&rsquo;s original hardware address in its ARP cache and sends data frames to B using that hardware address. However, B&rsquo;s original hardware address is no longer valid, so A cannot find host B. But after a short period of time, A&rsquo;s ARP cache has deleted B&rsquo;s original hardware address, so A rebroadcasts the ARP request packet and finds B again.</p>
+<p>Note that ARP is a solution to the problem of mapping IP addresses and hardware addresses of hosts or routers on the same LAN. The resolution from IP addresses to hardware addresses is automatic, and the user of the host is not aware of this address resolution process. Whenever a host or router wants to communicate with another host or router on this network with a known IP address, the ARP protocol automatically resolves that IP address to the hardware address required at the link layer.</p>
+</blockquote>
+<p>ARP</p>
+<h3 id="ipv4">IPv4</h3>
+<p>The format of an IP datagram can illustrate what functions the IP protocol has. An IP datagram consists of two parts: the header and the data. The first part of the header is a fixed length of 20 bytes, which is mandatory for all IP datagrams. Following the fixed part of the header are optional fields that are variable in length. The following describes the meaning of each field in the header.</p>
+<ul>
+<li>
+<p><strong>Version</strong> Occupies 4 bits and refers to the version of the IP protocol. The version of the IP protocol used by both communicating parties must be the same. The current widely used IP protocol version number is 4 (i.e. IPv4).</p>
+</li>
+<li>
+<p><strong>Header Length</strong> 　The maximum decimal value that can be represented is 15. Please note that the unit of the number represented by the initial length field is a 32-bit word (one 32-bit word is 4 bytes long). Since the fixed length of the IP prefix is 20 bytes, the minimum value of the prefix length field is 5 (i.e., the binary representation of the prefix length is 0101). And when the prefix length is the maximum value 1111 (i.e., 15 in decimal), it indicates that the prefix length reaches a maximum of 15 32-bit words long, i.e., 60 bytes. When the IP packet&rsquo;s initial length is not an integer multiple of 4 bytes, it must be padded using the final padding field. Therefore, the data portion of an IP datagram always starts at an integer multiple of 4 bytes, which is more convenient when implementing IP protocols. The disadvantage of limiting the initial length to 60 bytes is that sometimes it may not be enough. However, this is done in the hope that the user will minimize the overhead. The most common prefix length is 20 bytes (i.e., a prefix length of 0101), at which point no options are used.</p>
+</li>
+<li>
+<p>Differentiated Services 　It takes up 8 bits and is used to get better service. This field was called Service Type in the old standard , but it was never actually used.</p>
+</li>
+<li>
+<p>Total Length The total length is the length of the sum of the header and data in bytes. The total length field is 16 bits, so the maximum length of a datagram is 2 16 - 1 = 65535 bytes. However, in practice, it is very rare to transmit such a long datagram.</p>
+</li>
+</ul>
+<h3 id="flow-of-ip-layer-forwarding-packets">Flow of IP layer forwarding packets</h3>
+<p>We know that there is a routing table in the router, but if the routing table points to each host how to forward, that would make the routing table too large, but if the routing table only points to a network how to forward, then the routing table will only include the number of network items, which greatly reduces the need to store items, we do not have to care about the specific topology of a network and the specific number of devices connected to the network, because from one router to the next router forwarding.</p>
+<p>The most important items in the routing table are the following two pieces of information:
+$$
+(Destination network address, next-hop address)
+$$</p>
+<h3 id="icmpinternet-control-message-protocol">ICMP(Internet Control Message Protocol)</h3>
+<p>In order to forward IP datagrams more efficiently and to improve the chances of successful delivery, the ICMP protocol is used at the network layer. The ICMP protocol allows hosts or routers to report errors and provide reports on exceptions. It is important to note that ICMP is not a high-level protocol, but rather remains a network layer protocol, as ICMP messages are packed into IP datagrams as part of the data.</p>
+<p>&ldquo;TOS&rdquo; and &ldquo;Protocol&rdquo; are related to ICMP in the introduction to the packet header structure.</p>
+<p>The description given in the professor&rsquo;s slide is also great:</p>
+<blockquote>
+<p>Das Internet Control Message Protocol (ICMP) dient dazu,
+• in derartigen Fällen den Absender über das Problem zu benachrichtigen und
+• stellt zusätzlich Möglichkeiten bereit, um z. B.
+• die Erreichbarkeit von Hosts zu prüfen („Ping“) oder
+• Pakete umzuleiten (Redirect).</p>
+</blockquote>
+<h4 id="types-of-icmp-messages">Types of ICMP messages</h4>
+<h3 id="ipv6">IPv6</h3>
+<h4 id="ipv6-basic-header">IPv6 Basic Header</h4>
+<p>After IPv4 ran out of addresses, we naturally needed to expand the IP address block, hence IPv6. IPv6 still supports connectionless transport, but refers to the protocol data unit PDUs as packets, rather than IPv4 datagrams.</p>
+<p>The main changes in IPv6 are as follows:</p>
+<ol>
+<li><strong>Larger address space</strong>, increasing the 32-bit IPv4 address space to four times that of IPv4, i.e., to 128 bits.</li>
+<li><strong>Extended address hierarchy</strong>.</li>
+<li><strong>Flexible prefix format</strong>.</li>
+<li><strong>Improved options</strong>. 5.</li>
+<li><strong>Allows protocols to continue to expand</strong>. 6.</li>
+<li><strong>IPv6 prefixes are now 8-byte aligned</strong> (i.e., the prefix length must be an integer multiple of 8 bytes), whereas IPv4 prefixes were 4-byte aligned.</li>
+</ol>
+<p>Compared to IPv4, IPv6 has changed some fields in the header as follows:</p>
+<ul>
+<li>The length field of the header has been removed, since the length of the header is fixed (40 bytes)</li>
+<li>The Type of Service (TOS) field has been removed, since the Priority and Flow Label Number fields implement the function of the Type of Service field</li>
+<li>The total field length has been removed in favor of the payload length field</li>
+<li>Eliminated the Identification, Flag and Slice Offset fields, but the role is the same</li>
+<li>The protocol field has been removed</li>
+<li>Check sum field has been removed</li>
+<li>Removed optional fields</li>
+</ul>
+<figure><img src="https://cdn.jsdelivr.net/gh/Interstellarss/CDN@0.1.6/images/network-layer/IPv6_header_EN.png"
+         alt="image"/><figcaption>
+            <p>IPv4-Header (oben) und IPv6-Header (unten) im Vergleich</p>
+        </figcaption>
+</figure>
+
+<h4 id="ipv6-basic-prefix-segments-role">IPv6 Basic Prefix Segments Role</h4>
+<figure><img src="https://cdn.jsdelivr.net/gh/Interstellarss/CDN@0.1.6/images/network-layer/IPv6_header_CN.png"
+         alt="image"/><figcaption>
+            <p>IPv6 Header</p>
+        </figcaption>
+</figure>
+
+<ol>
+<li>
+<p><strong>version</strong> 4 bits, specifies the protocol version, for IPv6 this field is 6</p>
+</li>
+<li>
+<p><strong>traffic class</strong> 8 bits. This is to distinguish the class or priority of different IPv6 datagrams. We are currently experimenting with different traffic performance.</p>
+</li>
+<li>
+<p><strong>flow label</strong> 20 bits. A new mechanism in IPv6 is to support resource preallocation and allow routers to associate each datagram with a given resource allocation. IPv6 introduces the abstract concept of flow. A <strong>&ldquo;flow&rdquo; is a series of datagrams () on an interconnected network from a specific source to a specific destination (unicast or multicast), and the routers in the path of this &ldquo;flow&rdquo; are guaranteed the specified quality of service</strong>. All datagrams belonging to the same stream have the same stream label. Therefore, stream tagging is particularly useful for real-time audio/video data delivery. 4.</p>
+</li>
+<li>
+<p><strong>payload length</strong> is 16 bits. It specifies the number of bytes in the IPv6 datagram in addition to the base header (all extended headers are counted as part of the payload). The maximum value of this field is 64KB (65535 bytes)</p>
+</li>
+<li>
+<p><strong>next header</strong> 8 bits. It is equivalent to the optional field of the IPv4 protocol field.</p>
+</li>
+<li>
+<p><strong>hop limit</strong> 8 bits. Used to prevent datagrams.</p>
+</li>
+<li>
+<p><strong>Source address</strong> 128 bits. It is the address of the sender side of the datagram. 8.</p>
+</li>
+<li>
+<p><strong>Destination address</strong> 128 bits. It is the IP address of the receiving end of the datagram.</p>
+</li>
+</ol>
+<p>Let&rsquo;s introduce the extended initials of <strong>IPv6</strong>.</p>
+<p>As you know, if an IPv4 datagram uses options in its header, each router along the path of the datagram must check each of these options, which slows down the processing of the datagram by the router. IPv6 puts the functionality of the options in the original IPv4 header in the extended header, and leaves the extended header to the hosts at the source and destination at each end of the path, while none of the routers** through which the datagram passes process the extended header** (with the exception of one header). (with the exception of one, the hop-by-hop option for extended headers), which ** greatly improves the processing efficiency of the router **.</p>
+<p>We will probably encounter these six extended headers: (1) hop-by-hop option; (2) routing; (3) fragmentation; (4) identification; (5) encapsulation security payload; and (6) destination option.</p>
+<p>Each extension header consists of a number of fields, and they vary in length. However, the first field of all extension headers is the 8-bit &ldquo;next header&rdquo; field. The value of this field indicates what field follows the extension header. When multiple extension headers are used, they should appear in the above order. High-level headers are always placed last.</p>
+<h4 id="ipv6-addresses">IPv6 Addresses</h4>
+<p>n general, the destination address of an IPv6 datagram can be one of the following three basic types of addresses:</p>
+<ol>
+<li><strong>unicast</strong> Unicast is peer-to-peer communication</li>
+<li><strong>multicast</strong></li>
+<li><strong>anycast</strong></li>
+</ol>
+<p>IPv6 refers to both hosts and routers that implement IPv6 as nodes. Since a node may use multiple links to connect to some other nodes, a node may have multiple interfaces to the links. Thus, IPv6 assigns an IP address to each interface of a node. A node can have multiple unicast addresses, and any one of them can be used as the destination address to reach the node.</p>
+<h4 id="icmpv6">ICMPv6</h4>
+<p>Like IPv4, IPv6 does not guarantee reliable delivery of datagrams, as routers in the Internet may drop them. Therefore, IPv6 also needs to use ICMP to feed back some error messages. The new version is IPv6, which is much more complex than ICMPv4. The functions of the address resolution protocols ARP and IGMP have been merged into ICMPv6.</p>
+<figure><img src="https://cdn.jsdelivr.net/gh/Interstellarss/CDN@0.1.6/images/network-layer/ICMP_v6v4.png"
+         alt="image"/><figcaption>
+            <p>Comparison of the network layer in the old and new versions</p>
+        </figcaption>
+</figure>
+
+<p>ICMPv6 is a message-oriented protocol that uses messages to report errors, obtain information, probe neighboring stations, or manage multicast traffic. ICMPv6 adds several other protocols that define the function and meaning of messages. Different literature and RFC documents use different strategies when categorizing ICMPv6 messages, some defining some of them as ICMPv6 messages and others as <strong>Neighbor-Discovery ND (Neighbor Discovery) messages</strong>, <strong>using the NDP protocol (Neighbor Discovery Protocol)</strong> or multicast Protocol)** or Multicast Listener Delivery (MLD) messages. In fact, all these messages should be ICMPv6 messages, just with different functions and roles. Therefore, we include all these messages in different categories of ICMPv6. The reason for using this classification is that all these messages have the same format and all message types are handled by the ICMPv6 protocol.</p>
+<p>Structure of ICMPv6 messages:
+<figure><img src="https://cdn.jsdelivr.net/gh/Interstellarss/CDN@0.1.6/images/network-layer/ICMPv6_Nachricht_Aufbau.jpg"
+         alt="image"/><figcaption>
+            <p>ICMPv6</p>
+        </figcaption>
+</figure>
+</p>
+<h3 id="routing">Routing</h3>
+<h4 id="longest-prefix-matching">Longest Prefix Matching</h4>
+<p>When using CIDR, since this notation of network prefix is used, the IP address consists of two parts: network prefix and host number, so the items in the routing table have to be changed accordingly. At this time, each item consists of &ldquo;network prefix&rdquo; and &ldquo;next-hop address&rdquo;. But when looking up the routing table you may get more than one match . This raises the question: which route should we choose from these matches?</p>
+<p>The correct answer is: the route with the longest network prefix should be selected from the match results. This is called longest-prefix matching, because the longer the network prefix, the smaller the address block, and therefore the more specific the route. Longest-prefix matching is also known as longest matching or best matching.</p>
+<blockquote>
+<p>Die Routingtabelle wird von längeren Präfixen (spezifischeren Routen) hin zu kürzeren Präfixen (weniger
+spezifische Routen) durchsucht. Der erste passende Eintrag liefert das Gateway (Next-Hop) eines Pakets.
+Diesen Prozess bezeichnet man als Longest Prefix Matching.</p>
+</blockquote>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2020-07-06</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://interstellarss.github.io/posts/computernetwork/network-layer_en/" data-title="The network layer as a &#39;lead&#39; expert" data-hashtags="computer network"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://interstellarss.github.io/posts/computernetwork/network-layer_en/" data-hashtag="computer network"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://interstellarss.github.io/posts/computernetwork/network-layer_en/" data-title="The network layer as a &#39;lead&#39; expert"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://interstellarss.github.io/posts/computernetwork/network-layer_en/" data-title="The network layer as a &#39;lead&#39; expert"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@2.14.0/icons/line.svg"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://interstellarss.github.io/posts/computernetwork/network-layer_en/" data-title="The network layer as a &#39;lead&#39; expert"><i class="fab fa-weibo fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/computer-network/">computer network</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/seminar-hpc/shared-memory-parallelism_2/" class="prev" rel="prev" title="当我们谈论 shared memory parallelism 的时候我们在谈论些什么--提升篇"><i class="fas fa-angle-left fa-fw"></i>当我们谈论 shared memory parallelism 的时候我们在谈论些什么--提升篇</a>
+            <a href="/posts/imge/imge-1_en/" class="next" rel="next" title="Different Approaches to 「Rotation」">Different Approaches to 「Rotation」<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div id="gitalk" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.89.2">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.2.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/copy-tex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.37.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.8/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.2.0/dist/js/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.2.0/dist/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.0/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/typeit@7.0.4/dist/typeit.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":10},"comment":{"gitalk":{"admin":["Interstellarss"],"clientID":"b4d6ace595e393612b74","clientSecret":"ebc194ba054bc0b1364a73bb34fc5ac4a3fb9793","id":"2020-07-06T23:16:59+02:00","owner":"Interstellarss","repo":"interstellarss.github.io","title":"The network layer as a 'lead' expert"}},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"$$","right":"$$"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"},{"display":false,"left":"$","right":"$"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'G-LMR64333PL', { 'anonymize_ip': true });
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=G-LMR64333PL" async></script></body>
+</html>

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-        <title>基于diamond-square-algorithm生成高度图的C&#43;&#43;实现 - 法术研究分享Blog</title><meta name="Description" content="computer graphics中的一个小算法"><meta property="og:title" content="基于diamond-square-algorithm生成高度图的C&#43;&#43;实现" />
-<meta property="og:description" content="computer graphics中的一个小算法" />
+        <title>Generation of height maps based on diamond-square-algorithm in C&#43;&#43; - my Blog for notes</title><meta name="Description" content="a small algorithms for practical course for real-time computer graphics"><meta property="og:title" content="Generation of height maps based on diamond-square-algorithm in C&#43;&#43;" />
+<meta property="og:description" content="a small algorithms for practical course for real-time computer graphics" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://interstellarss.github.io/posts/computer_graphics/implementation-about-diamond-square/" /><meta property="og:image" content="https://interstellarss.github.io/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2020-05-21T11:38:08+02:00" />
@@ -15,10 +15,10 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://interstellarss.github.io/logo.png"/>
 
-<meta name="twitter:title" content="基于diamond-square-algorithm生成高度图的C&#43;&#43;实现"/>
-<meta name="twitter:description" content="computer graphics中的一个小算法"/>
-<meta name="application-name" content="法术研究分享Blog">
-<meta name="apple-mobile-web-app-title" content="法术研究分享Blog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c">
+<meta name="twitter:title" content="Generation of height maps based on diamond-square-algorithm in C&#43;&#43;"/>
+<meta name="twitter:description" content="a small algorithms for practical course for real-time computer graphics"/>
+<meta name="application-name" content="my Blog for Notes">
+<meta name="apple-mobile-web-app-title" content="my Blog for Notes"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c">
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -37,8 +37,8 @@ if (!doNotTrack) {
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "基于diamond-square-algorithm生成高度图的C++实现",
-        "inLanguage": "zh-CN",
+        "headline": "Generation of height maps based on diamond-square-algorithm in C++",
+        "inLanguage": "en",
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/interstellarss.github.io\/posts\/computer_graphics\/implementation-about-diamond-square\/"
@@ -53,7 +53,7 @@ if (!doNotTrack) {
             "name": "Puxuan"},"author": {
                 "@type": "Person",
                 "name": "Puxuan"
-            },"description": "computer graphics中的一个小算法"
+            },"description": "a small algorithms for practical course for real-time computer graphics"
     }
     </script></head>
     <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
@@ -61,21 +61,21 @@ if (!doNotTrack) {
         <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
     <div class="header-wrapper">
         <div class="header-title">
-            <a href="/" title="法术研究分享Blog"><span class="header-title-pre"><i class='fas fa-cat'></i></span></a>
+            <a href="/" title="my Blog for notes"><span class="header-title-pre"><i class='fas fa-cat'></i></span><span id="id-1" class="typeit"></span></a>
         </div>
         <div class="menu">
-            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
-                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
-                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/"> About </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
                             <i class="fas fa-search fa-fw"></i>
                         </a>
-                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
                             <i class="fas fa-times-circle fa-fw"></i>
                         </a>
                         <span class="search-button search-loading" id="search-loading-desktop">
                             <i class="fas fa-spinner fa-fw fa-spin"></i>
                         </span>
-                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
                     <i class="fas fa-adjust fa-fw"></i>
                 </a>
             </div>
@@ -85,7 +85,7 @@ if (!doNotTrack) {
     <div class="header-container">
         <div class="header-wrapper">
             <div class="header-title">
-                <a href="/" title="法术研究分享Blog"><span class="header-title-pre"><i class='fas fa-cat'></i></span></a>
+                <a href="/" title="my Blog for notes"><span class="header-title-pre"><i class='fas fa-cat'></i></span><span id="id-2" class="typeit"></span></a>
             </div>
             <div class="menu-toggle" id="menu-toggle-mobile">
                 <span></span><span></span><span></span>
@@ -93,11 +93,11 @@ if (!doNotTrack) {
         </div>
         <div class="menu" id="menu-mobile"><div class="search-wrapper">
                     <div class="search mobile" id="search-mobile">
-                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
-                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
                             <i class="fas fa-search fa-fw"></i>
                         </a>
-                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
                             <i class="fas fa-times-circle fa-fw"></i>
                         </a>
                         <span class="search-button search-loading" id="search-loading-mobile">
@@ -105,9 +105,9 @@ if (!doNotTrack) {
                         </span>
                     </div>
                     <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
-                        取消
+                        Cancel
                     </a>
-                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/" title="">About</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
                 <i class="fas fa-adjust fa-fw"></i>
             </a></div>
     </div>
@@ -119,10 +119,10 @@ if (!doNotTrack) {
     <div id="search-dropdown-mobile"></div>
 </div>
 <main class="main">
-                <div class="container"><article class="page single"><h1 class="single-title animated flipInX">基于diamond-square-algorithm生成高度图的C&#43;&#43;实现</h1><div class="post-meta">
-            <div class="post-meta-line"><span class="post-author"><a href="https://interstellarss.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Puxuan</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>学习笔记</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-05-21">2020-05-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2097 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 5 分钟&nbsp;</div>
+                <div class="container"><article class="page single"><h1 class="single-title animated flipInX">Generation of height maps based on diamond-square-algorithm in C&#43;&#43;</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://interstellarss.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Puxuan</a></span>&nbsp;<span class="post-category">included in <a href="/categories/notes/"><i class="far fa-folder fa-fw"></i>Notes</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-05-21">2020-05-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;2097 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;5 minutes&nbsp;</div>
         </div><div class="content" id="content"><p>其实很多时候我们看到的这些渲染真的是很神奇的事，比如一些terrain看似是三维的，其实可以由二维产生，即为每一个像素点赋予一个高度值，这些高度值构成的点列又可以转换为一张二维图像来存储，需要的时候，相应的地形可以由此图片生成。淡淡的想，一些所谓的空间法术，大概也就是这样了吧。高度图作为维度空间法术的入门想来也是极好的。</p>
 <p>至于法术的入门，我们只关注用正态分布或diamond square来赋值，terrain generator中关于color和normal的值图像我们后面会聊到。</p>
 <p>下面来看代码：</p>
@@ -924,14 +924,14 @@ if (!doNotTrack) {
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>更新于 2020-05-21</span>
+                <span>Updated on 2020-05-21</span>
             </div>
             <div class="post-info-license"></div>
         </div>
         <div class="post-info-line">
             <div class="post-info-md"></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://interstellarss.github.io/posts/computer_graphics/implementation-about-diamond-square/" data-title="基于diamond-square-algorithm生成高度图的C&#43;&#43;实现" data-hashtags="real-time computer graphics"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://interstellarss.github.io/posts/computer_graphics/implementation-about-diamond-square/" data-hashtag="real-time computer graphics"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://interstellarss.github.io/posts/computer_graphics/implementation-about-diamond-square/" data-title="基于diamond-square-algorithm生成高度图的C&#43;&#43;实现"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://interstellarss.github.io/posts/computer_graphics/implementation-about-diamond-square/" data-title="基于diamond-square-algorithm生成高度图的C&#43;&#43;实现"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@2.14.0/icons/line.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://interstellarss.github.io/posts/computer_graphics/implementation-about-diamond-square/" data-title="基于diamond-square-algorithm生成高度图的C&#43;&#43;实现"><i class="fab fa-weibo fa-fw"></i></a></span>
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://interstellarss.github.io/posts/computer_graphics/implementation-about-diamond-square/" data-title="Generation of height maps based on diamond-square-algorithm in C&#43;&#43;" data-hashtags="real-time computer graphics"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://interstellarss.github.io/posts/computer_graphics/implementation-about-diamond-square/" data-hashtag="real-time computer graphics"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://interstellarss.github.io/posts/computer_graphics/implementation-about-diamond-square/" data-title="Generation of height maps based on diamond-square-algorithm in C&#43;&#43;"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://interstellarss.github.io/posts/computer_graphics/implementation-about-diamond-square/" data-title="Generation of height maps based on diamond-square-algorithm in C&#43;&#43;"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@2.14.0/icons/line.svg"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://interstellarss.github.io/posts/computer_graphics/implementation-about-diamond-square/" data-title="Generation of height maps based on diamond-square-algorithm in C&#43;&#43;"><i class="fab fa-weibo fa-fw"></i></a></span>
             </div>
         </div>
     </div>
@@ -939,7 +939,7 @@ if (!doNotTrack) {
     <div class="post-info-more">
         <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/real-time-computer-graphics/">real-time computer graphics</a></section>
         <section>
-            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
         </section>
     </div>
 
@@ -950,17 +950,17 @@ if (!doNotTrack) {
                 Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
             </noscript></div></article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.89.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.89.2">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
                 </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>
 
-        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
                 <i class="fas fa-arrow-up fa-fw"></i>
-            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
                 <i class="fas fa-comment fa-fw"></i>
             </a>
-        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/copy-tex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.37.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.8/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.0/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"gitalk":{"admin":["Interstellarss"],"clientID":"b4d6ace595e393612b74","clientSecret":"ebc194ba054bc0b1364a73bb34fc5ac4a3fb9793","id":"2020-05-21T11:38:08+02:00","owner":"Interstellarss","repo":"interstellarss.github.io","title":"基于diamond-square-algorithm生成高度图的C++实现"}},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"$$","right":"$$"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"},{"display":false,"left":"$","right":"$"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/copy-tex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.37.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.8/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.0/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/typeit@7.0.4/dist/typeit.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":10},"comment":{"gitalk":{"admin":["Interstellarss"],"clientID":"b4d6ace595e393612b74","clientSecret":"ebc194ba054bc0b1364a73bb34fc5ac4a3fb9793","id":"2020-05-21T11:38:08+02:00","owner":"Interstellarss","repo":"interstellarss.github.io","title":"Generation of height maps based on diamond-square-algorithm in C++"}},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"$$","right":"$$"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"},{"display":false,"left":"$","right":"$"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
             window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
             gtag('config', 'G-LMR64333PL', { 'anonymize_ip': true });
         </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=G-LMR64333PL" async></script></body>

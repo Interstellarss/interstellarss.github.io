@@ -1,28 +1,34 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>Virtualization_Tech - 标签 - 法术研究分享Blog</title>
+        <title>Virtualization_Tech - Tag - my Blog for notes</title>
         <link>https://interstellarss.github.io/tags/virtualization_tech/</link>
-        <description>Virtualization_Tech - 标签 - 法术研究分享Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 02 Mar 2022 10:03:37 &#43;0100</lastBuildDate><atom:link href="https://interstellarss.github.io/tags/virtualization_tech/" rel="self" type="application/rss+xml" /><item>
+        <description>Virtualization_Tech - Tag - my Blog for notes</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 02 Mar 2022 10:03:37 &#43;0100</lastBuildDate><atom:link href="https://interstellarss.github.io/tags/virtualization_tech/" rel="self" type="application/rss+xml" /><item>
     <title>Something about ISA Emulation -- 2</title>
     <link>https://interstellarss.github.io/posts/vt/isa_emulation2/</link>
     <pubDate>Wed, 02 Mar 2022 10:03:37 &#43;0100</pubDate>
-    <author>作者</author>
+    <author>Author</author>
     <guid>https://interstellarss.github.io/posts/vt/isa_emulation2/</guid>
     <description><![CDATA[]]></description>
 </item><item>
     <title>Something about Process-Virtual-Machine</title>
     <link>https://interstellarss.github.io/posts/vt/process_virtual_machine/</link>
     <pubDate>Thu, 10 Feb 2022 15:50:20 &#43;0100</pubDate>
-    <author>作者</author>
+    <author>Author</author>
     <guid>https://interstellarss.github.io/posts/vt/process_virtual_machine/</guid>
-    <description><![CDATA[Process VM Emulation of a user-level process (with possibly different ISA, different OS) – components required? – techniques? – correctness verification? Process VM with same OS, same ISA – use case? motivation process migration flexible control of used OS resources „OS-level virtualization“ enough not discussed here Virtualization of]]></description>
+    <description><![CDATA[Process VM   Emulation of a user-level process (with possibly different ISA, different OS) – components required? – techniques? – correctness verification?
+  Process VM with same OS, same ISA – use case?
+ motivation  process migration flexible control of used OS resources   „OS-level virtualization“ enough not discussed here    Virtualization of a process environment
+ emulation of user ISA + OS environment (ABI) every guest process gets own environment guest and host OS often the same    View of the host machine user]]></description>
 </item><item>
     <title>Something about ISA Emulation -- 1</title>
     <link>https://interstellarss.github.io/posts/vt/isa_emulation1/</link>
     <pubDate>Tue, 16 Nov 2021 20:50:20 &#43;0100</pubDate>
-    <author>作者</author>
+    <author>Author</author>
     <guid>https://interstellarss.github.io/posts/vt/isa_emulation1/</guid>
-    <description><![CDATA[A complete ISA consists of many parts, including the register set and memory architecture, the instructions , and the trap and interrupt architecture. A virtual machine implementation is usually concerned with all aspects of ISA emulation. Here we will be focusing on (user-level) instruction emulation. Instruction set emulation can be carried out basiclly in 2 techniques: interpretation, and binary translation. Interpretation involves a cycle of fetching a source instrction, analyzing]]></description>
+    <description><![CDATA[A complete ISA consists of many parts, including the register set and memory architecture, the instructions , and the trap and interrupt architecture. A virtual machine implementation is usually concerned with all aspects of ISA emulation.
+Here we will be focusing on (user-level) instruction emulation.
+Instruction set emulation can be carried out basiclly in 2 techniques: interpretation, and binary translation.
+ Interpretation involves a cycle of fetching a source instrction, analyzing it, performing the required operation, and then fetching the next source instruction &ndash; all in software.]]></description>
 </item></channel>
 </rss>

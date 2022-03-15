@@ -1,77 +1,84 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>所有文章 - 法术研究分享Blog</title>
+        <title>All Posts - my Blog for notes</title>
         <link>https://interstellarss.github.io/posts/</link>
-        <description>所有文章 | 法术研究分享Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 02 Mar 2022 10:03:37 &#43;0100</lastBuildDate><atom:link href="https://interstellarss.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+        <description>All Posts | my Blog for notes</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 02 Mar 2022 10:03:37 &#43;0100</lastBuildDate><atom:link href="https://interstellarss.github.io/posts/" rel="self" type="application/rss+xml" /><item>
     <title>Something about ISA Emulation -- 2</title>
     <link>https://interstellarss.github.io/posts/vt/isa_emulation2/</link>
     <pubDate>Wed, 02 Mar 2022 10:03:37 &#43;0100</pubDate>
-    <author>作者</author>
+    <author>Author</author>
     <guid>https://interstellarss.github.io/posts/vt/isa_emulation2/</guid>
     <description><![CDATA[]]></description>
 </item><item>
     <title>Something about Process-Virtual-Machine</title>
     <link>https://interstellarss.github.io/posts/vt/process_virtual_machine/</link>
     <pubDate>Thu, 10 Feb 2022 15:50:20 &#43;0100</pubDate>
-    <author>作者</author>
+    <author>Author</author>
     <guid>https://interstellarss.github.io/posts/vt/process_virtual_machine/</guid>
-    <description><![CDATA[Process VM Emulation of a user-level process (with possibly different ISA, different OS) – components required? – techniques? – correctness verification? Process VM with same OS, same ISA – use case? motivation process migration flexible control of used OS resources „OS-level virtualization“ enough not discussed here Virtualization of]]></description>
+    <description><![CDATA[Process VM   Emulation of a user-level process (with possibly different ISA, different OS) – components required? – techniques? – correctness verification?
+  Process VM with same OS, same ISA – use case?
+ motivation  process migration flexible control of used OS resources   „OS-level virtualization“ enough not discussed here    Virtualization of a process environment
+ emulation of user ISA + OS environment (ABI) every guest process gets own environment guest and host OS often the same    View of the host machine user]]></description>
 </item><item>
     <title>Something about ISA Emulation -- 1</title>
     <link>https://interstellarss.github.io/posts/vt/isa_emulation1/</link>
     <pubDate>Tue, 16 Nov 2021 20:50:20 &#43;0100</pubDate>
-    <author>作者</author>
+    <author>Author</author>
     <guid>https://interstellarss.github.io/posts/vt/isa_emulation1/</guid>
-    <description><![CDATA[A complete ISA consists of many parts, including the register set and memory architecture, the instructions , and the trap and interrupt architecture. A virtual machine implementation is usually concerned with all aspects of ISA emulation. Here we will be focusing on (user-level) instruction emulation. Instruction set emulation can be carried out basiclly in 2 techniques: interpretation, and binary translation. Interpretation involves a cycle of fetching a source instrction, analyzing]]></description>
-</item><item>
-    <title>摄影记录--1</title>
-    <link>https://interstellarss.github.io/posts/photos/photograph1/</link>
-    <pubDate>Fri, 04 Dec 2020 19:49:03 &#43;0100</pubDate>
-    <author>作者</author>
-    <guid>https://interstellarss.github.io/posts/photos/photograph1/</guid>
-    <description><![CDATA[]]></description>
+    <description><![CDATA[A complete ISA consists of many parts, including the register set and memory architecture, the instructions , and the trap and interrupt architecture. A virtual machine implementation is usually concerned with all aspects of ISA emulation.
+Here we will be focusing on (user-level) instruction emulation.
+Instruction set emulation can be carried out basiclly in 2 techniques: interpretation, and binary translation.
+ Interpretation involves a cycle of fetching a source instrction, analyzing it, performing the required operation, and then fetching the next source instruction &ndash; all in software.]]></description>
 </item><item>
     <title>Relational Model and Relational Algebra</title>
     <link>https://interstellarss.github.io/posts/database/datenbank-3/</link>
     <pubDate>Sun, 15 Nov 2020 11:34:02 &#43;0100</pubDate>
-    <author>作者</author>
+    <author>Author</author>
     <guid>https://interstellarss.github.io/posts/database/datenbank-3/</guid>
     <description><![CDATA[]]></description>
 </item><item>
-    <title>「旋转」的不同实现方法</title>
-    <link>https://interstellarss.github.io/posts/imge/imge-1/</link>
+    <title>Different Approaches to 「Rotation」</title>
+    <link>https://interstellarss.github.io/posts/imge/imge-1_en/</link>
     <pubDate>Tue, 10 Nov 2020 16:08:41 &#43;0100</pubDate>
-    <author>作者</author>
-    <guid>https://interstellarss.github.io/posts/imge/imge-1/</guid>
+    <author>Author</author>
+    <guid>https://interstellarss.github.io/posts/imge/imge-1_en/</guid>
     <description><![CDATA[]]></description>
 </item><item>
-    <title>直观又调皮的ER-Model</title>
-    <link>https://interstellarss.github.io/posts/database/datenbank-2/</link>
-    <pubDate>Sun, 08 Nov 2020 14:44:27 &#43;0100</pubDate>
-    <author>作者</author>
-    <guid>https://interstellarss.github.io/posts/database/datenbank-2/</guid>
-    <description><![CDATA[ER-Model 的基础概念]]></description>
-</item><item>
-    <title>初识数据库</title>
-    <link>https://interstellarss.github.io/posts/database/datanbank-1/</link>
-    <pubDate>Wed, 04 Nov 2020 19:46:16 &#43;0100</pubDate>
-    <author>作者</author>
-    <guid>https://interstellarss.github.io/posts/database/datanbank-1/</guid>
-    <description><![CDATA[简单介绍DBMS的概念以及涵盖的主题]]></description>
-</item><item>
-    <title>作为带路专家的网络层</title>
-    <link>https://interstellarss.github.io/posts/computernetwork/network-layer/</link>
+    <title>The network layer as a &#39;lead&#39; expert</title>
+    <link>https://interstellarss.github.io/posts/computernetwork/network-layer_en/</link>
     <pubDate>Mon, 06 Jul 2020 23:16:59 &#43;0200</pubDate>
-    <author>作者</author>
-    <guid>https://interstellarss.github.io/posts/computernetwork/network-layer/</guid>
-    <description><![CDATA[在这里我们会认识到网络层提供的两种不同服务和网络层的核心也即&ndash;IP协议. 我们能够理解: 虚拟互连网络的概念. IP地址与物理地址的关]]></description>
+    <author>Author</author>
+    <guid>https://interstellarss.github.io/posts/computernetwork/network-layer_en/</guid>
+    <description><![CDATA[Here we will recognize the two different services provided by the network layer and the core of the network layer, namely the IP protocol. We can understand:
+ the concept of virtual interconnection networks. the relationship between IP addresses and physical addresses the traditional classification of IP addresses (including subnet masks)  Address Resolution Protocol ARP In practical applications, we often encounter the problem that we already know the IP address of a machine (host or router) and need to find out its corresponding hardware address.]]></description>
 </item><item>
     <title>当我们谈论 shared memory parallelism 的时候我们在谈论些什么--提升篇</title>
     <link>https://interstellarss.github.io/posts/seminar-hpc/shared-memory-parallelism_2/</link>
     <pubDate>Sun, 07 Jun 2020 21:44:12 &#43;0200</pubDate>
-    <author>作者</author>
+    <author>Author</author>
     <guid>https://interstellarss.github.io/posts/seminar-hpc/shared-memory-parallelism_2/</guid>
     <description><![CDATA[这次带来的是提升篇，其实就是seminar要交的paper的first draft，倒也算是偷懒的一种方式吧。 A brief Overview on Shared Memory Parallelism in Parallel Computing 1. Why parallel? To speed up,]]></description>
+</item><item>
+    <title>Generation of height maps based on diamond-square-algorithm in C&#43;&#43;</title>
+    <link>https://interstellarss.github.io/posts/computer_graphics/implementation-about-diamond-square/</link>
+    <pubDate>Thu, 21 May 2020 11:38:08 &#43;0200</pubDate>
+    <author>Author</author>
+    <guid>https://interstellarss.github.io/posts/computer_graphics/implementation-about-diamond-square/</guid>
+    <description><![CDATA[其实很多时候我们看到的这些渲染真的是很神奇的事，比如一些terrain看似是三维的，其实可以由二维产生，即为每一个像素点赋予一个高度值，这些]]></description>
+</item><item>
+    <title>DFA与NFA的故事(二)</title>
+    <link>https://interstellarss.github.io/posts/theo/something-about-dfa-and-nfa-2/</link>
+    <pubDate>Thu, 14 May 2020 23:56:46 &#43;0200</pubDate>
+    <author>Author</author>
+    <guid>https://interstellarss.github.io/posts/theo/something-about-dfa-and-nfa-2/</guid>
+    <description><![CDATA[我们从(一)可以认识到DFA和NFA是什么样子的，并且知道它们之间的等价性，在“从有穷自动机到正则语言”一篇中我们知道DFA，NFA和正则表]]></description>
+</item><item>
+    <title>功能重要单一的数据链路层</title>
+    <link>https://interstellarss.github.io/posts/computernetwork/data-link-layer/</link>
+    <pubDate>Tue, 12 May 2020 09:44:32 &#43;0200</pubDate>
+    <author>Author</author>
+    <guid>https://interstellarss.github.io/posts/computernetwork/data-link-layer/</guid>
+    <description><![CDATA[连接的特征（Verbindungscharakterisierung） 两个节点之间的连接会有如下的各种属性：传输速率（Übertragung]]></description>
 </item></channel>
 </rss>
