@@ -11,7 +11,7 @@
     <guid>https://interstellarss.github.io/posts/theo/something-about-dfa-and-nfa-2/</guid>
     <description><![CDATA[我们从(一)可以认识到DFA和NFA是什么样子的，并且知道它们之间的等价性，在“从有穷自动机到正则语言”一篇中我们知道DFA，NFA和正则表]]></description>
 </item><item>
-    <title>From Finite Automata to Regular Languages - Implementation Par</title>
+    <title>From Finite Automata to Regular Languages - Implementation Part</title>
     <link>https://interstellarss.github.io/posts/theo/something-about-regular-expression-implementation/</link>
     <pubDate>Tue, 12 May 2020 00:15:53 &#43;0200</pubDate>
     <author>Author</author>
