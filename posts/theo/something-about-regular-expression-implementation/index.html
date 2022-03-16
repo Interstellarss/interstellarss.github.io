@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-        <title>从有穷自动机到正则语言---实现篇 - my blog for notes</title><meta name="Description" content="有穷自动机中的部分java实现"><meta property="og:title" content="从有穷自动机到正则语言---实现篇" />
+        <title>From Finite Automata to Regular Languages - Implementation Par - my blog for notes</title><meta name="Description" content="有穷自动机中的部分java实现"><meta property="og:title" content="From Finite Automata to Regular Languages - Implementation Par" />
 <meta property="og:description" content="有穷自动机中的部分java实现" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://interstellarss.github.io/posts/theo/something-about-regular-expression-implementation/" /><meta property="og:image" content="https://interstellarss.github.io/logo.png"/><meta property="article:section" content="posts" />
@@ -15,7 +15,7 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://interstellarss.github.io/logo.png"/>
 
-<meta name="twitter:title" content="从有穷自动机到正则语言---实现篇"/>
+<meta name="twitter:title" content="From Finite Automata to Regular Languages - Implementation Par"/>
 <meta name="twitter:description" content="有穷自动机中的部分java实现"/>
 <meta name="application-name" content="my blog for notes">
 <meta name="apple-mobile-web-app-title" content="my blog for notes"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c">
@@ -37,7 +37,7 @@ if (!doNotTrack) {
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "从有穷自动机到正则语言---实现篇",
+        "headline": "From Finite Automata to Regular Languages - Implementation Par",
         "inLanguage": "en",
         "mainEntityOfPage": {
             "@type": "WebPage",
@@ -47,7 +47,7 @@ if (!doNotTrack) {
                             "url": "https:\/\/interstellarss.github.io\/images\/Apple-Devices-Preview.png",
                             "width":  3200 ,
                             "height":  2048 
-                        }],"genre": "posts","keywords": "theory of computation, theoretical computer science","wordcount":  5875 ,
+                        }],"genre": "posts","keywords": "theory of computation, theoretical computer science","wordcount":  5614 ,
         "url": "https:\/\/interstellarss.github.io\/posts\/theo\/something-about-regular-expression-implementation\/","datePublished": "2020-05-12T00:15:53+02:00","dateModified": "2020-05-12T00:15:53+02:00","publisher": {
             "@type": "Organization",
             "name": "Puxuan"},"author": {
@@ -119,12 +119,12 @@ if (!doNotTrack) {
     <div id="search-dropdown-mobile"></div>
 </div>
 <main class="main">
-                <div class="container"><article class="page single"><h1 class="single-title animated flipInX">从有穷自动机到正则语言---实现篇</h1><div class="post-meta">
+                <div class="container"><article class="page single"><h1 class="single-title animated flipInX">From Finite Automata to Regular Languages - Implementation Par</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://interstellarss.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Puxuan</a></span>&nbsp;<span class="post-category">included in <a href="/categories/notes/"><i class="far fa-folder fa-fw"></i>Notes</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-05-12">2020-05-12</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;5875 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-05-12">2020-05-12</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;5614 words&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;12 minutes&nbsp;</div>
-        </div><div class="content" id="content"><p>本篇可以看作是“从有穷自动机到正则表达式”此篇的番外篇，主要是提供JAVA实现从DFA到RE的转换。因为代码完全是从作业中copy的，不知道会不会有版权问题，但这也不算商业用途，其中有一部分代码也是我自己写的，所以应该问题不大吧。（作业默认会给出Java和Haskell的一些源码，我不太想写Haskell所以就用Java来实现了，有兴趣的可以自己从copy代码后试一试）</p>
-<p>先来看看正则表达式的实现，其中有一个Regex的抽象类，和另一篇博文中关于正则表达式的定义相对应，有6个子类来作为归纳的基础，分别是$\epsilon , \emptyset$, 单个字母，连接，并，星号，下面是代码。</p>
+        </div><div class="content" id="content"><p>This article can be seen as &ldquo;from infinite automata to regular expressions&rdquo; of this additional article, mainly to provide JAVA to achieve from DFA to RE conversion. Because the code is copied from the assignment, I don&rsquo;t know if there will be any copyright problem, but this is not considered commercial use, and some of the code is written by me, so it should not be a big problem. (The assignment will give some source code of Java and Haskell by default, I don&rsquo;t want to write Haskell so I will use Java to implement it, interested parties can try it by themselves after copying the code)</p>
+<p>Let&rsquo;s first look at the implementation of regular expressions, where there is an abstract class of Regex, corresponding to the definition of regular expressions in another blog post, with six subclasses to serve as a basis for generalization, namely $\epsilon , \emptyset$, single-letter, concatenated, and, asterisk, and here is the code.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">  1
@@ -1605,7 +1605,7 @@ if (!doNotTrack) {
 
 </code></pre></td></tr></table>
 </div>
-</div><p>好了，现在有了正则表达式的基础，再写一个parser用来识别正则表达式。</p>
+</div><p>Well, now that you have the basis of regular expressions, write another parser to recognize regular expressions.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">  1
@@ -2163,7 +2163,7 @@ if (!doNotTrack) {
 
 </code></pre></td></tr></table>
 </div>
-</div><p>接下来是关于State，也就是状态类的实现：</p>
+</div><p>The next point is about the implementation of the State, or state, class.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -2415,7 +2415,7 @@ if (!doNotTrack) {
 
 </code></pre></td></tr></table>
 </div>
-</div><p>终于把基础部分copy完了，接下来的DFAOperation类就是重点了，这里面有根据已有的DFA来识别一个串是否被其识别；又有根据给定的DFA来生成等价正则表达式（其中的算法也就是Tobia教授上课时候slides上面给出的那个，在另一篇博文中也有说明），我为了偷懒基本都是用stream来实现的，所以肯定不是最佳性能。这里要注意的是，将stream转为State类的数组时需要根据相应的 id来排序，否则用教授给的算法进行归纳时会出现问题（进行了多次debug才灵光一现看到这个问题）。</p>
+</div><p>Finally the basic part of copy finished, the next DFAOperation class is the focus, which is based on the existing DFA to identify whether a string is identified by it; and there is a given DFA to generate equivalent regular expressions (the algorithm is also Tobia Professor slides given above the class, in another blog post is also explained), I In order to be lazy, I basically use stream to implement it, so it is certainly not the best performance. The point to note here is that when converting the stream to an array of State classes, you need to sort them according to the corresponding ids, otherwise there will be a problem when using the algorithm given by the professor to summarize (it took several debug sessions to see this problem in a flash).</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -2878,7 +2878,7 @@ if (!doNotTrack) {
         <div class="post-info-line">
             <div class="post-info-md"></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://interstellarss.github.io/posts/theo/something-about-regular-expression-implementation/" data-title="从有穷自动机到正则语言---实现篇" data-hashtags="theory of computation,theoretical computer science"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://interstellarss.github.io/posts/theo/something-about-regular-expression-implementation/" data-hashtag="theory of computation"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://interstellarss.github.io/posts/theo/something-about-regular-expression-implementation/" data-title="从有穷自动机到正则语言---实现篇"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://interstellarss.github.io/posts/theo/something-about-regular-expression-implementation/" data-title="从有穷自动机到正则语言---实现篇"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@2.14.0/icons/line.svg"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://interstellarss.github.io/posts/theo/something-about-regular-expression-implementation/" data-title="从有穷自动机到正则语言---实现篇"><i class="fab fa-weibo fa-fw"></i></a></span>
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://interstellarss.github.io/posts/theo/something-about-regular-expression-implementation/" data-title="From Finite Automata to Regular Languages - Implementation Par" data-hashtags="theory of computation,theoretical computer science"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://interstellarss.github.io/posts/theo/something-about-regular-expression-implementation/" data-hashtag="theory of computation"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://interstellarss.github.io/posts/theo/something-about-regular-expression-implementation/" data-title="From Finite Automata to Regular Languages - Implementation Par"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://interstellarss.github.io/posts/theo/something-about-regular-expression-implementation/" data-title="From Finite Automata to Regular Languages - Implementation Par"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@2.14.0/icons/line.svg"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://interstellarss.github.io/posts/theo/something-about-regular-expression-implementation/" data-title="From Finite Automata to Regular Languages - Implementation Par"><i class="fab fa-weibo fa-fw"></i></a></span>
             </div>
         </div>
     </div>
@@ -2907,7 +2907,7 @@ if (!doNotTrack) {
             </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
                 <i class="fas fa-comment fa-fw"></i>
             </a>
-        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.2.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/copy-tex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.37.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.8/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.2.0/dist/js/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.2.0/dist/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.0/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/typeit@7.0.4/dist/typeit.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":10},"comment":{"gitalk":{"admin":["Interstellarss"],"clientID":"b4d6ace595e393612b74","clientSecret":"ebc194ba054bc0b1364a73bb34fc5ac4a3fb9793","id":"2020-05-12T00:15:53+02:00","owner":"Interstellarss","repo":"interstellarss.github.io","title":"从有穷自动机到正则语言---实现篇"}},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"$$","right":"$$"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"},{"display":false,"left":"$","right":"$"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.2.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/copy-tex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.37.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.8/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.2.0/dist/js/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.2.0/dist/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.0/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/typeit@7.0.4/dist/typeit.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":10},"comment":{"gitalk":{"admin":["Interstellarss"],"clientID":"b4d6ace595e393612b74","clientSecret":"ebc194ba054bc0b1364a73bb34fc5ac4a3fb9793","id":"2020-05-12T00:15:53+02:00","owner":"Interstellarss","repo":"interstellarss.github.io","title":"From Finite Automata to Regular Languages - Implementation Par"}},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"$$","right":"$$"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"},{"display":false,"left":"$","right":"$"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
             window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
             gtag('config', 'G-LMR64333PL', { 'anonymize_ip': true });
         </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=G-LMR64333PL" async></script></body>
